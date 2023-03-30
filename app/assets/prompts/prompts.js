@@ -1,7 +1,7 @@
 export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
-    // 6
+    // 23
     General: [
         {prompt: "If you have ever been admitted into a hospital"},
         {prompt: "For every letter in your first name"},
@@ -10,6 +10,22 @@ export default {
         {prompt: "If you have ever been worried about a mole or birthmark"},
         {prompt: "If you ever tested positive for COVID-19"},
         {prompt: "If you ever folded a box within 5 seconds"},
+        {prompt: "If you ever visited a continent other than your home continent"},
+        {prompt: "If you ever slept at ...'s house"},
+        {prompt: "If you ever suffered from food poisoning"},
+        {prompt: "If you have ever ridden in a helicopter"},
+        {prompt: "If you have ever controlled an actual airplane"},
+        {prompt: "If you ever went on a roadtrip with friends"},
+        {prompt: "For every time you visited Disneyland- or world"},
+        {prompt: "If you have ever been on a cruise"},
+        {prompt: "If you have ever attended a wedding"},
+        {prompt: "If you have ever made a profit of at least 200 euros in a casino"},
+        {prompt: "If you ever threw up after a rollercoaster ride"},
+        {prompt: "If you ever went to see a psychic or fortune teller"},
+        {prompt: "If you ever visited another country by train"},
+        {prompt: "If you ever went to a comedy show or stand-up performance"},
+        {prompt: "If you ever dyed your hair a different color"},
+        {prompt: "If you ever went on a ghost tour"},
     ],
     // 16
     Sports: [
@@ -30,7 +46,7 @@ export default {
         {prompt: "If you have ever played table tennis after the age of 16"},
         {prompt: "If you have ever sang along to the national anthem before a sports game at home"},
     ],
-    // 24
+    // 25
     Games: [
         {prompt: "If you have ever played League of Legends"},
         {prompt: "If you have ever played Fortnite"},
@@ -56,8 +72,9 @@ export default {
         {prompt: "If you own all editions of the same console-line (PlayStation 1-5, all xbox's etc.)"},
         {prompt: "If you have ever owned all editions of a videogame franchise which has at least 3 games (FIFA, CoD, Uncharted etc.)"},
         {prompt: "If you have ever been coworkers with someone at this table"},
+        {prompt: "If you ever played in the same match of any videogame with ..."},
     ],
-    // 9
+    // 10
     Work: [
         {prompt: "For every time you've been fired"},
         {prompt: "If you have ever told your superior you didn't like them"},
@@ -66,10 +83,11 @@ export default {
         {prompt: "If you have had 4 or more different jobs"},
         {prompt: "If you have ever worked for more than 10 hours in a day"},
         {prompt: "If you have ever had different functions at the same job"},
-        {prompt: "If you work in/study IT"},
+        {prompt: "If you work in or study IT"},
         {prompt: "If you have ever made friends at work and still hang out"},
+        {prompt: "If you ever went on a group trip with some coworkers"},
     ],
-    // 16
+    // 19
     Hobby: [
         {prompt: "If you have ever played a table top rpg"},
         {prompt: "If you are a collector of a specific object"},
@@ -89,8 +107,11 @@ export default {
         {prompt: "If you have ever been able to do a kickflip on a skateboard"},
         {prompt: "If you have ever caught a fish larger than 10cm in length"},
         {prompt: "If you are an anime fan, weeb"},
+        {prompt: "If you have ever done a beer or wine tasting"},
+        {prompt: "If you ever done a whisky tasting"},
+        {prompt: "If you ever went to a karaoke bar"},
     ],
-    // 10
+    // 15
     Love: [
         {prompt: "If you have ever been in a relationship that lasted longer than 2 years"},
         {prompt: "If you have ever been in a relationship that lasted less than a month"},
@@ -102,6 +123,11 @@ export default {
         {prompt: "If you have ever had a one night stand"},
         {prompt: "If you have ever had sex in the shower"},
         {prompt: "If you have ever kissed someone of the same sex"},
+        {prompt: "If you ever organised a 3-part date"},
+        {prompt: "If you ever went on a blind date"},
+        {prompt: "If you ever went out with someone from Tinder"},
+        {prompt: "If you were ever in an 'on again-off again' relationship"},
+        {prompt: "If you ever had sex with 2 different people within 24 hours"},
     ],
     // 10
     School: [
@@ -138,5 +164,13 @@ export default {
         "Continue playing if you had sex less than 7 days ago",
         "Continue playing if you pooped less then 3 hours ago",
         "Continue playing if you went to the movies less than 7 days ago",
+        "Continue playing if you are in a longterm relationship right now",
+        "Continue playing if you are single right now",
+        "Fold your box if you checked your phone in the past 10 minutes (Host gets a free pass)",
+        "Continue playing if you played a sport today",
+        "Continue playing if you're planning on going out tonight",
+        "Continue playing if you woke up past noon today",
+        "Continue playing if you got out of bed before 09:00 today",
+        "Continue playing if you went to the zoo this year"
     ]
 }
