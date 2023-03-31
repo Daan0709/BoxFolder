@@ -18,7 +18,7 @@ class GameScreen extends Component {
         promptLoaded: false,
         promptsLoaded: false,
         showNextRoundScreen: false,
-        turnsUntilNextRound: 2,
+        turnsUntilNextRound: 15,
         currentPlayer: null,
         currentPlayerIndex: 0,
         finalRound: false
@@ -87,7 +87,7 @@ class GameScreen extends Component {
 
     nextRoundHandler = () => {
         this.setState({'showNextRoundScreen': false});
-        this.setState({'turnsUntilNextRound': 2 - 1});
+        this.setState({'turnsUntilNextRound': 15 - 1});
         const nextRound = this.state.currentRound + 1;
         if (nextRound === 3){
             this.loadInFirstPlayer();
@@ -95,9 +95,13 @@ class GameScreen extends Component {
         this.setState({'currentRound': nextRound});
     }
 
-    loadInFirstPlayer = () => {
+    loadInRandomFinisherPrompt = () => {
         let finisherPrompt = Prompts.Finishers[Math.floor(Math.random()*Prompts.Finishers.length)];
         this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
+    }
+
+    loadInFirstPlayer = () => {
+        this.loadInRandomFinisherPrompt();
         this.setState({'currentPlayer': this.state.playerList[0]});
     }
 
@@ -125,8 +129,7 @@ class GameScreen extends Component {
             if (this.state.playerList.length === this.state.currentPlayerIndex){
                 this.setState({'currentPlayerIndex': 0});
                 this.setState({'currentPlayer': this.state.playerList[0]});
-                let finisherPrompt = Prompts.Finishers[Math.floor(Math.random()*Prompts.Finishers.length)];
-                this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
+                this.loadInRandomFinisherPrompt();
                 return
             }
             this.setState({'currentPlayer': this.state.playerList[this.state.currentPlayerIndex]});
@@ -153,10 +156,10 @@ class GameScreen extends Component {
         if (this.state.playerList.length === this.state.currentPlayerIndex+1){
             this.setState({'currentPlayerIndex': 0});
             this.setState({'currentPlayer': this.state.playerList[0]});
+            this.loadInRandomFinisherPrompt();
             return
         }
-        let finisherPrompt = Prompts.Finishers[Math.floor(Math.random()*Prompts.Finishers.length)];
-        this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
+        this.loadInRandomFinisherPrompt();
         this.setState({'currentPlayerIndex': this.state.currentPlayerIndex+1})
         this.setState({'currentPlayer': this.state.playerList[this.state.currentPlayerIndex+1]});
     }
