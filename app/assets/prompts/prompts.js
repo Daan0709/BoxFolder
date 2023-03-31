@@ -46,7 +46,7 @@ export default {
         {prompt: "If you have ever played table tennis after the age of 16"},
         {prompt: "If you have ever sang along to the national anthem before a sports game at home"},
     ],
-    // 25
+    // 31
     Games: [
         {prompt: "If you have ever played League of Legends"},
         {prompt: "If you have ever played Fortnite"},
@@ -73,8 +73,14 @@ export default {
         {prompt: "If you have ever owned all editions of a videogame franchise which has at least 3 games (FIFA, CoD, Uncharted etc.)"},
         {prompt: "If you have ever been coworkers with someone at this table"},
         {prompt: "If you ever played in the same match of any videogame with ..."},
+        {prompt: "If you ever played a boardgame with ..."},
+        {prompt: "If you ever played a racing game"},
+        {prompt: "If you ever spent money on a mobile game"},
+        {prompt: "If you ever played CS:GO"},
+        {prompt: "If you ever played The Sims"},
+        {prompt: "If you own a next gen console"},
     ],
-    // 10
+    // 16
     Work: [
         {prompt: "For every time you've been fired"},
         {prompt: "If you have ever told your superior you didn't like them"},
@@ -86,6 +92,12 @@ export default {
         {prompt: "If you work in or study IT"},
         {prompt: "If you have ever made friends at work and still hang out"},
         {prompt: "If you ever went on a group trip with some coworkers"},
+        {prompt: "If you work in or study healthcare"},
+        {prompt: "If you ever pretended being sick so you wouldn't have to go to work"},
+        {prompt: "If you ever had a job for less then a week"},
+        {prompt: "If you ever had a promotion at work"},
+        {prompt: "If you have ever been drunk at the place you work"},
+        {prompt: "If you ever reached out to a company for an interview, after which they ghosted you"},
     ],
     // 19
     Hobby: [
