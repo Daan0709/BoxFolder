@@ -33,17 +33,17 @@ class HelpScreen extends Component {
                             Round 1: The person holding the phone reads the prompt out loud. During the first round, people will have to drink
                             the specified amount of sips if they have (or have not) done the thing specified in the prompt.
                         </Text>
-                        <Image source={require('../assets/round-1-example.png')} style={styles.image}></Image>
+                        <Image source={require('../assets/images/round-1-example.png')} style={styles.image}></Image>
                         <Text style={[styles.normalText, styles.indentedText]}>
                             Round 2: During the second round the game has changed. This time you can hand out the sips to anyone that is playing the game with you!
                         </Text>
-                        <Image source={require('../assets/round-2-example.png')} style={styles.image}></Image>
+                        <Image source={require('../assets/images/round-2-example.png')} style={styles.image}></Image>
                         <Text style={[styles.normalText, styles.indentedText]}>
                             Round 3: This is the knockout round. The game will direct a prompt to a specific person (in order of the names entered at the beginning
                             of the game). If they meet the criteria: Great! they can continue playing. If not: They have to down their drink and are eliminated
                             from the game. Keep playing until there is only one (or no) winner left!
                         </Text>
-                        <Image source={require('../assets/round-3-example.png')} style={styles.image}></Image>
+                        <Image source={require('../assets/images/round-3-example.png')} style={styles.image}></Image>
                     </ScrollView>
                 </View>
                 <View style={styles.buttonContainer}>

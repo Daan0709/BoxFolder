@@ -94,7 +94,7 @@ class HomeScreen extends Component {
                 <View style={styles.background}>
                     <View style={styles.logoContainer}>
                         <Text style={styles.title}>Box Folder!</Text>
-                        <Image source={require('../assets/BoxFolderLogo.png')} style={styles.image}/>
+                        <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
                     </View>
                     <View style={styles.playersContainer}>
                         {this.state.playerList.map((pair) => {
