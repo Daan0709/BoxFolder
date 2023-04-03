@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 import CategoryScreen from "../screens/CategoryScreen";
 import GameScreen from "../screens/GameScreen";
+import HelpScreen from "../screens/HelpScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +13,7 @@ function HomeStack(){
             <Stack.Screen name="HomeScreen" component={HomeScreen}/>
             <Stack.Screen name="CategoryScreen" component={CategoryScreen}/>
             <Stack.Screen name="GameScreen" component={GameScreen}/>
+            <Stack.Screen name="HelpScreen" component={HelpScreen}/>
         </Stack.Navigator>
     )
 }

@@ -83,7 +83,7 @@ class HomeScreen extends Component {
     }
 
     helpButtonHandler = () => {
-        // this.props.navigation.navigate('HelpScreen');
+        this.props.navigation.navigate('HelpScreen');
     }
 
     render(){
@@ -109,13 +109,12 @@ class HomeScreen extends Component {
                             <Text style={styles.normalText}>+</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.playButtonContainer}>
-
+                    <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.longButton} onPress={this.playButtonHandler}>
                             <Text style={styles.normalText}>Let's Drink!</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.helpButtonHandler}>
-                            <MaterialIcons name="help-outline" size={24} color="black" />
+                            <MaterialIcons name="help-outline" size={30} color="white" />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -137,6 +136,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.Primary,
     },
+    buttonContainer: {
+        width: "100%",
+        alignItems: "center",
+        paddingTop: 20,
+        rowGap: 10
+    },
     container: {
         flex: 1,
     },
@@ -154,11 +159,9 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     logoContainer: {
-        flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
         width: "100%",
-        paddingTop: StatusBar.currentHeight
     },
     longButton: {
         borderRadius: 10,
@@ -174,15 +177,9 @@ const styles = StyleSheet.create({
         color: colors.White,
         fontSize: 20,
     },
-    playButtonContainer: {
-        width: "100%",
-        alignItems: "center",
-        padding: 20
-    },
     playersContainer: {
-        height: 375,
+        height: 400,
         width: '100%',
-
     },
     roundButton: {
         borderRadius: 100,
