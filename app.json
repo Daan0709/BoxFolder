@@ -4,23 +4,24 @@
     "slug": "BoxFolder",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./app/assets/adaptive-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./app/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0a2f02"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./app/assets/icon.png"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#0a2f02"
       },
       "package": "com.daannoob1337.BoxFolder"
     },
