@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import colors from "../config/colors";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function PlayerContainer(props) {
     const [name, setName] = useState(props.name);
@@ -19,11 +20,13 @@ function PlayerContainer(props) {
         <View style={styles.playerContainer}>
             <Text style={styles.normalText}>Player {rank+1}</Text>
             <TextInput value={props.name} style={styles.input} placeholder="Name" onChangeText={(newName) => handleChangeText(newName)}/>
-            {rank === 0 || rank === 1 ? <TouchableOpacity style={styles.invisibleButton}>
+            {rank === 0 || rank === 1 ?
+                <TouchableOpacity style={styles.invisibleButton}>
                     <Text style={styles.invisibleText}>x</Text>
-                </TouchableOpacity> :
-                <TouchableOpacity style={styles.roundButton} onPress={() => removeSelf(rank)}>
-                    <Text style={styles.normalText}>x</Text>
+                </TouchableOpacity>
+                :
+                <TouchableOpacity onPress={() => removeSelf(rank)}>
+                    <MaterialCommunityIcons name="close-box" size={30} color="black" />
                 </TouchableOpacity>
                 }
 

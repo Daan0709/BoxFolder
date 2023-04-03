@@ -50,7 +50,7 @@ export default {
         {prompt: "If you have ever went surfing"},
         {prompt: "If you have ever went horseback riding"},
         {prompt: "If you have ever gone kayaking or canoeing"},
-        {prompt: "If you have ever went to a match of your national team"},
+        {prompt: "If you have ever went to see a match of your national team"},
         {prompt: "If you have ever scored more than 3 goals in a single match"},
         {prompt: "If you have ever played competitive chess"},
         {prompt: "If you have ever played a sport no one at this table has played"},

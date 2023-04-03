@@ -40,7 +40,7 @@ class GameScreen extends Component {
     }
 
     backAction = () => {
-        Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+        Alert.alert('Hold on!', 'You will have to start over, are you sure you want to go back?', [
             {
                 text: 'Cancel',
                 onPress: () => null,
