@@ -54,7 +54,7 @@ class CategoryScreen extends Component {
         return (
             <View style={styles.container}>
                 <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar hidden={true}/>
+                <StatusBar backgroundColor={colors.Primary}/>
                 <View style={styles.background}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Choose your categories!</Text>

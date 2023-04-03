@@ -9,6 +9,7 @@ import {
     Alert
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { MaterialIcons } from '@expo/vector-icons';
 
 import colors from "../config/colors"
 import PlayerContainer from "../components/PlayerContainer";
@@ -81,11 +82,15 @@ class HomeScreen extends Component {
         });
     }
 
+    helpButtonHandler = () => {
+        // this.props.navigation.navigate('HelpScreen');
+    }
+
     render(){
         return (
             <View style={styles.container}>
                 <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar hidden={true}/>
+                <StatusBar backgroundColor={colors.Primary}/>
                 <View style={styles.background}>
                     <View style={styles.logoContainer}>
                         <Text style={styles.title}>Box Folder!</Text>
@@ -105,8 +110,12 @@ class HomeScreen extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.playButtonContainer}>
+
                         <TouchableOpacity style={styles.longButton} onPress={this.playButtonHandler}>
                             <Text style={styles.normalText}>Let's Drink!</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.helpButtonHandler}>
+                            <MaterialIcons name="help-outline" size={24} color="black" />
                         </TouchableOpacity>
                     </View>
                 </View>
