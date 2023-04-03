@@ -1,7 +1,7 @@
 export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
-    // 23
+    // 34
     General: [
         {prompt: "If you have ever been admitted into a hospital"},
         {prompt: "For every letter in your first name"},
@@ -26,8 +26,19 @@ export default {
         {prompt: "If you ever went to a comedy show or stand-up performance"},
         {prompt: "If you ever dyed your hair a different color"},
         {prompt: "If you ever went on a ghost tour"},
+        {prompt: "If you IQ is higher than 129"},
+        {prompt: "If you think you can drink more alcohol than the person to your right"},
+        {prompt: "For each time you've peed since you started drinking"},
+        {prompt: "If you vape"},
+        {prompt: "If your hand has ever hurt after high fiving ..."},
+        {prompt: "For each time you made a joke about someone else's mother tonight"},
+        {prompt: "If you folded a box tonight"},
+        {prompt: "If your taste in memes is darker than Barack Obama"},
+        {prompt: "If you've ever deliberately hung out with people whilst having COVID-19"},
+        {prompt: "If you know what the 'LAMP' meme is"},
+        {prompt: "If you like Suzan & Freek"},
     ],
-    // 16
+    // 25
     Sports: [
         {prompt: "If you have ever played football"},
         {prompt: "If you have ever played tennis"},
@@ -45,8 +56,17 @@ export default {
         {prompt: "If you have ever played a sport no one at this table has played"},
         {prompt: "If you have ever played table tennis after the age of 16"},
         {prompt: "If you have ever sang along to the national anthem before a sports game at home"},
+        {prompt: "If you ever practiced 2 sports at the same time"},
+        {prompt: "If you've been on the same sports team for 3 or more years"},
+        {prompt: "For every goal you scored this season"},
+        {prompt: "If you and the neighbour to your right play, or have played, in the same sportsteam"},
+        {prompt: "If you think you are a better athlete than the person to your left"},
+        {prompt: "If you have ever vomited while playing sports"},
+        {prompt: "If you have ever been drunk while participating in an official sportsmatch"},
+        {prompt: "For every sport you've ever officially practiced"},
+        {prompt: "If you have ever watched an entire handball match"},
     ],
-    // 31
+    // 41
     Games: [
         {prompt: "If you have ever played League of Legends"},
         {prompt: "If you have ever played Fortnite"},
@@ -79,8 +99,18 @@ export default {
         {prompt: "If you ever played CS:GO"},
         {prompt: "If you ever played The Sims"},
         {prompt: "If you own a next gen console"},
+        {prompt: "If you have ever been bronze or lower in League of Legends for an entire season"},
+        {prompt: "If you've never done a Pokémon nuzlocke"},
+        {prompt: "For every GTA game you own, or owned as a kid"},
+        {prompt: "If you think Battlefield is better than Call of Duty"},
+        {prompt: "If you've played 2 or more 'The Legend of Zelda' games"},
+        {prompt: "If you have ever played Call of Duty: Zombies with ..."},
+        {prompt: "If you've ever broken a controller out of anger"},
+        {prompt: "For every E-girl you've ever simped for"},
+        {prompt: "If you've never played Pokémon Red or Blue"},
+        {prompt: "If you have ever owned a Petal Patch in Habbo Hotel"},
     ],
-    // 16
+    // 24
     Work: [
         {prompt: "For every time you've been fired"},
         {prompt: "If you have ever told your superior you didn't like them"},
@@ -98,8 +128,16 @@ export default {
         {prompt: "If you ever had a promotion at work"},
         {prompt: "If you have ever been drunk at the place you work"},
         {prompt: "If you ever reached out to a company for an interview, after which they ghosted you"},
+        {prompt: "If you've ever been in love with a coworker"},
+        {prompt: "If you're currently unemployed"},
+        {prompt: "For each year you have worked at your current job"},
+        {prompt: "If you ever skipped work because you were too hungover from a night out with ..."},
+        {prompt: "If anyone at this table is, or was, a customer at the place you work"},
+        {prompt: "For each time your job application has been declined"},
+        {prompt: "If you would rather work part-time as an adult"},
+        {prompt: "If you prepare your own lunch before work"},
     ],
-    // 19
+    // 29
     Hobby: [
         {prompt: "If you have ever played a table top rpg"},
         {prompt: "If you are a collector of a specific object"},
@@ -122,8 +160,18 @@ export default {
         {prompt: "If you have ever done a beer or wine tasting"},
         {prompt: "If you ever done a whisky tasting"},
         {prompt: "If you ever went to a karaoke bar"},
+        {prompt: "If you've never watched all of the Harry Potter movies"},
+        {prompt: "If drinking is your biggest hobby"},
+        {prompt: "For every Dungeons and Dragons campaign you are currently in"},
+        {prompt: "If you have ever been to the club with ..."},
+        {prompt: "If your favorite music genre is Punp Pop or Rock"},
+        {prompt: "If you've ever been to a music festival with ..."},
+        {prompt: "If your favorite hobby is nerdy"},
+        {prompt: "If you practice any creative hobbies like painting or playing an instrument"},
+        {prompt: "If you share the same favorite hobby with ..."},
+        {prompt: "For each time you were scammed when trading Pokémon cards"},
     ],
-    // 15
+    // 28
     Love: [
         {prompt: "If you have ever been in a relationship that lasted longer than 2 years"},
         {prompt: "If you have ever been in a relationship that lasted less than a month"},
@@ -140,8 +188,21 @@ export default {
         {prompt: "If you ever went out with someone from Tinder"},
         {prompt: "If you were ever in an 'on again-off again' relationship"},
         {prompt: "If you ever had sex with 2 different people within 24 hours"},
+        {prompt: "If you sometimes still masturbate while thinking about your ex"},
+        {prompt: "For each time you have been rejected"},
+        {prompt: "If you ever rejected someone because they were too ugly for your liking"},
+        {prompt: "If you ever had a sex dream including someone at this table"},
+        {prompt: "If you've ever had a long distance relationship"},
+        {prompt: "If you live together with your significant other"},
+        {prompt: "For each base you've completed (1-5)"},
+        {prompt: "If you are into redheads"},
+        {prompt: "For every time you went to a strip club"},
+        {prompt: "If you think you'll stay single for at least another year"},
+        {prompt: "If you'd have a threesome with one of the people at this table"},
+        {prompt: "If you have a certain fetish"},
+        {prompt: "If you've ever done drugs before or during sex"},
     ],
-    // 10
+    // 17
     School: [
         {prompt: "If you have ever skipped school without letting your parents know"},
         {prompt: "If you have ever been the only one from your class to score full points in a test"},
@@ -151,8 +212,15 @@ export default {
         {prompt: "If you have ever gotten detention"},
         {prompt: "If you have ever repeated a grade"},
         {prompt: "If you have ever gotten the lowest possible score on a test which you actually took"},
-        {prompt: "If you are able to speak more than 2 languages fluently (exlcuding your native language) through school"},
+        {prompt: "If you are able to speak 2 or more languages fluently (exlcuding your native language) through school"},
         {prompt: "If you have ever had to leave the school building because of a fire"},
+        {prompt: "If you've ever been high in class"},
+        {prompt: "For each christmas ball from school you attended"},
+        {prompt: "If your favorite subject was P.E."},
+        {prompt: "If you always joined the group playing football during the break"},
+        {prompt: "If you ever skipped school with someone at this table"},
+        {prompt: "If you still go to school"},
+        {prompt: "If you ever folded a box during school time"},
     ],
     Finishers: [
         "Continue playing if you're drunk right now",
