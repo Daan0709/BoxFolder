@@ -5,10 +5,11 @@ import React from "react";
 function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler }) {
 
     const sipsString = amountOfSips === 1 ? ' sip' : ' sips';
+    const color = giveOrDrink === "Drink " ? colors.Primary : colors.PrimaryContrast;
 
     return (
         <TouchableWithoutFeedback onPress={nextPromptHandler}>
-            <View style={styles.background}>
+            <View style={[styles.background, {backgroundColor: color}]}>
                 <StatusBar hidden={true}/>
                 <View>
                     {amountOfSips === "Round 1" ?
@@ -30,6 +31,9 @@ function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler }) {
 }
 
 const styles = StyleSheet.create({
+    background: {
+        flex: 1
+    },
     normalText: {
         color: colors.White,
         fontSize: 30,
