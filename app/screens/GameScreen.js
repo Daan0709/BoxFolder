@@ -7,6 +7,7 @@ import colors from "../config/colors";
 import Prompt from "../components/Prompt";
 import NextRound from "../components/NextRound";
 import FinalRound from "../components/FinalRound";
+import ForceMode from "../components/ForceMode";
 
 class GameScreen extends Component {
     state = {
@@ -25,8 +26,7 @@ class GameScreen extends Component {
     };
 
     componentDidMount() {
-        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE); // Lock screen to landscape mode
-        const copy = [...this.props.route.params.playerList];                     // Necessary so the playerlist in HomeScreen doesn't get changed
+        const copy = [...this.props.route.params.playerList];       // Necessary so the playerlist in HomeScreen doesn't get changed
         this.setState({'playerList': copy})
         this.loadPrompts();
         this.backHandler = BackHandler.addEventListener(
@@ -179,6 +179,7 @@ class GameScreen extends Component {
     render() {
         return (
             <View style={styles.background}>
+                <ForceMode mode={ScreenOrientation.OrientationLock.LANDSCAPE}/>
                 {this.state.showNextRoundScreen ?                                   // If the next round screen should be shown:
                     <NextRound nextRoundHandler={this.nextRoundHandler} roundNumber={this.state.currentRound}/>
                     :
