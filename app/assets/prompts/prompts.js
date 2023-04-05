@@ -1,7 +1,7 @@
 export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
-    // 34
+    // 37
     General: [
         {prompt: "If you have ever been admitted into a hospital"},
         {prompt: "For every letter in your first name"},
@@ -33,10 +33,13 @@ export default {
         {prompt: "If your hand has ever hurt after high fiving ..."},
         {prompt: "For each time you made a joke about someone else's mother tonight"},
         {prompt: "If you folded a box tonight"},
-        {prompt: "If your taste in memes is darker than Barack Obama"},
+        {prompt: "If your taste in memes is very dark"},
         {prompt: "If you've ever deliberately hung out with people whilst having COVID-19"},
         {prompt: "If you know what the 'LAMP' meme is"},
         {prompt: "If you like Suzan & Freek"},
+        {prompt: "If you have ever saved a life"},
+        {prompt: "If you have ever accidentally started a fire"},
+        {prompt: "If you have ever sent a sensitive or hurtful message to the wrong person"},
     ],
     // 25
     Sports: [
@@ -110,7 +113,7 @@ export default {
         {prompt: "If you've never played Pokémon Red or Blue"},
         {prompt: "If you have ever owned a Petal Patch in Habbo Hotel"},
     ],
-    // 24
+    // 26
     Work: [
         {prompt: "For every time you've been fired"},
         {prompt: "If you have ever told your superior you didn't like them"},
@@ -136,8 +139,10 @@ export default {
         {prompt: "For each time your job application has been declined"},
         {prompt: "If you would rather work part-time as an adult"},
         {prompt: "If you prepare your own lunch before work"},
+        {prompt: "If you ever skipped work without letting work know"},
+        {prompt: "If you have ever truly hated a coworker"},
     ],
-    // 29
+    // 32
     Hobby: [
         {prompt: "If you have ever played a table top rpg"},
         {prompt: "If you are a collector of a specific object"},
@@ -170,8 +175,9 @@ export default {
         {prompt: "If you practice any creative hobbies like painting or playing an instrument"},
         {prompt: "If you share the same favorite hobby with ..."},
         {prompt: "For each time you were scammed when trading Pokémon cards"},
+        {prompt: "If you have ever roleplayed"},
     ],
-    // 28
+    // 31
     Love: [
         {prompt: "If you have ever been in a relationship that lasted longer than 2 years"},
         {prompt: "If you have ever been in a relationship that lasted less than a month"},
@@ -197,12 +203,15 @@ export default {
         {prompt: "For each base you've completed (1-5)"},
         {prompt: "If you are into redheads"},
         {prompt: "For every time you went to a strip club"},
-        {prompt: "If you think you'll stay single for at least another year"},
+        {prompt: "If you're currently single and think you'll stay single for at least another year"},
         {prompt: "If you'd have a threesome with one of the people at this table"},
         {prompt: "If you have a certain fetish"},
         {prompt: "If you've ever done drugs before or during sex"},
+        {prompt: "If you have ever been engaged"},
+        {prompt: "If you have ever seriously considered getting married"},
+        {prompt: "If you have ever fantasized about getting back together with your ex"},
     ],
-    // 17
+    // 20
     School: [
         {prompt: "If you have ever skipped school without letting your parents know"},
         {prompt: "If you have ever been the only one from your class to score full points in a test"},
@@ -221,6 +230,9 @@ export default {
         {prompt: "If you ever skipped school with someone at this table"},
         {prompt: "If you still go to school"},
         {prompt: "If you ever folded a box during school time"},
+        {prompt: "If you ever stuck your chewing gum underneath a desk"},
+        {prompt: "If you have ever drunk alcohol at your high school"},
+        {prompt: "If you have ever played 'Spin the bottle' at school-camp"},
     ],
     Finishers: [
         "Continue playing if you're drunk right now",
@@ -251,6 +263,8 @@ export default {
         "Continue playing if you're planning on going out tonight",
         "Continue playing if you woke up past noon today",
         "Continue playing if you got out of bed before 09:00 today",
-        "Continue playing if you went to the zoo this year"
+        "Continue playing if you went to the zoo this year",
+        "Continue playing if you have gotten your blood drawn in the past 6 months",
+        "Continue playing if you completed watching any show this week",
     ]
 }
