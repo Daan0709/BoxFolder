@@ -50,7 +50,7 @@ class HelpScreen extends Component {
                             Help
                         </Text>
                         <Text style={[styles.normalText, styles.topBorder]}>
-                            What does it mean to 'fold a box'? It's simple: if you have to fold a box, it means you have to down your drink.
+                            What does it mean to 'fold a box'? It's simple: if you have to fold a box, it means you have to down a full drink.
                         </Text>
                         <Text style={[styles.normalText, styles.topBorder]}>
                             What happens when a person is included in a question like here?

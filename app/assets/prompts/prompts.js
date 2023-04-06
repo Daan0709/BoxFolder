@@ -226,7 +226,7 @@ export default {
         {prompt: "If you've ever been high in class"},
         {prompt: "For each christmas ball from school you attended"},
         {prompt: "If your favorite subject was P.E."},
-        {prompt: "If you always joined the group playing football during the break"},
+        {prompt: "If you always joined the group playing football at recess"},
         {prompt: "If you ever skipped school with someone at this table"},
         {prompt: "If you still go to school"},
         {prompt: "If you ever folded a box during school time"},
