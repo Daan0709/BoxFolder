@@ -10,9 +10,9 @@ import ForceMode from "../components/ForceMode";
 class CategoryScreen extends Component {
 
     state = {
-        categories: [{title: "General", checked: true}, {title: "Sports", checked: true}, {title: "Games", checked: true},
-                    {title: "Work", checked: true}, {title: "Hobby", checked: true},
-                    {title: "Love", checked: true}, {title: "School", checked: true}],
+        categories: [{title: "General", checked: true, emoji: "🧠"}, {title: "Sports", checked: true, emoji: "⚽️"}, {title: "Games", checked: true, emoji: "🎮"},
+                    {title: "Work", checked: true, emoji: "🏢 "}, {title: "Hobby", checked: true, emoji: "🎳"},
+                    {title: "Love", checked: true, emoji: "❤️"}, {title: "School", checked: true, emoji: "📚 "}],
         amountOfPrompts: 15
     };
 
@@ -79,7 +79,7 @@ class CategoryScreen extends Component {
 
                     <View style={styles.categoryContainer}>
                         {this.state.categories.map((category) => {
-                            return (<Category title={category.title} initialCheck={category.checked} key={category.title} handleToUpdate={this.handleCheck}/>)
+                            return (<Category title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.title} handleToUpdate={this.handleCheck}/>)
                         })}
                     </View>
 

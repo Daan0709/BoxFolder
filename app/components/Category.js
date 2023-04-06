@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import colors from "../config/colors";
 
-function Category({ title, initialCheck, handleToUpdate }) {
+function Category({ title, emoji, initialCheck, handleToUpdate }) {
 
     const [checked, setChecked] = useState(initialCheck);
 
@@ -16,11 +16,12 @@ function Category({ title, initialCheck, handleToUpdate }) {
     return (
         <TouchableOpacity onPress={switchCheck}>
             {checked ?
-                <View style={styles.category_checked}>
+                <View style={styles.category}>
                     <Text style={styles.boldText}>{title}</Text>
+                    <Text style={styles.boldText}>{emoji}</Text>
                 </View>
                 :
-                <View style={styles.category_unchecked}>
+                <View style={[styles.category, styles.unchecked]}>
                     <Text style={styles.normalText}>{title}</Text>
                 </View>
             }
@@ -29,25 +30,18 @@ function Category({ title, initialCheck, handleToUpdate }) {
 }
 
 const styles = StyleSheet.create({
-    category_unchecked: {
+    category: {
         height: 110,
         width: 100,
         backgroundColor: colors.Tertiary,
         borderWidth: 2,
         borderColor: "black",
         borderRadius: 10,
-        opacity: 0.5,
-        justifyContent: "center",
         alignItems: "center",
     },
-    category_checked: {
-        height: 110,
-        width: 100,
-        backgroundColor: colors.Tertiary,
-        borderWidth: 2,
-        borderColor: "black",
-        borderRadius: 10,
-        alignItems: "center",
+    unchecked: {
+        opacity: 0.5,
+        justifyContent: "center",
     },
     normalText: {
         padding: 4,
