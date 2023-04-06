@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { AntDesign } from '@expo/vector-icons';
 
 import colors from "../config/colors";
 import Category from "../components/Category";
@@ -11,7 +12,8 @@ class CategoryScreen extends Component {
     state = {
         categories: [{title: "General", checked: true}, {title: "Sports", checked: true}, {title: "Games", checked: true},
                     {title: "Work", checked: true}, {title: "Hobby", checked: true},
-                    {title: "Love", checked: true}, {title: "School", checked: true}]
+                    {title: "Love", checked: true}, {title: "School", checked: true}],
+        amountOfPrompts: 15
     };
 
     handleCheck = (checked, title) => {         // Function that keeps the state categories up to date whenever one of the categories is checked or unchecked
@@ -32,22 +34,37 @@ class CategoryScreen extends Component {
 
     handlePlayButton = () => {
 
-        let cleared = false;
+        let amountCleared = 0;
         this.state.categories.forEach((category) => {
             if (category.checked === true){
-                cleared = true;
+                amountCleared++;
             }
         })
 
-        if (!cleared){
-            Alert.alert("Error", "Please select at least one category to play");
+        if (amountCleared < 2){
+            Alert.alert("Error", "Please select at least two categories to play");
             return
         }
 
         this.props.navigation.navigate('GameScreen', {
             categories: this.state.categories,
-            playerList: this.props.route.params.playerList
+            playerList: this.props.route.params.playerList,
+            amountOfPrompts: this.state.amountOfPrompts
         });
+    }
+
+    reduceAmountOfPrompts = () => {
+        if (this.state.amountOfPrompts === 5){
+            return;
+        }
+        this.setState({'amountOfPrompts': this.state.amountOfPrompts - 5})
+    }
+
+    increaseAmountOfPrompts = () => {
+        if (this.state.amountOfPrompts === 30){
+            return;
+        }
+        this.setState({'amountOfPrompts': this.state.amountOfPrompts + 5})
     }
 
     render() {
@@ -66,6 +83,20 @@ class CategoryScreen extends Component {
                         })}
                     </View>
 
+                    <View style={styles.buttonContainerColumn}>
+                        <Text style={styles.smallText}>How many prompts do you want per round?</Text>
+                        <View style={styles.amountOfRoundsContainer}>
+                            <TouchableOpacity onPress={this.reduceAmountOfPrompts}>
+                                <AntDesign name="minuscircle" size={30} color="black" />
+                            </TouchableOpacity>
+                            <Text style={styles.normalText}>{this.state.amountOfPrompts}</Text>
+                            <TouchableOpacity onPress={this.increaseAmountOfPrompts}>
+                                <AntDesign name="pluscircle" size={30} color="black" />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.longButton} onPress={this.handleBackButton}>
                             <Text style={styles.normalText}>Go Back!</Text>
@@ -82,6 +113,14 @@ class CategoryScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    amountOfRoundsContainer: {
+        flex: 1,
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 10,
+    },
     background: {
         flex: 1,
         justifyContent: 'flex-start',
@@ -95,8 +134,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-around"
     },
+    buttonContainerColumn: {
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "space-around"
+    },
     categoryContainer: {
-        height: 550, // Categoryheight * rows + 50
+        height: 490, // Categoryheight * rows + 50
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-around",
@@ -118,6 +163,10 @@ const styles = StyleSheet.create({
         padding: 4,
         color: colors.White,
         fontSize: 20,
+    },
+    smallText: {
+        color: colors.White,
+        fontSize: 15,
     },
     title: {
         color: colors.White,

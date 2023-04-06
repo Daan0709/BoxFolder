@@ -30,7 +30,7 @@ function Category({ title, initialCheck, handleToUpdate }) {
 
 const styles = StyleSheet.create({
     category_unchecked: {
-        height: 125,
+        height: 110,
         width: 100,
         backgroundColor: colors.Tertiary,
         borderWidth: 2,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     category_checked: {
-        height: 125,
+        height: 110,
         width: 100,
         backgroundColor: colors.Tertiary,
         borderWidth: 2,

@@ -19,7 +19,8 @@ class GameScreen extends Component {
         promptLoaded: false,
         promptsLoaded: false,
         showNextRoundScreen: false,
-        turnsUntilNextRound: 15,
+        turnsUntilNextRound: this.props.route.params.amountOfPrompts,
+        amountOfPrompts: this.props.route.params.amountOfPrompts,
         currentPlayer: null,
         currentPlayerIndex: 0,
         finalRound: false
@@ -87,7 +88,7 @@ class GameScreen extends Component {
 
     nextRoundHandler = () => {
         this.setState({'showNextRoundScreen': false});
-        this.setState({'turnsUntilNextRound': 15 - 1});
+        this.setState({'turnsUntilNextRound': this.state.amountOfPrompts - 1});
         const nextRound = this.state.currentRound + 1;
         if (nextRound === 3){
             this.loadInFirstPlayer();
