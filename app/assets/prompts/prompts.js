@@ -135,7 +135,7 @@ export default {
         {prompt: "If you're currently unemployed"},
         {prompt: "For each year you have worked at your current job"},
         {prompt: "If you ever skipped work because you were too hungover from a night out with ..."},
-        {prompt: "If anyone at this table is, or was, a customer at the place you work"},
+        {prompt: "If anyone at this table is, or has been, a customer at the place you work"},
         {prompt: "For each time your job application has been declined"},
         {prompt: "If you would rather work part-time as an adult"},
         {prompt: "If you prepare your own lunch before work"},

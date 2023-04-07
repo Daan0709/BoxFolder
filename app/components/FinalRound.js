@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Dimensions, ImageBackground, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import colors from "../config/colors";
 
 function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler, continuePlayingHandler, goBackHandler }) {
@@ -25,15 +25,24 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                     </View>
                 </View>
                 :                       // If not, show the winner
+                playerName !== "No one" ?
                 <View>
                     <StatusBar hidden={true}/>
+                    <ImageBackground source={require('../assets/images/confetti-box.png')} style={styles.image}>
+                        <Text style={styles.outlinedText}>{playerName} wins!</Text>
+                        <TouchableOpacity style={styles.longButton} onPress={goBackHandler}>
+                            <Text style={styles.normalText}>Continue</Text>
+                        </TouchableOpacity>
+                    </ImageBackground>
+                </View>
+                    :                   // Show this if no one wins
                     <View style={styles.winnerContainer}>
+                        <StatusBar hidden={true}/>
                         <Text style={styles.title}>{playerName} wins!</Text>
                         <TouchableOpacity style={styles.longButton} onPress={goBackHandler}>
                             <Text style={styles.normalText}>Continue</Text>
                         </TouchableOpacity>
                     </View>
-                </View>
             }
         </View>
     );
@@ -46,6 +55,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "black"
     },
+    outlinedText: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 40,
+        textShadowColor:'#000000',
+        textShadowOffset: {width: 2, height: 2},
+        textShadowRadius: 1
+    },
     buttonContainer: {
         height: "15%",
         width: "80%",
@@ -55,6 +72,12 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         alignItems: "center"
+    },
+    image: {
+        width: Dimensions.get('window').width,
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
     },
     longButton: {
         borderRadius: 10,
