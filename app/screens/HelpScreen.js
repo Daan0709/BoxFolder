@@ -53,11 +53,19 @@ class HelpScreen extends Component {
                             What does it mean to 'fold a box'? It's simple: if you have to fold a box, it means you have to down a full drink.
                         </Text>
                         <Text style={[styles.normalText, styles.topBorder]}>
-                            What happens when a person is included in a question like here?
+                            What happens when a person is included in a prompt like here?
                         </Text>
                         <Image source={require('../assets/images/player-named-example.png')} style={styles.image}></Image>
                         <Text style={styles.normalText}>
                             In the event where a player is named, they themselves are also included. In this particular example, Jill also has to drink 2 sips.
+                        </Text>
+                        <Text style={[styles.normalText, styles.topBorder]}>
+                            Uh-oh, you accidentally skipped a prompt! what now? No worries, just tap the left side of the screen displayed here:
+                        </Text>
+                        <Image source={require('../assets/images/previous-prompt-example.png')} style={styles.image}></Image>
+                        <Text style={styles.normalText}>
+                            This will take you back to the previous prompt. You can only go back one prompt, so try not to accidentally skip a prompt two times in a row!
+                            If you have seen the previous prompt, just tap the right side of the screen again to resume your game.
                         </Text>
                     </ScrollView>
                 </View>
