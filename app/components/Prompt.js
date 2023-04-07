@@ -1,11 +1,33 @@
-import {Dimensions, StatusBar, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
+import {Dimensions, StatusBar, StyleSheet, Text, TouchableWithoutFeedback, View, Animated} from "react-native";
 import colors from "../config/colors";
-import React from "react";
+import React, {useEffect, useRef} from "react";
 
 function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color }) {
 
+    const scale = useRef(new Animated.Value(1)).current;
     const sipsString = amountOfSips === 1 ? ' sip' : ' sips';
     const windowWidth = Dimensions.get('window').width;
+
+    useEffect(() => {
+
+        // Animated.timing(rotation, {
+        //     toValue: 1,
+        //     duration: 5000,
+        //     useNativeDriver: true,
+        // }).start();
+        Animated.sequence([
+            Animated.timing(scale, {
+                toValue: 1.2,
+                duration: 200,
+                useNativeDriver: true,
+            }),
+            Animated.timing(scale, {
+                toValue: 1,
+                duration: 200,
+                useNativeDriver: true,
+            })
+        ]).start();
+    })
 
     // Function that determines whether or not the user touched the right side or left side of the screen, and then acts accordingly
     function handleTouch(event){
@@ -34,7 +56,7 @@ function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previous
                         </View>
                     }
                     <View style={styles.promptContainer}>
-                        <Text style={styles.normalText}>{prompt}</Text>
+                        <Animated.Text style={[styles.normalText, {transform: [{scale: scale}]}]}>{prompt}</Animated.Text>
                     </View>
                 </View>
             </View>

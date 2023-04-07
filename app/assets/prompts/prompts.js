@@ -142,7 +142,7 @@ export default {
         {prompt: "If you ever skipped work without letting work know"},
         {prompt: "If you have ever truly hated a coworker"},
     ],
-    // 32
+    // 34
     Hobby: [
         {prompt: "If you have ever played a table top rpg"},
         {prompt: "If you are a collector of a specific object"},
@@ -176,6 +176,8 @@ export default {
         {prompt: "If you share the same favorite hobby with ..."},
         {prompt: "For each time you were scammed when trading Pokémon cards"},
         {prompt: "If you have ever roleplayed"},
+        {prompt: "If your favorite music genre is dance-related like Drum and Bass, Techno, Hardstyle etc."},
+        {prompt: "If you have ever seen the entire 'The Lord of the Rings' trilogy in one sitting"},
     ],
     // 31
     Love: [
@@ -221,7 +223,7 @@ export default {
         {prompt: "If you have ever gotten detention"},
         {prompt: "If you have ever repeated a grade"},
         {prompt: "If you have ever gotten the lowest possible score on a test which you actually took"},
-        {prompt: "If you are able to speak 2 or more languages fluently (exlcuding your native language) through school"},
+        {prompt: "If you are able to speak 2 or more languages fluently (excluding your native language) through school"},
         {prompt: "If you have ever had to leave the school building because of a fire"},
         {prompt: "If you've ever been high in class"},
         {prompt: "For each christmas ball from school you attended"},
@@ -230,7 +232,7 @@ export default {
         {prompt: "If you ever skipped school with someone at this table"},
         {prompt: "If you still go to school"},
         {prompt: "If you ever folded a box during school time"},
-        {prompt: "If you ever stuck your chewing gum underneath a desk"},
+        {prompt: "If you have ever stuck your chewing gum underneath a desk"},
         {prompt: "If you have ever drunk alcohol at your high school"},
         {prompt: "If you have ever played 'Spin the bottle' at school-camp"},
     ],
@@ -245,7 +247,8 @@ export default {
         "Continue playing if you worked today",
         "Continue playing if you're smoking at this very moment",
         "Continue playing if you went to school today",
-        "Continue playing if you watched an episode of How I Met Your Mother in the past 7 days",
+        "Continue playing if you watched an episode of 'How I Met Your Mother' in the past 7 days",
+        "Continue playing if you watched an episode of 'Friends' in the past 7 days",
         "Continue playing if you listened to music for more than 3 hours today",
         "Continue playing if your birthday was less than a month ago, or is less than a month into the future",
         "Continue playing if you played a videogame today",
