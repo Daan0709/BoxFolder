@@ -13,12 +13,14 @@ class GameScreen extends Component {
     state = {
         categories: this.props.route.params.categories,
         currentPrompt: {prompt: 'Click to begin!', amountOfSips: 'Round 1'}, // Starts with this so the prompts can load based on selected categories
+        previousPrompt: {prompt: 'Click to begin!', amountOfSips: 'Round 1'}, // Stored so the player can go back to it when they accidentally skip it
         currentRound: 1,
         playerList: [],
         prompts: [],
         promptLoaded: false,
         promptsLoaded: false,
         showNextRoundScreen: false,
+        showPreviousPrompt: false,
         turnsUntilNextRound: this.props.route.params.amountOfPrompts,
         amountOfPrompts: this.props.route.params.amountOfPrompts,
         currentPlayer: null,
@@ -63,9 +65,18 @@ class GameScreen extends Component {
         this.setState({'promptsLoaded': true});
     }
 
+    showCurrentPrompt = () => {
+        this.setState({'showPreviousPrompt': false})
+    }
+
     nextPromptHandler = () => {
+        if (this.state.showPreviousPrompt){
+            this.showCurrentPrompt();
+            return;
+        }
+        this.setState({'previousPrompt': this.state.currentPrompt});
         if (this.state.turnsUntilNextRound === 0){
-            this.setState({'showNextRoundScreen': true})
+            this.setState({'showNextRoundScreen': true});
         }
         let prompt = this.state.prompts[Math.floor(Math.random()*this.state.prompts.length)];
 
@@ -86,9 +97,14 @@ class GameScreen extends Component {
         this.setState({'turnsUntilNextRound': this.state.turnsUntilNextRound-1});
     }
 
+    previousPromptHandler = () => {
+        this.setState({'showPreviousPrompt': true})
+    }
+
     nextRoundHandler = () => {
         this.setState({'showNextRoundScreen': false});
         this.setState({'turnsUntilNextRound': this.state.amountOfPrompts - 1});
+        this.setState({'previousPrompt': {prompt: 'No previous prompt!', amountOfSips: ''}})
         const nextRound = this.state.currentRound + 1;
         if (nextRound === 3){
             this.loadInFirstPlayer();
@@ -106,7 +122,6 @@ class GameScreen extends Component {
         this.setState({'currentPlayer': this.state.playerList[0]});
     }
 
-    // TODO: Maybe clean up this function?
     loadNextPlayer = (elimination) => {
         // if there was an elimination
         if (elimination){
@@ -184,26 +199,45 @@ class GameScreen extends Component {
                 {this.state.showNextRoundScreen ?                                   // If the next round screen should be shown:
                     <NextRound nextRoundHandler={this.nextRoundHandler} roundNumber={this.state.currentRound}/>
                     :
-
-                    this.state.currentRound === 1 ?                                 // If it is round one, drink, round two: give out
-                        <Prompt prompt={this.state.currentPrompt.prompt}
-                                amountOfSips={this.state.currentPrompt.amountOfSips}
+                    this.state.showPreviousPrompt && this.state.currentRound === 1 ?    // If the player wants to see the previous prompt and its round 1
+                        <Prompt prompt={this.state.previousPrompt.prompt}
+                                amountOfSips={this.state.previousPrompt.amountOfSips}
                                 giveOrDrink={"Drink "}
-                                nextPromptHandler={this.nextPromptHandler}/>
+                                nextPromptHandler={this.nextPromptHandler}
+                                previousPromptHandler={this.previousPromptHandler}
+                                color={colors.Secondary}/>
                         :
-                        this.state.currentRound === 2 ?                             // Round two, so give out
-                        <Prompt prompt={this.state.currentPrompt.prompt}
-                                amountOfSips={this.state.currentPrompt.amountOfSips}
-                                giveOrDrink={"Give out "}
-                                nextPromptHandler={this.nextPromptHandler}/>
-                            :                                                       // Final round (round three)
-                            <FinalRound prompt={this.state.currentPrompt.prompt}
-                                        playerName={this.state.currentPlayer.name}
-                                        removePlayerHandler={this.removePlayerHandler}
-                                        continuePlayingHandler={this.continuePlayingHandler}
-                                        playerListLength={this.state.playerList.length}
-                                        goBackHandler={this.goBackHandler}
-                                        playerIndex={this.state.currentPlayerIndex}/>
+                        this.state.showPreviousPrompt && this.state.currentRound === 2 ? // If the player wants to see the previous prompt and its round 2
+                            <Prompt prompt={this.state.previousPrompt.prompt}
+                                    amountOfSips={this.state.previousPrompt.amountOfSips}
+                                    giveOrDrink={"Give out "}
+                                    nextPromptHandler={this.nextPromptHandler}
+                                    previousPromptHandler={this.previousPromptHandler}
+                                    color={colors.SecondaryContrast}/>
+                            :
+                            this.state.currentRound === 1 ?                                 // If it is round one, drink, round two: give out
+                                <Prompt prompt={this.state.currentPrompt.prompt}
+                                        amountOfSips={this.state.currentPrompt.amountOfSips}
+                                        giveOrDrink={"Drink "}
+                                        nextPromptHandler={this.nextPromptHandler}
+                                        previousPromptHandler={this.previousPromptHandler}
+                                        color={colors.Primary}/>
+                                :
+                                this.state.currentRound === 2 ?                             // Round two, so give out
+                                <Prompt prompt={this.state.currentPrompt.prompt}
+                                        amountOfSips={this.state.currentPrompt.amountOfSips}
+                                        giveOrDrink={"Give out "}
+                                        nextPromptHandler={this.nextPromptHandler}
+                                        previousPromptHandler={this.previousPromptHandler}
+                                        color={colors.PrimaryContrast}/>
+                                    :                                                       // Final round (round three)
+                                    <FinalRound prompt={this.state.currentPrompt.prompt}
+                                                playerName={this.state.currentPlayer.name}
+                                                removePlayerHandler={this.removePlayerHandler}
+                                                continuePlayingHandler={this.continuePlayingHandler}
+                                                playerListLength={this.state.playerList.length}
+                                                goBackHandler={this.goBackHandler}
+                                                playerIndex={this.state.currentPlayerIndex}/>
                 }
             </View>
         )

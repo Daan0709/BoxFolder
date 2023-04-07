@@ -3,5 +3,6 @@ export default {
     Secondary: '#034a22',
     Tertiary: '#05672e',
     PrimaryContrast: '#530364',
+    SecondaryContrast: '#80079b',
     White: '#fff'
 }

@@ -1,14 +1,26 @@
-import {StatusBar, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
+import {Dimensions, StatusBar, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
 import colors from "../config/colors";
 import React from "react";
 
-function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler }) {
+function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color }) {
 
     const sipsString = amountOfSips === 1 ? ' sip' : ' sips';
-    const color = giveOrDrink === "Drink " ? colors.Primary : colors.PrimaryContrast;
+    const windowWidth = Dimensions.get('window').width;
+
+    // Function that determines whether or not the user touched the right side or left side of the screen, and then acts accordingly
+    function handleTouch(event){
+        const x = event.nativeEvent.locationX;
+        // Left quarter of screen: show previous prompt
+        if (x < (windowWidth / 4)){
+            previousPromptHandler();
+            return;
+        }
+        // Right side: go to next prompt
+        nextPromptHandler();
+    }
 
     return (
-        <TouchableWithoutFeedback onPress={nextPromptHandler}>
+        <TouchableWithoutFeedback onPress={(e) => {handleTouch(e)}}>
             <View style={[styles.background, {backgroundColor: color}]}>
                 <StatusBar hidden={true}/>
                 <View>

@@ -169,7 +169,7 @@ export default {
         {prompt: "If drinking is your biggest hobby"},
         {prompt: "For every Dungeons and Dragons campaign you are currently in"},
         {prompt: "If you have ever been to the club with ..."},
-        {prompt: "If your favorite music genre is Punp Pop or Rock"},
+        {prompt: "If your favorite music genre is Punk Pop or Rock"},
         {prompt: "If you've ever been to a music festival with ..."},
         {prompt: "If your favorite hobby is nerdy"},
         {prompt: "If you practice any creative hobbies like painting or playing an instrument"},

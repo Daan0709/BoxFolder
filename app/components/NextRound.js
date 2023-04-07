@@ -8,7 +8,7 @@ function NextRound({ roundNumber, nextRoundHandler }) {
         <TouchableWithoutFeedback onPress={nextRoundHandler}>
             <View style={styles.nextRoundScreen}>
                 <StatusBar hidden={true}/>
-                <View style={styles.fullScreen}>
+                <View>
                     <Text style={styles.title}>Round {roundNumber + 1}</Text>
                 </View>
             </View>
