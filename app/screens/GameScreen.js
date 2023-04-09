@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
-import {Alert, BackHandler, StyleSheet, View} from "react-native";
+import {Alert, BackHandler, StyleSheet, TouchableOpacity, View} from "react-native";
 import Prompts from "../assets/prompts/prompts"
 
 import colors from "../config/colors";
@@ -8,6 +8,7 @@ import Prompt from "../components/Prompt";
 import NextRound from "../components/NextRound";
 import FinalRound from "../components/FinalRound";
 import ForceMode from "../components/ForceMode";
+import {MaterialIcons} from "@expo/vector-icons";
 
 class GameScreen extends Component {
     state = {
@@ -192,6 +193,10 @@ class GameScreen extends Component {
         this.props.navigation.navigate('HomeScreen');
     }
 
+    helpButtonHandler = () => {
+        this.props.navigation.navigate('HelpScreen');
+    }
+
     render() {
         return (
             <View style={styles.background}>
@@ -239,6 +244,9 @@ class GameScreen extends Component {
                                                 goBackHandler={this.goBackHandler}
                                                 playerIndex={this.state.currentPlayerIndex}/>
                 }
+                <TouchableOpacity onPress={this.helpButtonHandler} style={styles.helpButton}>
+                    <MaterialIcons name="help-outline" size={30} color="white" />
+                </TouchableOpacity>
             </View>
         )
     }
@@ -248,6 +256,11 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: colors.Primary
+    },
+    helpButton: {
+        position: "absolute",
+        top: 20,
+        left: 20,
     },
     nextRoundScreen: {
         flex: 1,
