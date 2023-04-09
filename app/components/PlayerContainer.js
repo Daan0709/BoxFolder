@@ -39,10 +39,11 @@ const styles = StyleSheet.create({
         color: colors.White,
         borderColor: "black",
         borderWidth: 2,
-        width: "60%",
         backgroundColor: colors.Secondary,
         padding: 2,
-        fontSize: 20
+        fontSize: 20,
+        flex: 3,
+        alignContent: "flex-end"
     },
     invisibleButton: {
         borderRadius: 100,
@@ -58,13 +59,15 @@ const styles = StyleSheet.create({
     normalText: {
         color: colors.White,
         fontSize: 20,
+        flex: 1,
+        alignContent: "flex-start",
+        width: "20%"
     },
     playerContainer: {
         flex: 1,
         flexDirection: "row",
         width: '100%',
         alignItems: "center",
-        justifyContent: "space-around"
     },
     roundButton: {
         borderRadius: 100,

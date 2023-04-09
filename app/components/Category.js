@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     category: {
         height: 110,
         width: 100,
-        backgroundColor: colors.Tertiary,
+        backgroundColor: colors.Secondary,
         borderWidth: 2,
         borderColor: "black",
         borderRadius: 10,

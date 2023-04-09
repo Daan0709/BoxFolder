@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.Secondary,
-        borderColor: "black",
+        borderColor: 'gray',
         borderWidth: 2,
-        width: "40%"
+        paddingHorizontal: 40,
     },
     nameContainer: {
         alignItems: "center",
