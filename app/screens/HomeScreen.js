@@ -23,6 +23,10 @@ class HomeScreen extends Component {
     };
 
     updatePlayerName = (name, rank) => {
+        // Max length of a name is 20 characters
+        if (name.length > 20){
+            return;
+        }
         let playerList = this.state.playerList;
         playerList.map((pair) => {
             if (pair.rank === rank){
@@ -65,7 +69,7 @@ class HomeScreen extends Component {
     }
 
     playButtonHandler = () => {
-        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+$/;
+        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ-— 0-9]+$/;
         let cleared = true;
         this.state.playerList.forEach((player) => {
             if (!regex.test(player.name)){
@@ -96,13 +100,21 @@ class HomeScreen extends Component {
                         <Text style={styles.title}>Box Folder!</Text>
                         <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
                     </View>
-                    <View style={styles.playersContainer}>
-                        {this.state.playerList.map((pair) => {
-                            return (
-                                <PlayerContainer handleToUpdate={this.updatePlayerName} removePlayer={this.removePlayerHandler} name={pair.name} rank={pair.rank} key={pair.rank}/>
-                            )
-                        })}
+                    <View style={styles.fixedHeightContainer}>
+                        <View style={[styles.playersContainer, {height: this.state.playerList.length * 40}]}>
+                            {this.state.playerList.map((pair) => {
+                                return (
+                                    <PlayerContainer
+                                        handleToUpdate={this.updatePlayerName}
+                                        removePlayer={this.removePlayerHandler}
+                                        name={pair.name}
+                                        rank={pair.rank}
+                                        key={pair.rank}/>
+                                )
+                            })}
+                        </View>
                     </View>
+
                     <View style={styles.addPlayerContainer}>
                         <Text style={styles.normalText}>Add New Player</Text>
                         <TouchableOpacity style={styles.roundButton} onPress={this.addPlayerHandler}>
@@ -145,6 +157,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    fixedHeightContainer: {
+        height: 400,    // Should be equal to 40 * the max amount of players
+    },
     image: {
       width: 80,
       height: 80
@@ -178,7 +193,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     playersContainer: {
-        height: 400,
         width: '100%',
     },
     roundButton: {

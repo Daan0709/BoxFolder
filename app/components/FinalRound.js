@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, ImageBackground, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Dimensions, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import colors from "../config/colors";
 
 function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler, continuePlayingHandler, goBackHandler }) {
@@ -28,12 +28,13 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                 playerName !== "No one" ?
                 <View>
                     <StatusBar hidden={true}/>
-                    <ImageBackground source={require('../assets/images/confetti-box.png')} style={styles.image}>
+                    <View style={styles.winnerContainer}>
+                        <Image source={require('../assets/images/confetti-box.png')} style={styles.image}/>
                         <Text style={styles.outlinedText}>{playerName} wins!</Text>
                         <TouchableOpacity style={styles.longButton} onPress={goBackHandler}>
                             <Text style={styles.normalText}>Continue</Text>
                         </TouchableOpacity>
-                    </ImageBackground>
+                    </View>
                 </View>
                     :                   // Show this if no one wins
                     <View style={styles.winnerContainer}>
@@ -74,19 +75,17 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     image: {
-        width: Dimensions.get('window').width,
-        height: "100%",
-        justifyContent: "center",
-        alignItems: "center",
+        width: Dimensions.get('window').width / 2,
+        height: 200,
     },
     longButton: {
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.Secondary,
-        borderColor: "black",
+        borderColor: 'gray',
         borderWidth: 2,
-        width: "40%"
+        paddingHorizontal: 40,
     },
     nameContainer: {
         alignItems: "center",
