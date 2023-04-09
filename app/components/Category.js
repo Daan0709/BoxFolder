@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderRadius: 10,
         alignItems: "center",
+        marginBottom: 5
     },
     unchecked: {
         opacity: 0.5,
