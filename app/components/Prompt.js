@@ -9,12 +9,6 @@ function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previous
     const windowWidth = Dimensions.get('window').width;
 
     useEffect(() => {
-
-        // Animated.timing(rotation, {
-        //     toValue: 1,
-        //     duration: 5000,
-        //     useNativeDriver: true,
-        // }).start();
         Animated.sequence([
             Animated.timing(scale, {
                 toValue: 1.2,
