@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { AntDesign } from '@expo/vector-icons';
+import {AntDesign, MaterialIcons} from '@expo/vector-icons';
 
 import colors from "../config/colors";
 import Category from "../components/Category";
@@ -67,6 +67,10 @@ class CategoryScreen extends Component {
         this.setState({'amountOfPrompts': this.state.amountOfPrompts + 5})
     }
 
+    helpButtonHandler = () => {
+        this.props.navigation.navigate('HelpScreen');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -100,6 +104,9 @@ class CategoryScreen extends Component {
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.longButton} onPress={this.handleBackButton}>
                             <Text style={styles.normalText}>Go Back!</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.helpButtonHandler}>
+                            <MaterialIcons name="help-outline" size={30} color="white" />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.longButton} onPress={this.handlePlayButton}>
                             <Text style={styles.normalText}>Let's Drink!</Text>
@@ -145,7 +152,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-around",
-        width: 210, // twice the width of a category + 10
+        alignContent: "center",
+        width: 310, // thrice the width of a category + 10
     },
     container: {
         flex: 1,
