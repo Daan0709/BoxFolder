@@ -9,6 +9,7 @@ import NextRound from "../components/NextRound";
 import FinalRound from "../components/FinalRound";
 import ForceMode from "../components/ForceMode";
 import {MaterialIcons} from "@expo/vector-icons";
+import {translateText} from "../services/LanguageService";
 
 class GameScreen extends Component {
     state = {
@@ -26,12 +27,14 @@ class GameScreen extends Component {
         amountOfPrompts: this.props.route.params.amountOfPrompts,
         currentPlayer: null,
         currentPlayerIndex: 0,
-        finalRound: false
+        finalRound: false,
+        language: this.props.route.params.language
     };
 
     componentDidMount() {
         const copy = [...this.props.route.params.playerList];       // Necessary so the playerlist in HomeScreen doesn't get changed
         this.setState({'playerList': copy})
+        this.setState({'currentPrompt': {prompt: translateText(this.state.language, "GameScreen", "start-title"), amountOfSips: translateText(this.state.language, "GameScreen", "start-round")}})
         this.loadPrompts();
         this.backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
@@ -59,7 +62,7 @@ class GameScreen extends Component {
         let promptsToLoad = [];
         this.state.categories.forEach((category) => {
             if (category.checked) {
-                promptsToLoad = promptsToLoad.concat(Prompts[category.title]);
+                promptsToLoad = promptsToLoad.concat(Prompts[this.state.language][category.key]);
             }
         })
         this.setState({'prompts': promptsToLoad});
@@ -114,7 +117,7 @@ class GameScreen extends Component {
     }
 
     loadInRandomFinisherPrompt = () => {
-        let finisherPrompt = Prompts.Finishers[Math.floor(Math.random()*Prompts.Finishers.length)];
+        let finisherPrompt = Prompts[this.state.language].Finishers[Math.floor(Math.random()*Prompts[this.state.language].Finishers.length)];
         this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
     }
 
@@ -194,7 +197,9 @@ class GameScreen extends Component {
     }
 
     helpButtonHandler = () => {
-        this.props.navigation.navigate('HelpScreen');
+        this.props.navigation.navigate('HelpScreen', {
+            language: this.state.language
+        });
     }
 
     render() {
@@ -202,7 +207,7 @@ class GameScreen extends Component {
             <View style={styles.background}>
                 <ForceMode mode={ScreenOrientation.OrientationLock.LANDSCAPE}/>
                 {this.state.showNextRoundScreen ?                                   // If the next round screen should be shown:
-                    <NextRound nextRoundHandler={this.nextRoundHandler} roundNumber={this.state.currentRound}/>
+                    <NextRound nextRoundHandler={this.nextRoundHandler} roundNumber={this.state.currentRound} language={this.state.language}/>
                     :
                     this.state.showPreviousPrompt && this.state.currentRound === 1 ?    // If the player wants to see the previous prompt and its round 1
                         <Prompt prompt={this.state.previousPrompt.prompt}
@@ -210,7 +215,8 @@ class GameScreen extends Component {
                                 giveOrDrink={"Drink "}
                                 nextPromptHandler={this.nextPromptHandler}
                                 previousPromptHandler={this.previousPromptHandler}
-                                color={colors.Secondary}/>
+                                color={colors.Secondary}
+                                language={this.state.language}/>
                         :
                         this.state.showPreviousPrompt && this.state.currentRound === 2 ? // If the player wants to see the previous prompt and its round 2
                             <Prompt prompt={this.state.previousPrompt.prompt}
@@ -218,7 +224,8 @@ class GameScreen extends Component {
                                     giveOrDrink={"Give out "}
                                     nextPromptHandler={this.nextPromptHandler}
                                     previousPromptHandler={this.previousPromptHandler}
-                                    color={colors.SecondaryContrast}/>
+                                    color={colors.SecondaryContrast}
+                                    language={this.state.language}/>
                             :
                             this.state.currentRound === 1 ?                                 // If it is round one, drink, round two: give out
                                 <Prompt prompt={this.state.currentPrompt.prompt}
@@ -226,7 +233,8 @@ class GameScreen extends Component {
                                         giveOrDrink={"Drink "}
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
-                                        color={colors.Primary}/>
+                                        color={colors.Primary}
+                                        language={this.state.language}/>
                                 :
                                 this.state.currentRound === 2 ?                             // Round two, so give out
                                 <Prompt prompt={this.state.currentPrompt.prompt}
@@ -234,7 +242,8 @@ class GameScreen extends Component {
                                         giveOrDrink={"Give out "}
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
-                                        color={colors.PrimaryContrast}/>
+                                        color={colors.PrimaryContrast}
+                                        language={this.state.language}/>
                                     :                                                       // Final round (round three)
                                     <FinalRound prompt={this.state.currentPrompt.prompt}
                                                 playerName={this.state.currentPlayer.name}
@@ -242,7 +251,8 @@ class GameScreen extends Component {
                                                 continuePlayingHandler={this.continuePlayingHandler}
                                                 playerListLength={this.state.playerList.length}
                                                 goBackHandler={this.goBackHandler}
-                                                playerIndex={this.state.currentPlayerIndex}/>
+                                                playerIndex={this.state.currentPlayerIndex}
+                                                language={this.state.language}/>
                 }
                 <TouchableOpacity onPress={this.helpButtonHandler} style={styles.helpButton}>
                     <MaterialIcons name="help-outline" size={30} color="white" />

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {translateText} from "../services/LanguageService";
 
 function PlayerContainer(props) {
     const [name, setName] = useState(props.name);
@@ -18,8 +19,9 @@ function PlayerContainer(props) {
 
     return (
         <View style={styles.playerContainer}>
-            <Text style={styles.normalText}>Player {rank+1}</Text>
-            <TextInput value={props.name} style={styles.input} placeholder="Name" onChangeText={(newName) => handleChangeText(newName)}/>
+            <Text style={styles.normalText}>{translateText(props.language, "PlayerContainer", "player-label")} {rank+1}</Text>
+            <TextInput value={props.name} style={styles.input} placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
+                       onChangeText={(newName) => handleChangeText(newName)} onFocus={props.setFocus} onEndEditing={props.endFocus}/>
             {rank === 0 || rank === 1 ?
                 <TouchableOpacity style={styles.invisibleButton}>
                     <Text style={styles.invisibleText}>x</Text>

@@ -1,8 +1,9 @@
 import React from 'react';
 import {Dimensions, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import colors from "../config/colors";
+import {translateText} from "../services/LanguageService";
 
-function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler, continuePlayingHandler, goBackHandler }) {
+function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler, continuePlayingHandler, goBackHandler, language }) {
 
     return (
         <View style={styles.background}>
@@ -17,10 +18,10 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                     </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.longButton} onPress={removePlayerHandler}>
-                            <Text style={styles.normalText}>Fold your box!</Text>
+                            <Text style={styles.normalText}>{translateText(language, "GameScreen", "eliminate-button")}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.longButton} onPress={continuePlayingHandler}>
-                            <Text style={styles.normalText}>Continue</Text>
+                            <Text style={styles.normalText}>{translateText(language, "GameScreen", "continue-button")}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -30,18 +31,18 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                     <StatusBar hidden={true}/>
                     <View style={styles.winnerContainer}>
                         <Image source={require('../assets/images/confetti-box.png')} style={styles.image}/>
-                        <Text style={styles.outlinedText}>{playerName} wins!</Text>
+                        <Text style={styles.outlinedText}>{playerName}{translateText(language, "GameScreen", "win")}</Text>
                         <TouchableOpacity style={styles.longButton} onPress={goBackHandler}>
-                            <Text style={styles.normalText}>Continue</Text>
+                            <Text style={styles.normalText}>{translateText(language, "GameScreen", "menu-button")}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                     :                   // Show this if no one wins
                     <View style={styles.winnerContainer}>
                         <StatusBar hidden={true}/>
-                        <Text style={styles.title}>{playerName} wins!</Text>
+                        <Text style={styles.title}>{translateText(language, "GameScreen", "no-one")}{translateText(language, "GameScreen", "win")}</Text>
                         <TouchableOpacity style={styles.longButton} onPress={goBackHandler}>
-                            <Text style={styles.normalText}>Continue</Text>
+                            <Text style={styles.normalText}>{translateText(language, "GameScreen", "menu-button")}</Text>
                         </TouchableOpacity>
                     </View>
             }

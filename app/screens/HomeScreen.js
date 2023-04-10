@@ -14,12 +14,17 @@ import { MaterialIcons } from '@expo/vector-icons';
 import colors from "../config/colors"
 import PlayerContainer from "../components/PlayerContainer";
 import ForceMode from "../components/ForceMode";
+import LanguageSwitch from "../components/LanguageSwitch";
+import {translateText} from "../services/LanguageService";
+
 
 class HomeScreen extends Component {
 
     state = {
         playerList: [{name: '', rank: 0}, {name: '', rank: 1}],
         amountOfPlayers: 1,
+        language: 'uk',
+        languageOpacity: 1,
     };
 
     updatePlayerName = (name, rank) => {
@@ -39,7 +44,7 @@ class HomeScreen extends Component {
     addPlayerHandler = () => {
 
         if (this.state.amountOfPlayers === 9){
-            Alert.alert("Too Many Players", "Maximum of 10 players!");
+            Alert.alert(translateText(this.state.language, "Alert", "player-amount-title"), translateText(this.state.language, "Alert", "player-amount-body"));
             return
         }
 
@@ -69,7 +74,7 @@ class HomeScreen extends Component {
     }
 
     playButtonHandler = () => {
-        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ-— 0-9]+$/;
+        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ-— 0-9()]+$/;
         let cleared = true;
         this.state.playerList.forEach((player) => {
             if (!regex.test(player.name)){
@@ -78,16 +83,33 @@ class HomeScreen extends Component {
         })
 
         if (!cleared){
-            Alert.alert("Error", "Please fill in all of the player's names (no spaces)!");
+            Alert.alert("Error", translateText(this.state.language, "Alert", "player-names-body"));
             return
         }
         this.props.navigation.navigate('CategoryScreen', {
-            playerList: this.state.playerList
+            playerList: this.state.playerList,
+            language: this.state.language
         });
     }
 
     helpButtonHandler = () => {
-        this.props.navigation.navigate('HelpScreen');
+        this.props.navigation.navigate('HelpScreen', {
+            language: this.state.language
+        });
+    };
+
+    setLanguageHandler = (lang) => {
+        this.setState({'language': lang});
+    }
+
+    // TODO: These only work if the user hits the enter button, not when they
+    // TODO: back out of the text focus with system buttons
+    setFocus = () => {
+        this.setState({'languageOpacity': 0});
+    }
+
+    endFocus = () => {
+        this.setState({'languageOpacity': 1});
     }
 
     render(){
@@ -105,8 +127,11 @@ class HomeScreen extends Component {
                             {this.state.playerList.map((pair) => {
                                 return (
                                     <PlayerContainer
+                                        language={this.state.language}
                                         handleToUpdate={this.updatePlayerName}
                                         removePlayer={this.removePlayerHandler}
+                                        setFocus={this.setFocus}
+                                        endFocus={this.endFocus}
                                         name={pair.name}
                                         rank={pair.rank}
                                         key={pair.rank}/>
@@ -116,19 +141,20 @@ class HomeScreen extends Component {
                     </View>
 
                     <View style={styles.addPlayerContainer}>
-                        <Text style={styles.normalText}>Add New Player</Text>
+                        <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "add-player-button")}</Text>
                         <TouchableOpacity style={styles.roundButton} onPress={this.addPlayerHandler}>
                             <Text style={styles.normalText}>+</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.longButton} onPress={this.playButtonHandler}>
-                            <Text style={styles.normalText}>Let's Drink!</Text>
+                            <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.helpButtonHandler}>
                             <MaterialIcons name="help-outline" size={30} color="white" />
                         </TouchableOpacity>
                     </View>
+                    <LanguageSwitch style={styles.language} language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} opacity={this.state.languageOpacity}/>
                 </View>
             </View>
         );
@@ -172,6 +198,12 @@ const styles = StyleSheet.create({
         backgroundColor: colors.Secondary,
         padding: 2,
         fontSize: 20
+    },
+    language: {
+        backgroundColor: "teal",
+        position: "absolute",
+        top: StatusBar.currentHeight,
+        right: 15,
     },
     logoContainer: {
         justifyContent: 'center',

@@ -6,15 +6,22 @@ import {AntDesign, MaterialIcons} from '@expo/vector-icons';
 import colors from "../config/colors";
 import Category from "../components/Category";
 import ForceMode from "../components/ForceMode";
+import {translateText} from "../services/LanguageService";
 
 class CategoryScreen extends Component {
 
     state = {
-        categories: [{title: "General", checked: true, emoji: "🧠"}, {title: "Sports", checked: true, emoji: "⚽️"}, {title: "Games", checked: true, emoji: "🎮"},
-                    {title: "Work", checked: true, emoji: "🏢 "}, {title: "Hobby", checked: true, emoji: "🎳"},
-                    {title: "Love", checked: true, emoji: "❤️"}, {title: "School", checked: true, emoji: "📚 "}],
-        amountOfPrompts: 15
+        language: this.props.route.params.language,
+        categories: [],
+        amountOfPrompts: 15,
     };
+
+    componentDidMount() {
+        this.setState({'categories': [{title: translateText(this.state.language, "CategoryScreen", "General"), key: "General", checked: true, emoji: "🧠"}, {title: translateText(this.state.language, "CategoryScreen", "Sports"), key: "Sports", checked: true, emoji: "⚽️"},
+                {title: translateText(this.state.language, "CategoryScreen", "Games"), key: "Games", checked: true, emoji: "🎮"}, {title: translateText(this.state.language, "CategoryScreen", "Work"), key: "Work", checked: true, emoji: "🏢 "},
+                {title: translateText(this.state.language, "CategoryScreen", "Hobby"), key: "Hobby", checked: true, emoji: "🎳"}, {title: translateText(this.state.language, "CategoryScreen", "Love"), key: "Love", checked: true, emoji: "❤️"},
+                {title: translateText(this.state.language, "CategoryScreen", "School"), key: "School", checked: true, emoji: "📚 "}]})
+    }
 
     handleCheck = (checked, title) => {         // Function that keeps the state categories up to date whenever one of the categories is checked or unchecked
         let categories = this.state.categories;
@@ -49,7 +56,8 @@ class CategoryScreen extends Component {
         this.props.navigation.navigate('GameScreen', {
             categories: this.state.categories,
             playerList: this.props.route.params.playerList,
-            amountOfPrompts: this.state.amountOfPrompts
+            amountOfPrompts: this.state.amountOfPrompts,
+            language: this.state.language
         });
     }
 
@@ -68,7 +76,9 @@ class CategoryScreen extends Component {
     }
 
     helpButtonHandler = () => {
-        this.props.navigation.navigate('HelpScreen');
+        this.props.navigation.navigate('HelpScreen', {
+            language: this.state.language
+        });
     }
 
     render() {
@@ -78,17 +88,17 @@ class CategoryScreen extends Component {
                 <StatusBar backgroundColor={colors.Primary}/>
                 <View style={styles.background}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Choose your categories!</Text>
+                        <Text style={styles.title}>{translateText(this.state.language, "CategoryScreen", "title")}</Text>
                     </View>
 
                     <View style={styles.categoryContainer}>
                         {this.state.categories.map((category) => {
-                            return (<Category title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.title} handleToUpdate={this.handleCheck}/>)
+                            return (<Category title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
                         })}
                     </View>
 
                     <View style={styles.buttonContainerColumn}>
-                        <Text style={styles.smallText}>How many prompts do you want per round?</Text>
+                        <Text style={styles.smallText}>{translateText(this.state.language, "CategoryScreen", "prompts-per-round")}</Text>
                         <View style={styles.amountOfRoundsContainer}>
                             <TouchableOpacity onPress={this.reduceAmountOfPrompts}>
                                 <AntDesign name="minuscircle" size={30} color="black" />
@@ -103,13 +113,13 @@ class CategoryScreen extends Component {
 
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.longButton} onPress={this.handleBackButton}>
-                            <Text style={styles.normalText}>Go Back!</Text>
+                            <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "back-button")}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.helpButtonHandler}>
                             <MaterialIcons name="help-outline" size={30} color="white" />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.longButton} onPress={this.handlePlayButton}>
-                            <Text style={styles.normalText}>Let's Drink!</Text>
+                            <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "play-button")}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -1,11 +1,14 @@
 import {Dimensions, StatusBar, StyleSheet, Text, TouchableWithoutFeedback, View, Animated} from "react-native";
 import colors from "../config/colors";
 import React, {useEffect, useRef} from "react";
+import {translateText} from "../services/LanguageService";
 
-function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color }) {
+function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color, language }) {
 
     const scale = useRef(new Animated.Value(1)).current;
-    const sipsString = amountOfSips === 1 ? ' sip' : ' sips';
+    const sipsString = amountOfSips === 1 ? translateText(language, "GameScreen", "sip-singular") : translateText(language, "GameScreen", "sip-plural");
+    const giveoutString = `${translateText(language, "GameScreen", "give-out").replace('...', amountOfSips+sipsString)}`;
+    const giveoutBool = giveOrDrink === "Give out ";
     const windowWidth = Dimensions.get('window').width;
 
     useEffect(() => {
@@ -40,14 +43,20 @@ function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previous
             <View style={[styles.background, {backgroundColor: color}]}>
                 <StatusBar hidden={true}/>
                 <View>
-                    {amountOfSips === "Round 1" ?
+                    {amountOfSips === translateText(language, "GameScreen", "start-round") ?
                         <View style={styles.titleContainer}>
-                            <Text style={styles.title}>Round 1</Text>
+                            <Text style={styles.title}>{translateText(language, "GameScreen", "start-round")}</Text>
                         </View>
                         :
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.title}>{giveOrDrink}{amountOfSips}{sipsString}</Text>
-                        </View>
+                        giveoutBool ?
+                            <View style={styles.titleContainer}>
+                                <Text style={styles.title}>{giveoutString}</Text>
+                            </View>
+                            :
+                            <View style={styles.titleContainer}>
+                                <Text style={styles.title}>{giveOrDrink}{amountOfSips}{sipsString}</Text>
+                            </View>
+
                     }
                     <View style={styles.promptContainer}>
                         <Animated.Text style={[styles.normalText, {transform: [{scale: scale}]}]}>{prompt}</Animated.Text>
