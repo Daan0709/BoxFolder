@@ -2,7 +2,8 @@ export const uk = () => {
     return {
         "HomeScreen": {
             "add-player-button": "Add New Player",
-            "play-button": "Continue",
+            "play-button": "LET'S DRINK!",
+            "help-button": "Help",
         },
         "PlayerContainer": {
             "player-label": "Player",
@@ -14,7 +15,7 @@ export const uk = () => {
             "player-names-body": "Please fill in all of the player's names before continuing!",
         },
         "HelpPage": {
-            "back-button": "Go Back",
+            "back-button": "< Go Back",
             "fold-box": "What does it mean to 'fold a box'? It's simple: if you have to fold a box, it means you have to down a full drink.",
             "person-included-top": "What happens when a person is included in a prompt like here?",
             "person-included-bot": "In the event where a player is named, they themselves are also included. In this particular example, Jill also has to drink 2 sips.",
@@ -37,9 +38,12 @@ export const uk = () => {
             "Hobby": "Hobby",
             "Love": "Love",
             "School": "School",
-            "prompts-per-round": "How many prompts do you want to see per round?",
-            "back-button": "Go Back",
-            "play-button": "Let's Drink!"
+            "Blank1": "",
+            "Blank2": "",
+            "prompts-per-round": "Number of prompts per round:",
+            "back-button": "< Go Back",
+            "play-button": "Let's Drink!",
+            "help-button": "Help"
         },
         "GameScreen": {
             "start-title": "Click to begin!",

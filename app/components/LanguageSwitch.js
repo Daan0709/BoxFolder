@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Dimensions, StatusBar, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
 import colors from "../config/colors";
 
-function LanguageSwitch({ language, setLanguageHandler, opacity }) {
+function LanguageSwitch({ language, setLanguageHandler }) {
 
     const [clicked, setClicked] = useState(false);
     const [currentLanguage, setCurrentLanguage] = useState(language);
@@ -25,7 +25,7 @@ function LanguageSwitch({ language, setLanguageHandler, opacity }) {
     };
 
     return (
-        <View style={[styles.switchContainer, {opacity: opacity}]}>
+        <View style={styles.switchContainer}>
             {
                 clicked ?
                     <View style={styles.clickedContainer}>
@@ -59,25 +59,18 @@ const styles = StyleSheet.create({
         height: Dimensions.get('screen').height,
         width: Dimensions.get('screen').width,
         backgroundColor: colors.Primary,
-        top: -StatusBar.currentHeight,
-        right: -15,
+        alignItems: "center",
+        justifyContent: "center",
     },
     flagsContainer: {
         flexDirection: "row",
-        justifyContent: "center",
     },
     switchContainer: {
         position: "absolute",
-        top: StatusBar.currentHeight,
-        right: 15,
+        width: "100%",
     },
     flagStyling: {
         fontSize: 30,
-        padding: 5,
-        borderRadius: 5,
-        borderWidth: 2,
-        borderColor: 'black',
-        backgroundColor: colors.Secondary,
         textAlign: "center"
     }
 })

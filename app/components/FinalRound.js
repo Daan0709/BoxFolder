@@ -1,6 +1,8 @@
 import React from 'react';
 import {Dimensions, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+
 import colors from "../config/colors";
+import styleSheet from "../config/StyleSheet";
 import {translateText} from "../services/LanguageService";
 
 function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler, continuePlayingHandler, goBackHandler, language }) {
@@ -17,10 +19,10 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                         <Text style={styles.normalText}>{prompt}</Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.longButton} onPress={removePlayerHandler}>
+                        <TouchableOpacity style={styleSheet.SecondaryButton} onPress={removePlayerHandler}>
                             <Text style={styles.normalText}>{translateText(language, "GameScreen", "eliminate-button")}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.longButton} onPress={continuePlayingHandler}>
+                        <TouchableOpacity style={styleSheet.PrimaryButton} onPress={continuePlayingHandler}>
                             <Text style={styles.normalText}>{translateText(language, "GameScreen", "continue-button")}</Text>
                         </TouchableOpacity>
                     </View>
@@ -32,7 +34,7 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                     <View style={styles.winnerContainer}>
                         <Image source={require('../assets/images/confetti-box.png')} style={styles.image}/>
                         <Text style={styles.outlinedText}>{playerName}{translateText(language, "GameScreen", "win")}</Text>
-                        <TouchableOpacity style={styles.longButton} onPress={goBackHandler}>
+                        <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={goBackHandler}>
                             <Text style={styles.normalText}>{translateText(language, "GameScreen", "menu-button")}</Text>
                         </TouchableOpacity>
                     </View>
@@ -41,7 +43,7 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                     <View style={styles.winnerContainer}>
                         <StatusBar hidden={true}/>
                         <Text style={styles.title}>{translateText(language, "GameScreen", "no-one")}{translateText(language, "GameScreen", "win")}</Text>
-                        <TouchableOpacity style={styles.longButton} onPress={goBackHandler}>
+                        <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={goBackHandler}>
                             <Text style={styles.normalText}>{translateText(language, "GameScreen", "menu-button")}</Text>
                         </TouchableOpacity>
                     </View>

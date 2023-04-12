@@ -1,8 +1,9 @@
 export default {
-    Primary: '#0a2f02',
-    Secondary: '#034a22',
-    Tertiary: '#05672e',
+    Primary: '#0A2F03',
+    Secondary: '#395E31',
+    Tertiary: '#4b7a4d',
     PrimaryContrast: '#530364',
     SecondaryContrast: '#80079b',
-    White: '#fff'
+    White: '#fff',
+    Lightblue: '#00BAFF',
 }

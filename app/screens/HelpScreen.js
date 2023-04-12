@@ -14,6 +14,7 @@ import { AntDesign } from '@expo/vector-icons';
 import * as ScreenOrientation from "expo-screen-orientation";
 
 import colors from "../config/colors";
+import styleSheet from "../config/StyleSheet";
 import ForceMode from "../components/ForceMode";
 import {translateText} from "../services/LanguageService";
 
@@ -153,7 +154,7 @@ class HelpScreen extends Component {
                         </Animated.View>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.longButton} onPress={this.goBackHandler}>
+                        <TouchableOpacity style={styleSheet.PrimaryButton} onPress={this.goBackHandler}>
                             <Text style={styles.normalText}>{translateText(this.state.language, "HelpPage", "back-button")}</Text>
                         </TouchableOpacity>
                     </View>
@@ -178,8 +179,7 @@ const styles = StyleSheet.create({
     },
     helpBox: {
         borderRadius: 15,
-        borderColor: 'black',
-        borderWidth: 2,
+        backgroundColor: colors.Tertiary,
         padding: 10
     },
     helpContainer: {
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         height: "100%",
         width: "100%",
-        backgroundColor: colors.Tertiary,
+        backgroundColor: colors.Secondary,
         flexDirection: "row",
         borderTopRightRadius: 15,
         borderBottomRightRadius: 15,

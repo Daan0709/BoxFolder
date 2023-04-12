@@ -6,12 +6,13 @@ import {
     Image,
     Text,
     TouchableOpacity,
-    Alert
+    Alert, ScrollView
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 import colors from "../config/colors"
+import styleSheet from "../config/StyleSheet";
 import PlayerContainer from "../components/PlayerContainer";
 import ForceMode from "../components/ForceMode";
 import LanguageSwitch from "../components/LanguageSwitch";
@@ -102,16 +103,6 @@ class HomeScreen extends Component {
         this.setState({'language': lang});
     }
 
-    // TODO: These only work if the user hits the enter button, not when they
-    // TODO: back out of the text focus with system buttons
-    setFocus = () => {
-        this.setState({'languageOpacity': 0});
-    }
-
-    endFocus = () => {
-        this.setState({'languageOpacity': 1});
-    }
-
     render(){
         return (
             <View style={styles.container}>
@@ -122,40 +113,35 @@ class HomeScreen extends Component {
                         <Text style={styles.title}>Box Folder!</Text>
                         <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
                     </View>
-                    <View style={styles.fixedHeightContainer}>
-                        <View style={[styles.playersContainer, {height: this.state.playerList.length * 40}]}>
+                    <TouchableOpacity style={styles.addPlayerContainer} onPress={this.addPlayerHandler}>
+                        <Entypo name="add-user" size={30} color="white" />
+                    </TouchableOpacity>
+                    <ScrollView contentContainerStyle={styles.fixedHeightContainer}>
+                        <View style={[styles.playersContainer, {height: this.state.playerList.length * 80}]}>
                             {this.state.playerList.map((pair) => {
                                 return (
                                     <PlayerContainer
                                         language={this.state.language}
                                         handleToUpdate={this.updatePlayerName}
                                         removePlayer={this.removePlayerHandler}
-                                        setFocus={this.setFocus}
-                                        endFocus={this.endFocus}
                                         name={pair.name}
                                         rank={pair.rank}
                                         key={pair.rank}/>
                                 )
                             })}
                         </View>
-                    </View>
-
-                    <View style={styles.addPlayerContainer}>
-                        <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "add-player-button")}</Text>
-                        <TouchableOpacity style={styles.roundButton} onPress={this.addPlayerHandler}>
-                            <Text style={styles.normalText}>+</Text>
-                        </TouchableOpacity>
-                    </View>
+                    </ScrollView>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.longButton} onPress={this.playButtonHandler}>
+                        <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={this.playButtonHandler}>
                             <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={this.helpButtonHandler}>
-                            <MaterialIcons name="help-outline" size={30} color="white" />
+                        <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
+                            <MaterialIcons name="help-outline" size={30} color="white"/>
+                            <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
                         </TouchableOpacity>
                     </View>
-                    <LanguageSwitch style={styles.language} language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} opacity={this.state.languageOpacity}/>
                 </View>
+                <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler}/>
             </View>
         );
     }
@@ -164,9 +150,8 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
     addPlayerContainer: {
-        width: "100%",
-        alignItems: "center",
-        padding: 10
+        width: "80%",
+        marginBottom: 15
     },
     background: {
         flex: 1,
@@ -184,31 +169,25 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     fixedHeightContainer: {
-        height: 400,    // Should be equal to 40 * the max amount of players
+        width: "100%",
+    },
+    helpButton: {
+        flexDirection: "row",
+        alignItems: "center",
     },
     image: {
       width: 80,
       height: 80
     },
-    input: {
-        color: colors.White,
-        borderColor: "black",
-        borderWidth: 2,
-        width: "60%",
-        backgroundColor: colors.Secondary,
-        padding: 2,
-        fontSize: 20
-    },
     language: {
         backgroundColor: "teal",
-        position: "absolute",
-        top: StatusBar.currentHeight,
-        right: 15,
+        width: "100%"
     },
     logoContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         width: "100%",
+        top: StatusBar.currentHeight
     },
     longButton: {
         borderRadius: 10,
