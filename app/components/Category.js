@@ -18,7 +18,7 @@ function Category({ title, emoji, initialCheck, handleToUpdate }) {
             {checked ?
                 <View style={styles.category}>
                     <Text style={styles.boldText}>{title}</Text>
-                    <Text style={styles.boldText}>{emoji}</Text>
+                    <Text style={styles.emoji}>{emoji}</Text>
                 </View>
                 :
                 <View style={[styles.category, styles.unchecked]}>
@@ -38,6 +38,11 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderRadius: 10,
         alignItems: "center",
+        marginBottom: 5
+    },
+    emoji: {
+        padding: 4,
+        fontSize: 25,
     },
     unchecked: {
         opacity: 0.5,
@@ -46,12 +51,12 @@ const styles = StyleSheet.create({
     normalText: {
         padding: 4,
         color: colors.White,
-        fontSize: 20,
+        fontSize: 17,
     },
     boldText: {
         padding: 4,
         color: colors.White,
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: "bold"
     }
 })
