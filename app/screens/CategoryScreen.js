@@ -18,8 +18,8 @@ class CategoryScreen extends Component {
         theme: this.props.route.params.theme,
         categories: [],
         amountOfPrompts: 15,
-        minusColor: 'white',
-        plusColor: 'white',
+        minusColor: this.props.route.params.theme.textColor,
+        plusColor: this.props.route.params.theme.textColor,
         fontsLoaded: false,
     };
 
@@ -89,9 +89,9 @@ class CategoryScreen extends Component {
             return;
         }
         if (this.state.amountOfPrompts - 5 === 5){
-            this.setState({'minusColor': 'gray'})
+            this.setState({'minusColor': this.state.theme.Secondary})
         }
-        this.setState({'plusColor': 'white'})
+        this.setState({'plusColor': this.state.theme.textColor})
         this.setState({'amountOfPrompts': this.state.amountOfPrompts - 5})
     }
 
@@ -100,9 +100,9 @@ class CategoryScreen extends Component {
             return;
         }
         if (this.state.amountOfPrompts + 5 === 30){
-            this.setState({'plusColor': 'gray'})
+            this.setState({'plusColor': this.state.theme.Secondary})
         }
-        this.setState({'minusColor': 'white'})
+        this.setState({'minusColor': this.state.theme.textColor})
         this.setState({'amountOfPrompts': this.state.amountOfPrompts + 5})
     }
 
@@ -124,7 +124,7 @@ class CategoryScreen extends Component {
                                     end={{x: 0, y: 1}}
                                     style={styles.background}>
                         <View style={styles.titleContainer}>
-                            <Text style={styles.title}>{translateText(this.state.language, "CategoryScreen", "title")}</Text>
+                            <Text style={[styles.title, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "title")}</Text>
                         </View>
 
                         <View style={styles.categoriesContainer}>
@@ -146,12 +146,12 @@ class CategoryScreen extends Component {
                         </View>
 
                         <View style={styles.buttonContainerColumn}>
-                            <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "prompts-per-round")}</Text>
+                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "prompts-per-round")}</Text>
                             <View style={styles.amountOfRoundsContainer}>
                                 <TouchableOpacity onPress={this.reduceAmountOfPrompts}>
                                     <AntDesign name="minuscircle" size={30} color={this.state.minusColor} />
                                 </TouchableOpacity>
-                                <Text style={styles.normalText}>{this.state.amountOfPrompts}</Text>
+                                <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>{this.state.amountOfPrompts}</Text>
                                 <TouchableOpacity onPress={this.increaseAmountOfPrompts}>
                                     <AntDesign name="pluscircle" size={30} color={this.state.plusColor} />
                                 </TouchableOpacity>
@@ -160,15 +160,15 @@ class CategoryScreen extends Component {
 
 
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={styleSheet.SecondaryButton} onPress={this.handleBackButton}>
-                                <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "back-button")}</Text>
+                            <TouchableOpacity style={[styleSheet.SecondaryButton, {borderColor: this.state.theme.textColor}]} onPress={this.handleBackButton}>
+                                <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "back-button")}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
-                                <MaterialIcons name="help-outline" size={30} color="white" />
-                                <Text style={styles.smallText}>{translateText(this.state.language, "CategoryScreen", "help-button")}</Text>
+                                <MaterialIcons name="help-outline" size={30} color={this.state.theme.textColor} />
+                                <Text style={[styles.smallText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "help-button")}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styleSheet.PrimaryButton} onPress={this.handlePlayButton}>
-                                <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "play-button")}</Text>
+                                <Text style={[styles.normalText, {color: 'white'}]}>{translateText(this.state.language, "CategoryScreen", "play-button")}</Text>
                             </TouchableOpacity>
                         </View>
                     </LinearGradient>
@@ -229,17 +229,14 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     normalText: {
-        color: colors.White,
         fontSize: 18,
         fontFamily: 'Sono-Regular'
     },
     smallText: {
-        color: colors.White,
         fontSize: 12,
         fontFamily: 'Sono-Light'
     },
     title: {
-        color: colors.White,
         fontSize: 40,
         fontFamily: 'Sono-Bold'
     },

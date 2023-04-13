@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
-import {Alert, BackHandler, StyleSheet, TouchableOpacity, View} from "react-native";
+import {Alert, BackHandler, StatusBar, StyleSheet, TouchableOpacity, View} from "react-native";
 import Prompts from "../assets/prompts/prompts"
 ;
 import Prompt from "../components/Prompt";
@@ -110,9 +110,9 @@ class GameScreen extends Component {
     }
 
     nextRoundHandler = () => {
+        this.loadInNextPrompt();
         this.setState({'showNextRoundScreen': false});
         this.setState({'turnsUntilNextRound': this.state.amountOfPrompts - 1});
-        this.loadInNextPrompt();
         this.setState({'previousPrompt': {prompt: translateText(this.state.language, "GameScreen", "previous-prompt"), amountOfSips: ''}})
         const nextRound = this.state.currentRound + 1;
         if (nextRound === 3){
@@ -210,6 +210,7 @@ class GameScreen extends Component {
     render() {
         return (
             <View style={styles.background}>
+                <StatusBar hidden={true}/>
                 <ForceMode mode={ScreenOrientation.OrientationLock.LANDSCAPE}/>
                 {this.state.showNextRoundScreen ?                                   // If the next round screen should be shown:
                     <NextRound nextRoundHandler={this.nextRoundHandler} roundNumber={this.state.currentRound} language={this.state.language}/>
@@ -221,6 +222,7 @@ class GameScreen extends Component {
                                 nextPromptHandler={this.nextPromptHandler}
                                 previousPromptHandler={this.previousPromptHandler}
                                 color={this.state.theme.Secondary} secondaryColor={this.state.theme.Tertiary}
+                                textColor={this.state.theme.textColor}
                                 language={this.state.language}/>
                         :
                         this.state.showPreviousPrompt && this.state.currentRound === 2 ? // If the player wants to see the previous prompt and its round 2
@@ -230,6 +232,7 @@ class GameScreen extends Component {
                                     nextPromptHandler={this.nextPromptHandler}
                                     previousPromptHandler={this.previousPromptHandler}
                                     color={this.state.theme.SecondaryContrast} secondaryColor={this.state.theme.TertiaryContrast}
+                                    textColor={this.state.theme.textColor}
                                     language={this.state.language}/>
                             :
                             this.state.currentRound === 1 ?                                 // If it is round one, drink, round two: give out
@@ -239,6 +242,7 @@ class GameScreen extends Component {
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
                                         color={this.state.theme.Secondary} secondaryColor={this.state.theme.Primary}
+                                        textColor={this.state.theme.textColor}
                                         language={this.state.language}/>
                                 :
                                 this.state.currentRound === 2 ?                             // Round two, so give out
@@ -248,6 +252,7 @@ class GameScreen extends Component {
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
                                         color={this.state.theme.SecondaryContrast} secondaryColor={this.state.theme.PrimaryContrast}
+                                        textColor={this.state.theme.textColor}
                                         language={this.state.language}/>
                                     :                                                       // Final round (round three)
                                     <FinalRound prompt={this.state.currentPrompt.prompt}
@@ -260,7 +265,7 @@ class GameScreen extends Component {
                                                 language={this.state.language}/>
                 }
                 <TouchableOpacity onPress={this.helpButtonHandler} style={styles.helpButton}>
-                    <MaterialIcons name="help-outline" size={30} color="white" />
+                    <MaterialIcons name="help-outline" size={30} color={this.state.theme.textColor} />
                 </TouchableOpacity>
             </View>
         )

@@ -147,11 +147,11 @@ class HomeScreen extends Component {
                                     end={{x: 0, y: 1}}
                                     style={styles.background}>
                         <View style={styles.logoContainer}>
-                            <Text style={styles.title}>Box Folder!</Text>
+                            <Text style={[styles.title, {color: this.state.theme.textColor}]}>Box Folder!</Text>
                             <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
                         </View>
                         <TouchableOpacity style={styles.addPlayerContainer} onPress={this.addPlayerHandler}>
-                            <Entypo name="add-user" size={30} color="white" />
+                            <Entypo name="add-user" size={30} color={this.state.theme.textColor} />
                         </TouchableOpacity>
                         <ScrollView contentContainerStyle={styles.fixedHeightContainer}>
                             <View style={[styles.playersContainer, {height: this.state.playerList.length * 80}]}>
@@ -174,8 +174,8 @@ class HomeScreen extends Component {
                                 <Text style={styles.lightText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
-                                <MaterialIcons name="help-outline" size={30} color="white"/>
-                                <Text style={styles.extraLightText}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
+                                <MaterialIcons name="help-outline" size={30} color={this.state.theme.textColor}/>
+                                <Text style={[styles.extraLightText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
                             </TouchableOpacity>
                             <ThemeSwitch theme={this.state.theme} swapThemeHandler={this.swapThemeHandler} language={this.state.language}/>
                         </View>
@@ -256,7 +256,6 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
     },
     title: {
-        color: colors.White,
         fontSize: 40,
         fontFamily: 'Sono-Regular'
     }

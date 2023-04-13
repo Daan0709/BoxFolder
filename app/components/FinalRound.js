@@ -30,7 +30,6 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
             style={styles.background}>
             {playerListLength > 1 ?   // If there are more than 1 players left
                 <View style={styles.container}>
-                    <StatusBar hidden={true}/>
                     <View style={styles.nameContainer}>
                         <Text style={styles.title}>{playerName}</Text>
                     </View>
@@ -38,7 +37,7 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                         <Text style={styles.normalText}>{prompt}</Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styleSheet.SecondaryButton} onPress={removePlayerHandler}>
+                        <TouchableOpacity style={[styleSheet.SecondaryButton, {borderColor: 'white'}]} onPress={removePlayerHandler}>
                             <Text style={styles.lightText}>{translateText(language, "GameScreen", "eliminate-button")}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styleSheet.PrimaryButton} onPress={continuePlayingHandler}>

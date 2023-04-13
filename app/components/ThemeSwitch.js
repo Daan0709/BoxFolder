@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from "react-native";
 import { Octicons } from '@expo/vector-icons';
 
-import colors from "../config/colors";
 import {getColorTheme} from "../services/ThemeService";
 import {translateText} from "../services/LanguageService";
 import {useFonts} from "expo-font";
@@ -23,6 +22,12 @@ function ThemeSwitch({ theme, swapThemeHandler, language }) {
         if (theme === getColorTheme('green')){
             swapThemeHandler('purple');
             return
+        } else if (theme === getColorTheme('purple')){
+            swapThemeHandler('black');
+            return
+        } else if (theme === getColorTheme('black')){
+            swapThemeHandler('white');
+            return
         }
         swapThemeHandler('green');
     }
@@ -33,8 +38,8 @@ function ThemeSwitch({ theme, swapThemeHandler, language }) {
 
     return (
         <TouchableOpacity onPress={swapTheme} style={[styles.button]}>
-            <Octicons name="paintbrush" size={24} color="white" />
-            <Text style={styles.extraLightText}>{translateText(language, "HomeScreen", "theme-button")}</Text>
+            <Octicons name="paintbrush" size={24} color={theme.textColor} />
+            <Text style={[styles.extraLightText, {color: theme.textColor}]}>{translateText(language, "HomeScreen", "theme-button")}</Text>
         </TouchableOpacity>
     );
 }
@@ -47,7 +52,6 @@ const styles = StyleSheet.create({
     },
     extraLightText: {
         padding: 4,
-        color: colors.White,
         fontSize: 15,
         fontFamily: 'Sono-ExtraLight'
     },

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import colors from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {translateText} from "../services/LanguageService";
 import {useFonts} from "expo-font";
@@ -33,11 +32,11 @@ function PlayerContainer(props) {
 
     return (
         <View style={styles.playerContainer}>
-            <Text style={styles.regularText}>{translateText(props.language, "PlayerContainer", "player-label")} {rank+1}</Text>
+            <Text style={[styles.regularText, {color: props.theme.textColor}]}>{translateText(props.language, "PlayerContainer", "player-label")} {rank+1}</Text>
             <View style={styles.horizontalContainer}>
-                <TextInput value={props.name} style={[styles.input, {backgroundColor: props.theme.Secondary,}]}
+                <TextInput value={props.name} style={[styles.input, {backgroundColor: props.theme.Secondary, color: props.theme.textColor}]}
                            placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
-                           placeholderTextColor={'#bdbbbb'}
+                           placeholderTextColor={props.theme.Tertiary}
                            onChangeText={(newName) => handleChangeText(newName)}/>
                 {rank === 0 || rank === 1 ?
                     <TouchableOpacity style={styles.invisibleButton}>
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     input: {
-        color: colors.White,
         borderRadius: 5,
         padding: 2,
         paddingLeft: 10,
@@ -73,7 +71,6 @@ const styles = StyleSheet.create({
         height: 30,
     },
     regularText: {
-        color: colors.White,
         fontSize: 15,
         alignContent: "flex-start",
         fontFamily: 'Sono-Regular'

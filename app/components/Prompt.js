@@ -1,11 +1,9 @@
-import {Dimensions, StatusBar, StyleSheet, Text, TouchableWithoutFeedback, View, Animated} from "react-native";
-import colors from "../config/colors";
+import {Dimensions, StyleSheet, Text, TouchableWithoutFeedback, View, Animated} from "react-native";
 import React, {useEffect, useRef} from "react";
 import {translateText} from "../services/LanguageService";
 import {LinearGradient} from "expo-linear-gradient";
-import {useFonts} from "expo-font";
 
-function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color, secondaryColor, language }) {
+function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color, secondaryColor, language, textColor }) {
 
     const scale = useRef(new Animated.Value(1)).current;
     const sipsString = amountOfSips === 1 ? translateText(language, "GameScreen", "sip-singular") : translateText(language, "GameScreen", "sip-plural");
@@ -46,25 +44,24 @@ function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previous
                             start={{x: 1, y: 0}}
                             end={{x: 0, y: 1}}
                             style={styles.background}>
-                <StatusBar hidden={true}/>
                 <View>
                     {amountOfSips === translateText(language, "GameScreen", "start-round") ?
                         <View style={styles.titleContainer}>
-                            <Text style={styles.title}>{translateText(language, "GameScreen", "start-round")}</Text>
+                            <Text style={[styles.title, {color: textColor}]}>{translateText(language, "GameScreen", "start-round")}</Text>
                         </View>
                         :
                         giveoutBool ?
                             <View style={styles.titleContainer}>
-                                <Text style={styles.title}>{giveoutString}</Text>
+                                <Text style={[styles.title, {color: textColor}]}>{giveoutString}</Text>
                             </View>
                             :
                             <View style={styles.titleContainer}>
-                                <Text style={styles.title}>{giveOrDrink}{amountOfSips}{sipsString}</Text>
+                                <Text style={[styles.title, {color: textColor}]}>{giveOrDrink}{amountOfSips}{sipsString}</Text>
                             </View>
 
                     }
                     <View style={styles.promptContainer}>
-                        <Animated.Text style={[styles.normalText, {transform: [{scale: scale}]}]}>{prompt}</Animated.Text>
+                        <Animated.Text style={[styles.normalText, {transform: [{scale: scale}]}, {color: textColor}]}>{prompt}</Animated.Text>
                     </View>
                 </View>
             </LinearGradient>
@@ -77,7 +74,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     normalText: {
-        color: colors.White,
         fontSize: 30,
         textAlign: "center"
     },
@@ -88,7 +84,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     title: {
-        color: colors.White,
         fontSize: 40,
         fontWeight: "bold",
     },

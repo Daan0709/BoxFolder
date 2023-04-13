@@ -100,30 +100,30 @@ class HelpScreen extends Component {
                             <Animated.View style={[styles.helpPage, {transform: [{translateX: this.state.translationHelp}]}]}>
                                 <View style={styles.helpContainer}>
                                     <ScrollView contentContainerStyle={styles.scroller}>
-                                        <Text style={styles.title}>
+                                        <Text style={[styles.title, {color: this.state.theme.textColor}]}>
                                             Help
                                         </Text>
                                         <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
-                                            <Text style={[styles.normalText]}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "fold-box")}
                                             </Text>
                                         </View>
                                         <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
-                                            <Text style={[styles.normalText]}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "person-included-top")}
                                             </Text>
                                             <Image source={require('../assets/images/player-named-example.png')} style={styles.image}></Image>
-                                            <Text style={styles.normalText}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "person-included-bot")}
                                             </Text>
                                         </View>
                                         <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
-                                            <Text style={[styles.normalText]}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "skipped-prompt-top")}
                                             </Text>
                                             <Image source={require('../assets/images/previous-prompt-example.png')}
                                                    style={[styles.image, {height: 150}]}></Image>
-                                            <Text style={styles.normalText}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "skipped-prompt-bot")}
                                             </Text>
                                         </View>
@@ -138,32 +138,32 @@ class HelpScreen extends Component {
                             <Animated.View style={[styles.howToPlayPage, {transform: [{translateX: this.state.translationHowTo}]}]}>
                                 <View style={styles.helpContainer}>
                                     <ScrollView contentContainerStyle={styles.scroller}>
-                                        <Text style={styles.title}>
+                                        <Text style={[styles.title, {color: this.state.theme.textColor}]}>
                                             {translateText(this.state.language, "HelpPage", "how-to-play-title")}
                                         </Text>
                                         <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
-                                            <Text style={styles.normalText}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "step-one")}
                                             </Text>
                                         </View>
                                         <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
-                                            <Text style={styles.normalText}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "step-two")}
                                             </Text>
                                         </View>
                                         <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
-                                            <Text style={styles.normalText}>
+                                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "step-three-title")}
                                             </Text>
-                                            <Text style={[styles.normalText, styles.indentedText]}>
+                                            <Text style={[styles.normalText, styles.indentedText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "step-three-top")}
                                             </Text>
                                             <Image source={require('../assets/images/round-1-example.png')} style={styles.image}></Image>
-                                            <Text style={[styles.normalText, styles.indentedText]}>
+                                            <Text style={[styles.normalText, styles.indentedText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "step-three-mid")}
                                             </Text>
                                             <Image source={require('../assets/images/round-2-example.png')} style={styles.image}></Image>
-                                            <Text style={[styles.normalText, styles.indentedText]}>
+                                            <Text style={[styles.normalText, styles.indentedText, {color: this.state.theme.textColor}]}>
                                                 {translateText(this.state.language, "HelpPage", "step-three-bot")}
                                             </Text>
                                             <Image source={require('../assets/images/round-3-example.png')} style={styles.image}></Image>
@@ -180,7 +180,7 @@ class HelpScreen extends Component {
                         </View>
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity style={styleSheet.PrimaryButton} onPress={this.goBackHandler}>
-                                <Text style={styles.normalText}>{translateText(this.state.language, "HelpPage", "back-button")}</Text>
+                                <Text style={[styles.normalText, {color: 'white'}]}>{translateText(this.state.language, "HelpPage", "back-button")}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -249,7 +249,6 @@ const styles = StyleSheet.create({
         width: "50%"
     },
     normalText: {
-        color: colors.White,
         fontSize: 15,
         fontFamily: 'Sono-Regular'
     },
@@ -268,7 +267,6 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
     },
     title: {
-        color: colors.White,
         fontSize: 30,
         alignSelf: "center",
         fontFamily: "Sono-Bold"

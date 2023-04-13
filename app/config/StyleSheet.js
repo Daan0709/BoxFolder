@@ -15,7 +15,6 @@ export default {
         justifyContent: "center"
     },
     SecondaryButton: {
-        borderColor: colors.White,
         borderWidth: 2,
         borderRadius: 5,
         paddingVertical: 5,

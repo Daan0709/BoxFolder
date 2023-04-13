@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import colors from "../config/colors";
 import {useFonts} from "expo-font";
 
 function Category({ title, emoji, initialCheck, handleToUpdate, theme }) {
@@ -33,14 +32,14 @@ function Category({ title, emoji, initialCheck, handleToUpdate, theme }) {
                 {checked ?
                     <TouchableOpacity style={[styles.card, {backgroundColor: theme.Secondary}]} onPress={switchCheck}>
                         <View style={styles.category}>
-                            <Text style={styles.boldText}>{title}</Text>
+                            <Text style={[styles.boldText, {color: theme.textColor}]}>{title}</Text>
                             <Text style={styles.emoji}>{emoji}</Text>
                         </View>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity style={[styles.card_unchecked, {backgroundColor: theme.Secondary}]} onPress={switchCheck}>
                         <View style={styles.category}>
-                            <Text style={styles.normalText}>{title}</Text>
+                            <Text style={[styles.normalText, {color: theme.textColor}]}>{title}</Text>
                         </View>
                     </TouchableOpacity>
 
@@ -74,13 +73,11 @@ const styles = StyleSheet.create({
     },
     normalText: {
         padding: 4,
-        color: colors.White,
         fontSize: 17,
         fontFamily: 'Sono-Light'
     },
     boldText: {
         padding: 4,
-        color: colors.White,
         fontSize: 17,
         fontFamily: 'Sono-SemiBold'
     }
