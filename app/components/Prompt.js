@@ -3,6 +3,7 @@ import colors from "../config/colors";
 import React, {useEffect, useRef} from "react";
 import {translateText} from "../services/LanguageService";
 import {LinearGradient} from "expo-linear-gradient";
+import {useFonts} from "expo-font";
 
 function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color, secondaryColor, language }) {
 

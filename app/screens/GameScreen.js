@@ -273,17 +273,6 @@ const styles = StyleSheet.create({
         top: 20,
         left: 20,
     },
-    nextRoundScreen: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "black"
-    },
-    title: {
-        color: colors.White,
-        fontSize: 40,
-        fontWeight: "bold"
-    },
 })
 
 export default GameScreen;

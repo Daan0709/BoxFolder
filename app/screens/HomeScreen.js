@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
+import * as Font from 'expo-font';
 import {LinearGradient} from "expo-linear-gradient";
 
 import colors from "../config/colors";
@@ -30,11 +31,26 @@ class HomeScreen extends Component {
         amountOfPlayers: 1,
         language: 'uk',
         languageOpacity: 1,
-        theme: getColorTheme('green')
+        theme: getColorTheme('green'),
+        fontsLoaded: false,
     };
 
     componentDidMount() {
         SystemUI.setBackgroundColorAsync(this.state.theme.Secondary); // Stops screen from flickering white when switching screens
+        this.loadFonts();
+    }
+
+    async loadFonts(){
+        await Font.loadAsync({
+            'Sono-ExtraLight': require('../assets/fonts/Sono-ExtraLight.ttf'),
+            'Sono-Bold': require('../assets/fonts/Sono-Bold.ttf'),
+            'Sono-ExtraBold': require('../assets/fonts/Sono-ExtraBold.ttf'),
+            'Sono-Light': require('../assets/fonts/Sono-Light.ttf'),
+            'Sono-Medium': require('../assets/fonts/Sono-Medium.ttf'),
+            'Sono-Regular': require('../assets/fonts/Sono-Regular.ttf'),
+            'Sono-SemiBold': require('../assets/fonts/Sono-SemiBold.ttf'),
+        });
+        this.setState({'fontsLoaded': true});
     }
 
     updatePlayerName = (name, rank) => {
@@ -121,51 +137,55 @@ class HomeScreen extends Component {
     }
 
     render(){
-        return (
-            <View style={styles.container}>
-                <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar backgroundColor={this.state.theme.Secondary}/>
-                <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
-                                start={{x: 1, y: 0}}
-                                end={{x: 0, y: 1}}
-                                style={styles.background}>
-                    <View style={styles.logoContainer}>
-                        <Text style={styles.title}>Box Folder!</Text>
-                        <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
-                    </View>
-                    <TouchableOpacity style={styles.addPlayerContainer} onPress={this.addPlayerHandler}>
-                        <Entypo name="add-user" size={30} color="white" />
-                    </TouchableOpacity>
-                    <ScrollView contentContainerStyle={styles.fixedHeightContainer}>
-                        <View style={[styles.playersContainer, {height: this.state.playerList.length * 80}]}>
-                            {this.state.playerList.map((pair) => {
-                                return (
-                                    <PlayerContainer
-                                        language={this.state.language}
-                                        theme={this.state.theme}
-                                        handleToUpdate={this.updatePlayerName}
-                                        removePlayer={this.removePlayerHandler}
-                                        name={pair.name}
-                                        rank={pair.rank}
-                                        key={pair.rank}/>
-                                )
-                            })}
+        if (this.state.fontsLoaded){
+            return (
+                <View style={styles.container}>
+                    <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
+                    <StatusBar backgroundColor={this.state.theme.Secondary}/>
+                    <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
+                                    start={{x: 1, y: 0}}
+                                    end={{x: 0, y: 1}}
+                                    style={styles.background}>
+                        <View style={styles.logoContainer}>
+                            <Text style={styles.title}>Box Folder!</Text>
+                            <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
                         </View>
-                    </ScrollView>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={this.playButtonHandler}>
-                            <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
+                        <TouchableOpacity style={styles.addPlayerContainer} onPress={this.addPlayerHandler}>
+                            <Entypo name="add-user" size={30} color="white" />
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
-                            <MaterialIcons name="help-outline" size={30} color="white"/>
-                            <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
-                        </TouchableOpacity>
-                        <ThemeSwitch theme={this.state.theme} swapThemeHandler={this.swapThemeHandler} language={this.state.language}/>
-                    </View>
-                </LinearGradient>
-                <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} theme={this.state.theme}/>
-            </View>
-        );
+                        <ScrollView contentContainerStyle={styles.fixedHeightContainer}>
+                            <View style={[styles.playersContainer, {height: this.state.playerList.length * 80}]}>
+                                {this.state.playerList.map((pair) => {
+                                    return (
+                                        <PlayerContainer
+                                            language={this.state.language}
+                                            theme={this.state.theme}
+                                            handleToUpdate={this.updatePlayerName}
+                                            removePlayer={this.removePlayerHandler}
+                                            name={pair.name}
+                                            rank={pair.rank}
+                                            key={pair.rank}/>
+                                    )
+                                })}
+                            </View>
+                        </ScrollView>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={this.playButtonHandler}>
+                                <Text style={styles.lightText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
+                                <MaterialIcons name="help-outline" size={30} color="white"/>
+                                <Text style={styles.extraLightText}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
+                            </TouchableOpacity>
+                            <ThemeSwitch theme={this.state.theme} swapThemeHandler={this.swapThemeHandler} language={this.state.language}/>
+                        </View>
+                    </LinearGradient>
+                    <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} theme={this.state.theme}/>
+                </View>
+            );
+        } else {
+            return null;
+        }
     }
 
 }
@@ -212,10 +232,17 @@ const styles = StyleSheet.create({
         width: "100%",
         top: StatusBar.currentHeight
     },
-    normalText: {
+    lightText: {
         padding: 4,
         color: colors.White,
         fontSize: 20,
+        fontFamily: 'Sono-Light'
+    },
+    extraLightText: {
+        padding: 4,
+        color: colors.White,
+        fontSize: 20,
+        fontFamily: 'Sono-ExtraLight'
     },
     playersContainer: {
         width: '100%',
@@ -231,6 +258,7 @@ const styles = StyleSheet.create({
     title: {
         color: colors.White,
         fontSize: 40,
+        fontFamily: 'Sono-Regular'
     }
 })
 
