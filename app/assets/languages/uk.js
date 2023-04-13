@@ -48,8 +48,12 @@ export const uk = () => {
         },
         "GameScreen": {
             "start-title": "Click to begin!",
+            "previous-prompt": "No previous prompt!",
             "start-round": "Round 1",
             "round": "Round ",
+            "round-one": "Stay Hydrated!",
+            "round-two": "Give to charity!",
+            "round-three": "Survival of the fittest!",
             "sip-singular": " sip",
             "sip-plural": " sips",
             "give-out": "Give out ...",
@@ -57,7 +61,10 @@ export const uk = () => {
             "continue-button": "Continue",
             "menu-button": "New Game",
             "win": " wins!",
-            "no-one": "No one"
+            "no-one": "No one",
+            "back-alert-title": "Hold On!",
+            "back-alert-body": "Going back means you will have to start over. Are you sure?",
+            "back-alert-button": "YES",
         }
     }
 }

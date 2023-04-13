@@ -18,6 +18,8 @@ class CategoryScreen extends Component {
         theme: this.props.route.params.theme,
         categories: [],
         amountOfPrompts: 15,
+        minusColor: 'white',
+        plusColor: 'white',
         fontsLoaded: false,
     };
 
@@ -86,6 +88,10 @@ class CategoryScreen extends Component {
         if (this.state.amountOfPrompts === 5){
             return;
         }
+        if (this.state.amountOfPrompts - 5 === 5){
+            this.setState({'minusColor': 'gray'})
+        }
+        this.setState({'plusColor': 'white'})
         this.setState({'amountOfPrompts': this.state.amountOfPrompts - 5})
     }
 
@@ -93,6 +99,10 @@ class CategoryScreen extends Component {
         if (this.state.amountOfPrompts === 30){
             return;
         }
+        if (this.state.amountOfPrompts + 5 === 30){
+            this.setState({'plusColor': 'gray'})
+        }
+        this.setState({'minusColor': 'white'})
         this.setState({'amountOfPrompts': this.state.amountOfPrompts + 5})
     }
 
@@ -139,11 +149,11 @@ class CategoryScreen extends Component {
                             <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "prompts-per-round")}</Text>
                             <View style={styles.amountOfRoundsContainer}>
                                 <TouchableOpacity onPress={this.reduceAmountOfPrompts}>
-                                    <AntDesign name="minuscircle" size={30} color="white" />
+                                    <AntDesign name="minuscircle" size={30} color={this.state.minusColor} />
                                 </TouchableOpacity>
                                 <Text style={styles.normalText}>{this.state.amountOfPrompts}</Text>
                                 <TouchableOpacity onPress={this.increaseAmountOfPrompts}>
-                                    <AntDesign name="pluscircle" size={30} color="white" />
+                                    <AntDesign name="pluscircle" size={30} color={this.state.plusColor} />
                                 </TouchableOpacity>
                             </View>
                         </View>

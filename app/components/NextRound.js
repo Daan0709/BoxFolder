@@ -23,8 +23,16 @@ function NextRound({ roundNumber, nextRoundHandler, language }) {
         <TouchableWithoutFeedback onPress={nextRoundHandler}>
             <View style={styles.nextRoundScreen}>
                 <StatusBar hidden={true}/>
-                <View>
-                    <Text style={styles.title}>{translateText(language, "GameScreen", "round")} {roundNumber + 1}</Text>
+                <View style={styles.textContainer}>
+                    <Text style={styles.title}>{translateText(language, "GameScreen", "round")}{roundNumber + 1}</Text>
+                    {roundNumber === 0 ?
+                        <Text style={styles.subTitle}>{translateText(language, "GameScreen", "round-one")}</Text>
+                            :
+                            roundNumber === 1 ?
+                            <Text style={styles.subTitle}>{translateText(language, "GameScreen", "round-two")}</Text>
+                                :
+                                <Text style={styles.subTitle}>{translateText(language, "GameScreen", "round-three")}</Text>
+                    }
                 </View>
             </View>
         </TouchableWithoutFeedback>
@@ -38,9 +46,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "black"
     },
+    textContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 50
+    },
     title: {
         color: colors.White,
         fontSize: 40,
+        fontFamily: 'Sono-Bold'
+    },
+    subTitle: {
+        color: colors.White,
+        fontSize: 30,
         fontFamily: 'Sono-Bold'
     },
 })

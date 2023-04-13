@@ -48,8 +48,12 @@ export const nl = () => {
         },
         "GameScreen": {
             "start-title": "Klik om te beginnen!",
+            "previous-prompt": "Geen vorige vraag!",
             "start-round": "Ronde 1",
             "round": "Ronde ",
+            "round-one": "Blijf Gehydrateerd!",
+            "round-two": "Geven aan het goede doel!",
+            "round-three": "De sterkste overleeft!",
             "sip-singular": " slok",
             "sip-plural": " slokken",
             "give-out": "Geef ... weg",
@@ -57,7 +61,10 @@ export const nl = () => {
             "continue-button": "Speel Door",
             "menu-button": "Nieuw Spel",
             "win": " heeft gewonnen!",
-            "no-one": "Niemand"
+            "no-one": "Niemand",
+            "back-alert-title": "Wacht Even!",
+            "back-alert-body": "Als je teruggaat zal je opnieuw moeten beginnen. Weet je het zeker?",
+            "back-alert-button": "JA",
         }
     }
 }

@@ -2,8 +2,7 @@ import React, {Component} from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
 import {Alert, BackHandler, StyleSheet, TouchableOpacity, View} from "react-native";
 import Prompts from "../assets/prompts/prompts"
-
-import colors from "../config/colors";
+;
 import Prompt from "../components/Prompt";
 import NextRound from "../components/NextRound";
 import FinalRound from "../components/FinalRound";
@@ -14,14 +13,14 @@ import {translateText} from "../services/LanguageService";
 class GameScreen extends Component {
     state = {
         categories: this.props.route.params.categories,
-        currentPrompt: {prompt: 'Click to begin!', amountOfSips: 'Round 1'}, // Starts with this so the prompts can load based on selected categories
-        previousPrompt: {prompt: 'Click to begin!', amountOfSips: 'Round 1'}, // Stored so the player can go back to it when they accidentally skip it
-        currentRound: 1,
+        currentPrompt: {},
+        previousPrompt: {}, // Stored so the player can go back to it when they accidentally skip it
+        currentRound: 0,
         playerList: [],
         prompts: [],
         promptLoaded: false,
         promptsLoaded: false,
-        showNextRoundScreen: false,
+        showNextRoundScreen: true,
         showPreviousPrompt: false,
         turnsUntilNextRound: this.props.route.params.amountOfPrompts,
         amountOfPrompts: this.props.route.params.amountOfPrompts,
@@ -35,7 +34,7 @@ class GameScreen extends Component {
     componentDidMount() {
         const copy = [...this.props.route.params.playerList];       // Necessary so the playerlist in HomeScreen doesn't get changed
         this.setState({'playerList': copy})
-        this.setState({'currentPrompt': {prompt: translateText(this.state.language, "GameScreen", "start-title"), amountOfSips: translateText(this.state.language, "GameScreen", "start-round")}})
+        this.setState({'previousPrompt': {prompt: translateText(this.state.language, "GameScreen", "start-title"), amountOfSips: translateText(this.state.language, "GameScreen", "start-round")}})
         this.loadPrompts();
         this.backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
@@ -48,13 +47,13 @@ class GameScreen extends Component {
     }
 
     backAction = () => {
-        Alert.alert('Hold on!', 'You will have to start over, are you sure you want to go back?', [
+        Alert.alert(translateText(this.state.language, "GameScreen", "back-alert-title"), translateText(this.state.language, "GameScreen", "back-alert-body"), [
             {
                 text: 'Cancel',
                 onPress: () => null,
                 style: 'cancel',
             },
-            {text: 'YES', onPress: () => this.props.navigation.goBack()},
+            {text: translateText(this.state.language, "GameScreen", "back-alert-button"), onPress: () => this.props.navigation.goBack()},
         ]);
         return true;
     };
@@ -83,6 +82,12 @@ class GameScreen extends Component {
         if (this.state.turnsUntilNextRound === 0){
             this.setState({'showNextRoundScreen': true});
         }
+
+        this.loadInNextPrompt();
+        this.setState({'turnsUntilNextRound': this.state.turnsUntilNextRound-1});
+    }
+
+    loadInNextPrompt = () => {
         let prompt = this.state.prompts[Math.floor(Math.random()*this.state.prompts.length)];
 
         // If a name needs to be chosen, replace the "..." with a random name
@@ -98,8 +103,6 @@ class GameScreen extends Component {
         //                                             V The max amount of sips per prompt, minimum of 1
         let amountOfSips = Math.floor(Math.random()*3)+1;
         this.setState({'currentPrompt': {prompt: promptClone.prompt, amountOfSips: amountOfSips}});
-
-        this.setState({'turnsUntilNextRound': this.state.turnsUntilNextRound-1});
     }
 
     previousPromptHandler = () => {
@@ -109,7 +112,8 @@ class GameScreen extends Component {
     nextRoundHandler = () => {
         this.setState({'showNextRoundScreen': false});
         this.setState({'turnsUntilNextRound': this.state.amountOfPrompts - 1});
-        this.setState({'previousPrompt': {prompt: 'No previous prompt!', amountOfSips: ''}})
+        this.loadInNextPrompt();
+        this.setState({'previousPrompt': {prompt: translateText(this.state.language, "GameScreen", "previous-prompt"), amountOfSips: ''}})
         const nextRound = this.state.currentRound + 1;
         if (nextRound === 3){
             this.loadInFirstPlayer();
