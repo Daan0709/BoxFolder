@@ -2,7 +2,9 @@ export const nl = () => {
     return {
         "HomeScreen": {
             "add-player-button": "Voeg Nog Een Speler Toe",
-            "play-button": "Doorgaan",
+            "play-button": "DOORGAAN",
+            "help-button": "Help",
+            "theme-button": "Thema"
         },
         "PlayerContainer": {
             "player-label": "Speler",
@@ -14,7 +16,7 @@ export const nl = () => {
             "player-names-body": "Vul de naam van elke speler in voordat je door kan gaan!",
         },
         "HelpPage": {
-            "back-button": "Ga Terug",
+            "back-button": "< Ga Terug",
             "fold-box": "Wat betekent het om een 'bak te vouwen'? Dit betekent simpelweg dat je een vol glas in één keer leeg moet drinken.",
             "person-included-top": "Wat gebeurt er wanneer een speler zelf in een vraag wordt benoemd zoals hieronder?",
             "person-included-bot": "Wanneer dit gebeurd, wordt de speler zelf ook meegeteld. In dit voorbeeld zou Jill dus ook 2 slokken moeten nemen.",
@@ -37,9 +39,12 @@ export const nl = () => {
             "Hobby": "Hobby",
             "Love": "Liefde",
             "School": "School",
-            "prompts-per-round": "Hoeveel vragen wil je zien per ronde?",
-            "back-button": "Ga Terug",
-            "play-button": "Beginnen!"
+            "Blank1": "",
+            "Blank2": "",
+            "prompts-per-round": "Aantal vragen per ronde:",
+            "back-button": "< Ga Terug",
+            "play-button": "Beginnen!",
+            "help-button": "Help"
         },
         "GameScreen": {
             "start-title": "Klik om te beginnen!",

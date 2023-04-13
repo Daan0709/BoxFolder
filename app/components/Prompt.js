@@ -2,8 +2,9 @@ import {Dimensions, StatusBar, StyleSheet, Text, TouchableWithoutFeedback, View,
 import colors from "../config/colors";
 import React, {useEffect, useRef} from "react";
 import {translateText} from "../services/LanguageService";
+import {LinearGradient} from "expo-linear-gradient";
 
-function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color, language }) {
+function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previousPromptHandler, color, secondaryColor, language }) {
 
     const scale = useRef(new Animated.Value(1)).current;
     const sipsString = amountOfSips === 1 ? translateText(language, "GameScreen", "sip-singular") : translateText(language, "GameScreen", "sip-plural");
@@ -40,7 +41,10 @@ function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previous
 
     return (
         <TouchableWithoutFeedback onPress={(e) => {handleTouch(e)}}>
-            <View style={[styles.background, {backgroundColor: color}]}>
+            <LinearGradient colors={[color, secondaryColor, color]}
+                            start={{x: 1, y: 0}}
+                            end={{x: 0, y: 1}}
+                            style={styles.background}>
                 <StatusBar hidden={true}/>
                 <View>
                     {amountOfSips === translateText(language, "GameScreen", "start-round") ?
@@ -62,7 +66,7 @@ function Prompt({ prompt, amountOfSips, giveOrDrink, nextPromptHandler, previous
                         <Animated.Text style={[styles.normalText, {transform: [{scale: scale}]}]}>{prompt}</Animated.Text>
                     </View>
                 </View>
-            </View>
+            </LinearGradient>
         </TouchableWithoutFeedback>
     );
 }

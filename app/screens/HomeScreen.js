@@ -6,16 +6,21 @@ import {
     Image,
     Text,
     TouchableOpacity,
-    Alert
+    Alert, ScrollView
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, Entypo } from '@expo/vector-icons';
+import {LinearGradient} from "expo-linear-gradient";
 
-import colors from "../config/colors"
+import colors from "../config/colors";
+import styleSheet from "../config/StyleSheet";
 import PlayerContainer from "../components/PlayerContainer";
 import ForceMode from "../components/ForceMode";
 import LanguageSwitch from "../components/LanguageSwitch";
 import {translateText} from "../services/LanguageService";
+import {getColorTheme} from "../services/ThemeService";
+import ThemeSwitch from "../components/ThemeSwitch";
+import * as SystemUI from "expo-system-ui";
 
 
 class HomeScreen extends Component {
@@ -25,7 +30,12 @@ class HomeScreen extends Component {
         amountOfPlayers: 1,
         language: 'uk',
         languageOpacity: 1,
+        theme: getColorTheme('green')
     };
+
+    componentDidMount() {
+        SystemUI.setBackgroundColorAsync(this.state.theme.Secondary); // Stops screen from flickering white when switching screens
+    }
 
     updatePlayerName = (name, rank) => {
         // Max length of a name is 20 characters
@@ -38,7 +48,7 @@ class HomeScreen extends Component {
                 pair.name = name;
             }
         })
-        this.setState({'playerList': playerList})
+        this.setState({'playerList': playerList});
     }
 
     addPlayerHandler = () => {
@@ -48,7 +58,7 @@ class HomeScreen extends Component {
             return
         }
 
-        this.setState({'amountOfPlayers': this.state.amountOfPlayers+1}) // Increase Players By 1
+        this.setState({'amountOfPlayers': this.state.amountOfPlayers+1}); // Increase Players By 1
 
         let playerList = this.state.playerList;
         playerList.push({name: "", rank: this.state.amountOfPlayers+1}); // Append a blank player to the player list
@@ -66,7 +76,7 @@ class HomeScreen extends Component {
         let highRankArray = playerList.slice(rank);
         highRankArray.map((player) => {
             player.rank = player.rank -1
-        })
+        });
 
         let result = correctLowArray.concat(highRankArray);
         this.setState({'amountOfPlayers': this.state.amountOfPlayers-1})
@@ -88,13 +98,15 @@ class HomeScreen extends Component {
         }
         this.props.navigation.navigate('CategoryScreen', {
             playerList: this.state.playerList,
-            language: this.state.language
+            language: this.state.language,
+            theme: this.state.theme
         });
     }
 
     helpButtonHandler = () => {
         this.props.navigation.navigate('HelpScreen', {
-            language: this.state.language
+            language: this.state.language,
+            theme: this.state.theme
         });
     };
 
@@ -102,60 +114,56 @@ class HomeScreen extends Component {
         this.setState({'language': lang});
     }
 
-    // TODO: These only work if the user hits the enter button, not when they
-    // TODO: back out of the text focus with system buttons
-    setFocus = () => {
-        this.setState({'languageOpacity': 0});
-    }
-
-    endFocus = () => {
-        this.setState({'languageOpacity': 1});
+    swapThemeHandler = (theme) => {
+        theme = getColorTheme(theme)
+        SystemUI.setBackgroundColorAsync(theme.Secondary);   // Prevents the screen flashing white when switching screens (Android only)
+        this.setState({'theme': theme});
     }
 
     render(){
         return (
             <View style={styles.container}>
                 <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar backgroundColor={colors.Primary}/>
-                <View style={styles.background}>
+                <StatusBar backgroundColor={this.state.theme.Secondary}/>
+                <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
+                                start={{x: 1, y: 0}}
+                                end={{x: 0, y: 1}}
+                                style={styles.background}>
                     <View style={styles.logoContainer}>
                         <Text style={styles.title}>Box Folder!</Text>
                         <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
                     </View>
-                    <View style={styles.fixedHeightContainer}>
-                        <View style={[styles.playersContainer, {height: this.state.playerList.length * 40}]}>
+                    <TouchableOpacity style={styles.addPlayerContainer} onPress={this.addPlayerHandler}>
+                        <Entypo name="add-user" size={30} color="white" />
+                    </TouchableOpacity>
+                    <ScrollView contentContainerStyle={styles.fixedHeightContainer}>
+                        <View style={[styles.playersContainer, {height: this.state.playerList.length * 80}]}>
                             {this.state.playerList.map((pair) => {
                                 return (
                                     <PlayerContainer
                                         language={this.state.language}
+                                        theme={this.state.theme}
                                         handleToUpdate={this.updatePlayerName}
                                         removePlayer={this.removePlayerHandler}
-                                        setFocus={this.setFocus}
-                                        endFocus={this.endFocus}
                                         name={pair.name}
                                         rank={pair.rank}
                                         key={pair.rank}/>
                                 )
                             })}
                         </View>
-                    </View>
-
-                    <View style={styles.addPlayerContainer}>
-                        <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "add-player-button")}</Text>
-                        <TouchableOpacity style={styles.roundButton} onPress={this.addPlayerHandler}>
-                            <Text style={styles.normalText}>+</Text>
-                        </TouchableOpacity>
-                    </View>
+                    </ScrollView>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.longButton} onPress={this.playButtonHandler}>
+                        <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={this.playButtonHandler}>
                             <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={this.helpButtonHandler}>
-                            <MaterialIcons name="help-outline" size={30} color="white" />
+                        <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
+                            <MaterialIcons name="help-outline" size={30} color="white"/>
+                            <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
                         </TouchableOpacity>
+                        <ThemeSwitch theme={this.state.theme} swapThemeHandler={this.swapThemeHandler} language={this.state.language}/>
                     </View>
-                    <LanguageSwitch style={styles.language} language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} opacity={this.state.languageOpacity}/>
-                </View>
+                </LinearGradient>
+                <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} theme={this.state.theme}/>
             </View>
         );
     }
@@ -164,15 +172,15 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
     addPlayerContainer: {
-        width: "100%",
-        alignItems: "center",
-        padding: 10
+        width: "80%",
+        marginBottom: 15
     },
     background: {
-        flex: 1,
+        height: "100%",
+        width: "100%",
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.Primary,
+        position: "absolute"
     },
     buttonContainer: {
         width: "100%",
@@ -184,40 +192,25 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     fixedHeightContainer: {
-        height: 400,    // Should be equal to 40 * the max amount of players
+        width: "100%",
+    },
+    helpButton: {
+        flexDirection: "row",
+        alignItems: "center",
     },
     image: {
       width: 80,
       height: 80
     },
-    input: {
-        color: colors.White,
-        borderColor: "black",
-        borderWidth: 2,
-        width: "60%",
-        backgroundColor: colors.Secondary,
-        padding: 2,
-        fontSize: 20
-    },
     language: {
         backgroundColor: "teal",
-        position: "absolute",
-        top: StatusBar.currentHeight,
-        right: 15,
+        width: "100%"
     },
     logoContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         width: "100%",
-    },
-    longButton: {
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.Secondary,
-        borderColor: "black",
-        borderWidth: 2,
-        width: "50%"
+        top: StatusBar.currentHeight
     },
     normalText: {
         padding: 4,
