@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import colors from "../config/colors";
 
-function Category({ title, emoji, initialCheck, handleToUpdate }) {
+function Category({ title, emoji, initialCheck, handleToUpdate, theme }) {
 
     const [checked, setChecked] = useState(initialCheck);
 
@@ -15,32 +15,41 @@ function Category({ title, emoji, initialCheck, handleToUpdate }) {
     // Render top component if it is checked, render bottom component if it is not
     return (
         title !== "" ?
-            <TouchableOpacity style={styles.card} onPress={switchCheck}>
+            <View style={{flex: 1}}>
                 {checked ?
-                    <View style={styles.category}>
-                        <Text style={styles.boldText}>{title}</Text>
-                        <Text style={styles.emoji}>{emoji}</Text>
-                    </View>
+                    <TouchableOpacity style={[styles.card, {backgroundColor: theme.Secondary}]} onPress={switchCheck}>
+                        <View style={styles.category}>
+                            <Text style={styles.boldText}>{title}</Text>
+                            <Text style={styles.emoji}>{emoji}</Text>
+                        </View>
+                    </TouchableOpacity>
                     :
-                    <View style={[styles.category, styles.unchecked]}>
-                        <Text style={styles.normalText}>{title}</Text>
-                        <Text style={styles.emoji}></Text>
-                    </View>
+                    <TouchableOpacity style={[styles.card_unchecked, {backgroundColor: theme.Secondary}]} onPress={switchCheck}>
+                        <View style={styles.category}>
+                            <Text style={styles.normalText}>{title}</Text>
+                        </View>
+                    </TouchableOpacity>
+
                 }
-            </TouchableOpacity>
+            </View>
             :
-            <View style={[styles.card, {backgroundColor: colors.Primary}]}>
+            <View style={styles.card}>
             </View>
     );
 }
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: colors.Secondary,
-        height: "100%",
         flex: 1,
         borderRadius: 5,
         marginBottom: 5
+    },
+    card_unchecked: {
+        flex: 1,
+        borderRadius: 5,
+        marginBottom: 5,
+        opacity: 0.25,
+        justifyContent: "center"
     },
     category: {
         alignItems: "center",
@@ -48,10 +57,6 @@ const styles = StyleSheet.create({
     emoji: {
         padding: 4,
         fontSize: 25,
-    },
-    unchecked: {
-        opacity: 0.5,
-        justifyContent: "center",
     },
     normalText: {
         padding: 4,

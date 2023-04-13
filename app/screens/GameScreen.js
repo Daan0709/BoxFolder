@@ -28,7 +28,8 @@ class GameScreen extends Component {
         currentPlayer: null,
         currentPlayerIndex: 0,
         finalRound: false,
-        language: this.props.route.params.language
+        language: this.props.route.params.language,
+        theme: this.props.route.params.theme,
     };
 
     componentDidMount() {
@@ -198,7 +199,8 @@ class GameScreen extends Component {
 
     helpButtonHandler = () => {
         this.props.navigation.navigate('HelpScreen', {
-            language: this.state.language
+            language: this.state.language,
+            theme: this.state.theme
         });
     }
 
@@ -215,7 +217,7 @@ class GameScreen extends Component {
                                 giveOrDrink={"Drink "}
                                 nextPromptHandler={this.nextPromptHandler}
                                 previousPromptHandler={this.previousPromptHandler}
-                                color={colors.Secondary}
+                                color={this.state.theme.Secondary} secondaryColor={this.state.theme.Tertiary}
                                 language={this.state.language}/>
                         :
                         this.state.showPreviousPrompt && this.state.currentRound === 2 ? // If the player wants to see the previous prompt and its round 2
@@ -224,7 +226,7 @@ class GameScreen extends Component {
                                     giveOrDrink={"Give out "}
                                     nextPromptHandler={this.nextPromptHandler}
                                     previousPromptHandler={this.previousPromptHandler}
-                                    color={colors.SecondaryContrast}
+                                    color={this.state.theme.SecondaryContrast} secondaryColor={this.state.theme.TertiaryContrast}
                                     language={this.state.language}/>
                             :
                             this.state.currentRound === 1 ?                                 // If it is round one, drink, round two: give out
@@ -233,7 +235,7 @@ class GameScreen extends Component {
                                         giveOrDrink={"Drink "}
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
-                                        color={colors.Primary}
+                                        color={this.state.theme.Secondary} secondaryColor={this.state.theme.Primary}
                                         language={this.state.language}/>
                                 :
                                 this.state.currentRound === 2 ?                             // Round two, so give out
@@ -242,7 +244,7 @@ class GameScreen extends Component {
                                         giveOrDrink={"Give out "}
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
-                                        color={colors.PrimaryContrast}
+                                        color={this.state.theme.SecondaryContrast} secondaryColor={this.state.theme.PrimaryContrast}
                                         language={this.state.language}/>
                                     :                                                       // Final round (round three)
                                     <FinalRound prompt={this.state.currentPrompt.prompt}
@@ -265,7 +267,6 @@ class GameScreen extends Component {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        backgroundColor: colors.Primary
     },
     helpButton: {
         position: "absolute",

@@ -19,9 +19,10 @@
       "icon": "./app/assets/icon.png"
     },
     "android": {
+      "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
-        "backgroundColor": "#0a2f02"
+        "backgroundColor": "#0A2F03"
       },
       "package": "com.daannoob1337.BoxFolder"
     },

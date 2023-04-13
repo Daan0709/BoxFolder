@@ -4,6 +4,7 @@ export const nl = () => {
             "add-player-button": "Voeg Nog Een Speler Toe",
             "play-button": "DOORGAAN",
             "help-button": "Help",
+            "theme-button": "Thema"
         },
         "PlayerContainer": {
             "player-label": "Speler",

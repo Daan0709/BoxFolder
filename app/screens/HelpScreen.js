@@ -17,6 +17,7 @@ import colors from "../config/colors";
 import styleSheet from "../config/StyleSheet";
 import ForceMode from "../components/ForceMode";
 import {translateText} from "../services/LanguageService";
+import {LinearGradient} from "expo-linear-gradient";
 
 
 class HelpScreen extends Component {
@@ -28,7 +29,8 @@ class HelpScreen extends Component {
     state = {
         translationHowTo: new Animated.Value(this.width),
         translationHelp: new Animated.Value(0),
-        language: this.props.route.params.language
+        language: this.props.route.params.language,
+        theme: this.props.route.params.theme
     }
 
     swipeLeft = () => {
@@ -67,9 +69,12 @@ class HelpScreen extends Component {
 
     render() {
         return(
-            <View style={styles.background}>
+            <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
+                            start={{x: 1, y: 0}}
+                            end={{x: 0, y: 1}}
+                            style={styles.background}>
                 <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar backgroundColor={colors.Primary}/>
+                <StatusBar backgroundColor={this.state.theme.Secondary}/>
                 <View style={styles.container}>
                     <View style={styles.pageContainer}>
                         <Animated.View style={[styles.helpPage, {transform: [{translateX: this.state.translationHelp}]}]}>
@@ -78,12 +83,12 @@ class HelpScreen extends Component {
                                     <Text style={styles.title}>
                                         Help
                                     </Text>
-                                    <View style={styles.helpBox}>
+                                    <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
                                         <Text style={[styles.normalText]}>
                                             {translateText(this.state.language, "HelpPage", "fold-box")}
                                         </Text>
                                     </View>
-                                    <View style={styles.helpBox}>
+                                    <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
                                         <Text style={[styles.normalText]}>
                                             {translateText(this.state.language, "HelpPage", "person-included-top")}
                                         </Text>
@@ -92,7 +97,7 @@ class HelpScreen extends Component {
                                             {translateText(this.state.language, "HelpPage", "person-included-bot")}
                                         </Text>
                                     </View>
-                                    <View style={styles.helpBox}>
+                                    <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
                                         <Text style={[styles.normalText]}>
                                             {translateText(this.state.language, "HelpPage", "skipped-prompt-top")}
                                         </Text>
@@ -116,17 +121,17 @@ class HelpScreen extends Component {
                                     <Text style={styles.title}>
                                         {translateText(this.state.language, "HelpPage", "how-to-play-title")}
                                     </Text>
-                                    <View style={styles.helpBox}>
+                                    <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
                                         <Text style={styles.normalText}>
                                             {translateText(this.state.language, "HelpPage", "step-one")}
                                         </Text>
                                     </View>
-                                    <View style={styles.helpBox}>
+                                    <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
                                         <Text style={styles.normalText}>
                                             {translateText(this.state.language, "HelpPage", "step-two")}
                                         </Text>
                                     </View>
-                                    <View style={styles.helpBox}>
+                                    <View style={[styles.helpBox, {backgroundColor: this.state.theme.Tertiary}]}>
                                         <Text style={styles.normalText}>
                                             {translateText(this.state.language, "HelpPage", "step-three-title")}
                                         </Text>
@@ -159,14 +164,13 @@ class HelpScreen extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </LinearGradient>
         )
     }
 }
 
 const styles = StyleSheet.create({
     background: {
-        backgroundColor: colors.Primary,
         flex: 1
     },
     buttonContainer: {
@@ -179,7 +183,6 @@ const styles = StyleSheet.create({
     },
     helpBox: {
         borderRadius: 15,
-        backgroundColor: colors.Tertiary,
         padding: 10
     },
     helpContainer: {
@@ -189,7 +192,6 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         height: "100%",
         width: "100%",
-        backgroundColor: colors.Secondary,
         flexDirection: "row",
         borderTopLeftRadius: 15,
         borderBottomLeftRadius: 15,
@@ -199,7 +201,6 @@ const styles = StyleSheet.create({
         position: "absolute",
         height: "100%",
         width: "100%",
-        backgroundColor: colors.Secondary,
         flexDirection: "row",
         borderTopRightRadius: 15,
         borderBottomRightRadius: 15,

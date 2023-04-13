@@ -4,6 +4,7 @@ export const uk = () => {
             "add-player-button": "Add New Player",
             "play-button": "LET'S DRINK!",
             "help-button": "Help",
+            "theme-button": "Theme"
         },
         "PlayerContainer": {
             "player-label": "Player",

@@ -8,11 +8,13 @@ import styleSheet from "../config/StyleSheet";
 import Category from "../components/Category";
 import ForceMode from "../components/ForceMode";
 import {translateText} from "../services/LanguageService";
+import {LinearGradient} from "expo-linear-gradient";
 
 class CategoryScreen extends Component {
 
     state = {
         language: this.props.route.params.language,
+        theme: this.props.route.params.theme,
         categories: [],
         amountOfPrompts: 15,
     };
@@ -59,7 +61,8 @@ class CategoryScreen extends Component {
             categories: this.state.categories,
             playerList: this.props.route.params.playerList,
             amountOfPrompts: this.state.amountOfPrompts,
-            language: this.state.language
+            language: this.state.language,
+            theme: this.state.theme
         });
     }
 
@@ -79,7 +82,8 @@ class CategoryScreen extends Component {
 
     helpButtonHandler = () => {
         this.props.navigation.navigate('HelpScreen', {
-            language: this.state.language
+            language: this.state.language,
+            theme: this.state.theme
         });
     }
 
@@ -87,8 +91,11 @@ class CategoryScreen extends Component {
         return (
             <View style={styles.container}>
                 <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar backgroundColor={colors.Primary}/>
-                <View style={styles.background}>
+                <StatusBar backgroundColor={colors.Secondary}/>
+                <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
+                                start={{x: 1, y: 0}}
+                                end={{x: 0, y: 1}}
+                                style={styles.background}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>{translateText(this.state.language, "CategoryScreen", "title")}</Text>
                     </View>
@@ -96,17 +103,17 @@ class CategoryScreen extends Component {
                     <View style={styles.categoriesContainer}>
                         <View style={styles.categoryRowContainer}>
                             {this.state.categories.filter(category => category.rank < 3).map((category) => {
-                                return (<Category title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
+                                return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
                             })}
                         </View>
                         <View style={styles.categoryRowContainer}>
                             {this.state.categories.filter(category => category.rank >= 3 && category.rank < 6).map((category) => {
-                                return (<Category title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
+                                return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
                             })}
                         </View>
                         <View style={styles.categoryRowContainer}>
                             {this.state.categories.filter(category => category.rank >= 6 && category.rank < 9).map((category) => {
-                                return (<Category title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
+                                return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
                             })}
                         </View>
                     </View>
@@ -137,7 +144,7 @@ class CategoryScreen extends Component {
                             <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "play-button")}</Text>
                         </TouchableOpacity>
                     </View>
-                </View>
+                </LinearGradient>
             </View>
 
         );
@@ -147,8 +154,8 @@ class CategoryScreen extends Component {
 const styles = StyleSheet.create({
     amountOfRoundsContainer: {
         flexDirection: "row",
-        width: "100%",
-        justifyContent: "center",
+        width: "25%",
+        justifyContent: "space-evenly",
         alignItems: "flex-end",
         gap: 10,
     },
@@ -156,7 +163,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: colors.Primary,
     },
     buttonContainer: {
         flex: 1,

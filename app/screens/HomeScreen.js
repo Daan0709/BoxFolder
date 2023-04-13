@@ -10,13 +10,17 @@ import {
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
+import {LinearGradient} from "expo-linear-gradient";
 
-import colors from "../config/colors"
+import colors from "../config/colors";
 import styleSheet from "../config/StyleSheet";
 import PlayerContainer from "../components/PlayerContainer";
 import ForceMode from "../components/ForceMode";
 import LanguageSwitch from "../components/LanguageSwitch";
 import {translateText} from "../services/LanguageService";
+import {getColorTheme} from "../services/ThemeService";
+import ThemeSwitch from "../components/ThemeSwitch";
+import * as SystemUI from "expo-system-ui";
 
 
 class HomeScreen extends Component {
@@ -26,7 +30,12 @@ class HomeScreen extends Component {
         amountOfPlayers: 1,
         language: 'uk',
         languageOpacity: 1,
+        theme: getColorTheme('green')
     };
+
+    componentDidMount() {
+        SystemUI.setBackgroundColorAsync(this.state.theme.Secondary); // Stops screen from flickering white when switching screens
+    }
 
     updatePlayerName = (name, rank) => {
         // Max length of a name is 20 characters
@@ -39,7 +48,7 @@ class HomeScreen extends Component {
                 pair.name = name;
             }
         })
-        this.setState({'playerList': playerList})
+        this.setState({'playerList': playerList});
     }
 
     addPlayerHandler = () => {
@@ -49,7 +58,7 @@ class HomeScreen extends Component {
             return
         }
 
-        this.setState({'amountOfPlayers': this.state.amountOfPlayers+1}) // Increase Players By 1
+        this.setState({'amountOfPlayers': this.state.amountOfPlayers+1}); // Increase Players By 1
 
         let playerList = this.state.playerList;
         playerList.push({name: "", rank: this.state.amountOfPlayers+1}); // Append a blank player to the player list
@@ -67,7 +76,7 @@ class HomeScreen extends Component {
         let highRankArray = playerList.slice(rank);
         highRankArray.map((player) => {
             player.rank = player.rank -1
-        })
+        });
 
         let result = correctLowArray.concat(highRankArray);
         this.setState({'amountOfPlayers': this.state.amountOfPlayers-1})
@@ -89,13 +98,15 @@ class HomeScreen extends Component {
         }
         this.props.navigation.navigate('CategoryScreen', {
             playerList: this.state.playerList,
-            language: this.state.language
+            language: this.state.language,
+            theme: this.state.theme
         });
     }
 
     helpButtonHandler = () => {
         this.props.navigation.navigate('HelpScreen', {
-            language: this.state.language
+            language: this.state.language,
+            theme: this.state.theme
         });
     };
 
@@ -103,12 +114,21 @@ class HomeScreen extends Component {
         this.setState({'language': lang});
     }
 
+    swapThemeHandler = (theme) => {
+        theme = getColorTheme(theme)
+        SystemUI.setBackgroundColorAsync(theme.Secondary);   // Prevents the screen flashing white when switching screens (Android only)
+        this.setState({'theme': theme});
+    }
+
     render(){
         return (
             <View style={styles.container}>
                 <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar backgroundColor={colors.Primary}/>
-                <View style={styles.background}>
+                <StatusBar backgroundColor={this.state.theme.Secondary}/>
+                <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
+                                start={{x: 1, y: 0}}
+                                end={{x: 0, y: 1}}
+                                style={styles.background}>
                     <View style={styles.logoContainer}>
                         <Text style={styles.title}>Box Folder!</Text>
                         <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
@@ -122,6 +142,7 @@ class HomeScreen extends Component {
                                 return (
                                     <PlayerContainer
                                         language={this.state.language}
+                                        theme={this.state.theme}
                                         handleToUpdate={this.updatePlayerName}
                                         removePlayer={this.removePlayerHandler}
                                         name={pair.name}
@@ -139,9 +160,10 @@ class HomeScreen extends Component {
                             <MaterialIcons name="help-outline" size={30} color="white"/>
                             <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
                         </TouchableOpacity>
+                        <ThemeSwitch theme={this.state.theme} swapThemeHandler={this.swapThemeHandler} language={this.state.language}/>
                     </View>
-                </View>
-                <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler}/>
+                </LinearGradient>
+                <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} theme={this.state.theme}/>
             </View>
         );
     }
@@ -154,10 +176,11 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     background: {
-        flex: 1,
+        height: "100%",
+        width: "100%",
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.Primary,
+        position: "absolute"
     },
     buttonContainer: {
         width: "100%",
@@ -188,15 +211,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: "100%",
         top: StatusBar.currentHeight
-    },
-    longButton: {
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.Secondary,
-        borderColor: "black",
-        borderWidth: 2,
-        width: "50%"
     },
     normalText: {
         padding: 4,

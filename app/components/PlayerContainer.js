@@ -21,13 +21,12 @@ function PlayerContainer(props) {
         <View style={styles.playerContainer}>
             <Text style={styles.normalText}>{translateText(props.language, "PlayerContainer", "player-label")} {rank+1}</Text>
             <View style={styles.horizontalContainer}>
-                <TextInput value={props.name} style={styles.input}
+                <TextInput value={props.name} style={[styles.input, {backgroundColor: props.theme.Secondary,}]}
                            placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
                            placeholderTextColor={'#bdbbbb'}
                            onChangeText={(newName) => handleChangeText(newName)}/>
                 {rank === 0 || rank === 1 ?
                     <TouchableOpacity style={styles.invisibleButton}>
-                        <Text style={styles.invisibleText}>x</Text>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={() => removeSelf(rank)}>
@@ -49,22 +48,14 @@ const styles = StyleSheet.create({
     input: {
         color: colors.White,
         borderRadius: 5,
-        backgroundColor: colors.Secondary,
         padding: 2,
         paddingLeft: 10,
         fontSize: 15,
         flex: 1,
     },
     invisibleButton: {
-        borderRadius: 100,
         width: 30,
         height: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.Primary,
-    },
-    invisibleText: {
-        color: colors.Primary
     },
     normalText: {
         color: colors.White,

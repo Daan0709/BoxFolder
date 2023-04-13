@@ -4,11 +4,16 @@ import {Dimensions, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View} 
 import colors from "../config/colors";
 import styleSheet from "../config/StyleSheet";
 import {translateText} from "../services/LanguageService";
+import {LinearGradient} from "expo-linear-gradient";
 
 function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler, continuePlayingHandler, goBackHandler, language }) {
 
     return (
-        <View style={styles.background}>
+        <LinearGradient
+            colors={['rgb(0,0,0)', 'rgb(68,68,68)', 'rgb(0,0,0)']}
+            start={{x: 1, y: 0}}
+            end={{x: 0, y:1}}
+            style={styles.background}>
             {playerListLength > 1 ?   // If there are more than 1 players left
                 <View style={styles.container}>
                     <StatusBar hidden={true}/>
@@ -48,7 +53,7 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                         </TouchableOpacity>
                     </View>
             }
-        </View>
+        </LinearGradient>
     );
 }
 
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
         height: "15%",
         width: "80%",
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-evenly"
     },
     container: {
         justifyContent: "center",
