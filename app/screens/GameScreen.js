@@ -158,8 +158,7 @@ class GameScreen extends Component {
                 return
             }
             this.setState({'currentPlayer': this.state.playerList[this.state.currentPlayerIndex]});
-            let finisherPrompt = Prompts.Finishers[Math.floor(Math.random()*Prompts.Finishers.length)];
-            this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
+            this.loadInRandomFinisherPrompt();
             return
         }
 
