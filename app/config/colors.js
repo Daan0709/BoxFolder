@@ -8,6 +8,15 @@ export default {
         TertiaryContrast: '#b044cc',
         textColor: '#fff'
     },
+    'lightgreen': {
+        Primary: '#80e16e',
+        Secondary: '#609f79',
+        Tertiary: '#caeac4',
+        PrimaryContrast: '#b32ed9',
+        SecondaryContrast: '#c755e5',
+        TertiaryContrast: '#cb7de3',
+        textColor: '#000000'
+    },
     'purple': {
         Primary: '#530364',
         Secondary: '#80079b',
@@ -21,19 +30,37 @@ export default {
         Primary: '#000000',
         Secondary: '#2a2a2a',
         Tertiary: '#707070',
-        PrimaryContrast: '#0541b7',
-        SecondaryContrast: '#2154be',
-        TertiaryContrast: '#4068c0',
+        PrimaryContrast: '#000f41',
+        SecondaryContrast: '#01154b',
+        TertiaryContrast: '#01226b',
         textColor: '#ffffff'
     },
     'white': {
         Primary: '#ffffff',
         Secondary: '#bdbdbd',
         Tertiary: '#7a7979',
-        PrimaryContrast: '#7a7979',
-        SecondaryContrast: '#bdbdbd',
-        TertiaryContrast: '#ffffff',
+        PrimaryContrast: '#1466d7',
+        SecondaryContrast: '#4f84d7',
+        TertiaryContrast: '#95ade5',
         textColor: '#000000'
+    },
+    'coral': {
+        Primary: '#1a05d3',
+        Secondary: '#6004b9',
+        Tertiary: '#b20bcb',
+        PrimaryContrast: '#ab0841',
+        SecondaryContrast: '#ab0885',
+        TertiaryContrast: '#8d08ab',
+        textColor: '#ffffff'
+    },
+    'mediteranean': {
+        Primary: '#1fd3c7',
+        Secondary: '#7e0df1',
+        Tertiary: '#35eeb6',
+        PrimaryContrast: '#1fd3c7',
+        SecondaryContrast: '#ab0885',
+        TertiaryContrast: '#35eeb6',
+        textColor: '#ffffff'
     },
     White: '#fff',
     Lightblue: '#00BAFF',

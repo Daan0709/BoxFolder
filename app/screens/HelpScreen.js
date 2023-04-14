@@ -131,7 +131,7 @@ class HelpScreen extends Component {
                                 </View>
 
                                 <TouchableOpacity onPress={this.swipeLeft} style={styles.swipeButton}>
-                                    <AntDesign name="caretright" size={40} color="black" />
+                                    <AntDesign name="caretright" size={40} color={this.state.theme.textColor} />
                                 </TouchableOpacity>
                             </Animated.View>
 
@@ -174,7 +174,7 @@ class HelpScreen extends Component {
                                 </View>
 
                                 <TouchableOpacity onPress={this.swipeRight} style={styles.swipeButton}>
-                                    <AntDesign name="caretleft" size={40} color="black" />
+                                    <AntDesign name="caretleft" size={40} color={this.state.theme.textColor} />
                                 </TouchableOpacity>
                             </Animated.View>
                         </View>
