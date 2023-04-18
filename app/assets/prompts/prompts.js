@@ -2,7 +2,7 @@ export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
     "uk": {
-        // 37
+        // 36
         General: [
             {prompt: "If you have ever been admitted into a hospital"},
             {prompt: "For every letter in your first name"},
@@ -37,7 +37,6 @@ export default {
             {prompt: "If your taste in memes is very dark"},
             {prompt: "If you've ever deliberately hung out with people whilst having COVID-19"},
             {prompt: "If you know what the 'LAMP' meme is"},
-            {prompt: "If you like Suzan & Freek"},
             {prompt: "If you have ever saved a life"},
             {prompt: "If you have ever accidentally started a fire"},
             {prompt: "If you have ever sent a sensitive or hurtful message to the wrong person"},
@@ -144,7 +143,7 @@ export default {
             {prompt: "If you ever skipped work without letting work know"},
             {prompt: "If you have ever truly hated a coworker"},
         ],
-        // 34
+        // 35
         Hobby: [
             {prompt: "If you have ever played a table top rpg"},
             {prompt: "If you are a collector of a specific object"},
@@ -180,6 +179,7 @@ export default {
             {prompt: "If you have ever roleplayed"},
             {prompt: "If your favorite music genre is dance-related like Drum and Bass, Techno, Hardstyle etc."},
             {prompt: "If you have ever seen the entire 'The Lord of the Rings' trilogy in one sitting"},
+            {prompt: "If you enjoy listening to Meghan Trainor"},
         ],
         // 31
         Love: [
@@ -276,7 +276,7 @@ export default {
         ]
     },
     "nl": {
-        // 37
+        // 36
         General: [
             {prompt: "Als je wel eens bent opgenomen in het ziekenhuis"},
             {prompt: "Voor elke letter in je voornaam"},
@@ -311,7 +311,6 @@ export default {
             {prompt: "Als je smaak in memes heel duister is"},
             {prompt: "Als je ooit met vrienden hebt afgesproken terwijl je wist dat je COVID-19 had"},
             {prompt: "Als je weet wat de 'LAMP' meme is"},
-            {prompt: "Als je Suzan & Freek leuk vindt"},
             {prompt: "Als je ooit een leven hebt gered"},
             {prompt: "Als je ooit per ongeluk een brand hebt gesticht"},
             {prompt: "Als je ooit een gevoelig of pijnlijk bericht hebt gestuurd naar de verkeerde persoon"},
@@ -418,7 +417,7 @@ export default {
             {prompt: "Als je ooit niet naar werk bent gegaan zonder het je werkgever te laten weten"},
             {prompt: "Als je ooit een collega gehaat hebt"},
         ],
-        // 34
+        // 35
         Hobby: [
             {prompt: "Als je ooit een table top rpg hebt gespeeld"},
             {prompt: "Als je een verzamelaar bent van een bepaald voorwerp"},
@@ -454,6 +453,7 @@ export default {
             {prompt: "Als je ooit hebt geroleplayed"},
             {prompt: "Als je favoriete muziek genre dans gerelateerd is, zoals Drum and Bass, Hardstyle, Techno etc."},
             {prompt: "Als je ooit de hele 'The Lord of the Rings' trilogie in een keer gekeken hebt"},
+            {prompt: "Als je Suzan & Freek leuk vindt"},
         ],
         // 31
         Love: [

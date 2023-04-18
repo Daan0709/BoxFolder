@@ -5,9 +5,8 @@ import { Octicons, AntDesign } from '@expo/vector-icons';
 import {translateText} from "../services/LanguageService";
 import {useFonts} from "expo-font";
 import {LinearGradient} from "expo-linear-gradient";
-import colors from "../config/colors";
 
-function ThemeSwitch({ theme, swapThemeHandler, language }) {
+function ThemeSwitch({ currentTheme, swapThemeHandler, language, allThemes }) {
 
     const [clicked, setClicked] = useState(false);
     const [loaded] = useFonts({
@@ -19,6 +18,7 @@ function ThemeSwitch({ theme, swapThemeHandler, language }) {
         Sono_Regular: require('../assets/fonts/Sono-Regular.ttf'),
         Sono_SemiBold: require('../assets/fonts/Sono-SemiBold.ttf'),
     })
+    const [themes] = useState(allThemes);
 
     function swapTheme(theme){
         swapThemeHandler(theme);
@@ -38,57 +38,42 @@ function ThemeSwitch({ theme, swapThemeHandler, language }) {
             {clicked ?
                 <View style={styles.themeSwitch}>
                     <TouchableOpacity onPress={themeClickHandler} style={[styles.button]}>
-                        <Octicons name="paintbrush" size={24} color={theme.textColor} />
-                        <Text style={[styles.extraLightText, {color: theme.textColor}]}>{translateText(language, "HomeScreen", "theme-button")}</Text>
+                        <Octicons name="paintbrush" size={24} color={currentTheme.textColor} />
+                        <Text style={[styles.extraLightText, {color: currentTheme.textColor}]}>{translateText(language, "HomeScreen", "theme-button")}</Text>
                     </TouchableOpacity>
-                    <AntDesign style={styles.caret} name="caretdown" size={24} color={theme.Primary} />
-                    <View style={[styles.themesContainer, {backgroundColor: theme.Primary}]}>
+                    <AntDesign style={styles.caret} name="caretdown" size={24} color={currentTheme.Primary} />
+                    <View style={[styles.themesContainer, {backgroundColor: currentTheme.Primary}]}>
                         <View style={styles.themesRow}>
-                            <TouchableOpacity style={{borderColor: theme.textColor, borderWidth: 2}} onPress={() => swapTheme('green')}>
-                                <LinearGradient colors={[colors['green'].Primary, colors['green'].Secondary, colors['green'].Tertiary]}
-                                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                                style={styles.themeButton}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{borderColor: theme.textColor, borderWidth: 2}} onPress={() => swapTheme('lightgreen')}>
-                                <LinearGradient colors={[colors['lightgreen'].Primary, colors['lightgreen'].Secondary, colors['lightgreen'].Tertiary]}
-                                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                                style={styles.themeButton}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{borderColor: theme.textColor, borderWidth: 2}} onPress={() => swapTheme('purple')}>
-                                <LinearGradient colors={[colors['purple'].Primary, colors['purple'].Secondary, colors['purple'].Tertiary]}
-                                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                                style={styles.themeButton}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{borderColor: theme.textColor, borderWidth: 2}} onPress={() => swapTheme('black')}>
-                                <LinearGradient colors={[colors['black'].Primary, colors['black'].Secondary, colors['black'].Tertiary]}
-                                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                                style={styles.themeButton}/>
-                            </TouchableOpacity>
+                            {themes.filter(theme => theme.index < 4).map((theme) => {
+                                return (
+                                        <TouchableOpacity style={{borderColor: currentTheme.textColor, borderWidth: 2}}
+                                                          onPress={() => swapTheme(theme)} key={theme.index}>
+                                            <LinearGradient colors={[theme.Primary, theme.Secondary, theme.Tertiary]}
+                                                            start={{x: 1, y: 0}} end={{x: 0, y: 1}}
+                                                            style={styles.themeButton}/>
+                                        </TouchableOpacity>
+                                    )
+                            })}
                         </View>
                         <View style={styles.themesRow}>
-                            <TouchableOpacity style={{borderColor: theme.textColor, borderWidth: 2}} onPress={() => swapTheme('white')}>
-                                <LinearGradient colors={[colors['white'].Primary, colors['white'].Secondary, colors['white'].Tertiary]}
-                                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                                style={styles.themeButton}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{borderColor: theme.textColor, borderWidth: 2}} onPress={() => swapTheme('coral')}>
-                                <LinearGradient colors={[colors['coral'].Primary, colors['coral'].Secondary, colors['coral'].Tertiary]}
-                                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                                style={styles.themeButton}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{borderColor: theme.textColor, borderWidth: 2}} onPress={() => swapTheme('mediteranean')}>
-                                <LinearGradient colors={[colors['mediteranean'].Primary, colors['mediteranean'].Secondary, colors['mediteranean'].Tertiary]}
-                                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                                style={styles.themeButton}/>
-                            </TouchableOpacity>
+                            {themes.filter(theme => theme.index >= 4 && theme.index < 8).map((theme) => {
+                                return (
+                                    <TouchableOpacity style={{borderColor: currentTheme.textColor, borderWidth: 2}}
+                                                      onPress={() => swapTheme(theme)} key={theme.index}>
+                                        <LinearGradient colors={[theme.Primary, theme.Secondary, theme.Tertiary]}
+                                                        start={{x: 1, y: 0}} end={{x: 0, y: 1}}
+                                                        style={styles.themeButton}/>
+                                    </TouchableOpacity>
+                                )
+                            })}
                         </View>
                     </View>
                 </View>
 
                 :
                 <TouchableOpacity onPress={themeClickHandler} style={[styles.button]}>
-                    <Octicons name="paintbrush" size={24} color={theme.textColor} />
-                    <Text style={[styles.extraLightText, {color: theme.textColor}]}>{translateText(language, "HomeScreen", "theme-button")}</Text>
+                    <Octicons name="paintbrush" size={24} color={currentTheme.textColor} />
+                    <Text style={[styles.extraLightText, {color: currentTheme.textColor}]}>{translateText(language, "HomeScreen", "theme-button")}</Text>
                 </TouchableOpacity>
             }
         </View>

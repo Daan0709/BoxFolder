@@ -33,20 +33,33 @@ function PlayerContainer(props) {
     return (
         <View style={styles.playerContainer}>
             <Text style={[styles.regularText, {color: props.theme.textColor}]}>{translateText(props.language, "PlayerContainer", "player-label")} {rank+1}</Text>
-            <View style={styles.horizontalContainer}>
-                <TextInput value={props.name} style={[styles.input, {backgroundColor: props.theme.Secondary, color: props.theme.textColor}]}
-                           placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
-                           placeholderTextColor={props.theme.Tertiary}
-                           onChangeText={(newName) => handleChangeText(newName)}/>
-                {rank === 0 || rank === 1 ?
-                    <TouchableOpacity style={styles.invisibleButton}>
-                    </TouchableOpacity>
-                    :
+            {rank === 0 || rank === 1 ?
+                <View style={styles.horizontalContainer}>
+                    <TextInput value={props.name} style={[styles.input, {
+                        backgroundColor: props.theme.Secondary,
+                        color: props.theme.textColor
+                    }]}
+                               placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
+                               placeholderTextColor={props.theme.Tertiary}
+                               onChangeText={(newName) => handleChangeText(newName)}
+                               autoFocus={false}/>
+                    <TouchableOpacity style={styles.invisibleButton}/>
+                </View>
+                :
+                <View style={styles.horizontalContainer}>
+                    <TextInput value={props.name} style={[styles.input, {
+                        backgroundColor: props.theme.Secondary,
+                        color: props.theme.textColor
+                    }]}
+                               placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
+                               placeholderTextColor={props.theme.Tertiary}
+                               onChangeText={(newName) => handleChangeText(newName)}
+                               autoFocus={true}/>
                     <TouchableOpacity onPress={() => removeSelf(rank)}>
-                        <MaterialCommunityIcons name="close-box" size={30} color="black" />
+                        <MaterialCommunityIcons name="close-box" size={30} color={props.theme.textColor}/>
                     </TouchableOpacity>
-                }
-            </View>
+                </View>
+            }
         </View>
     );
 }

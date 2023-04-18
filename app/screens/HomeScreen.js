@@ -6,20 +6,19 @@ import {
     Image,
     Text,
     TouchableOpacity,
-    Alert, ScrollView
+    Alert, ScrollView,
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import {LinearGradient} from "expo-linear-gradient";
 
-import colors from "../config/colors";
 import styleSheet from "../config/StyleSheet";
 import PlayerContainer from "../components/PlayerContainer";
 import ForceMode from "../components/ForceMode";
 import LanguageSwitch from "../components/LanguageSwitch";
 import {translateText} from "../services/LanguageService";
-import {getColorTheme} from "../services/ThemeService";
+import {getAllThemes, getColorTheme} from "../services/ThemeService";
 import ThemeSwitch from "../components/ThemeSwitch";
 import * as SystemUI from "expo-system-ui";
 
@@ -131,7 +130,6 @@ class HomeScreen extends Component {
     }
 
     swapThemeHandler = (theme) => {
-        theme = getColorTheme(theme)
         SystemUI.setBackgroundColorAsync(theme.Secondary);   // Prevents the screen flashing white when switching screens (Android only)
         this.setState({'theme': theme});
     }
@@ -171,13 +169,14 @@ class HomeScreen extends Component {
                         </ScrollView>
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={this.playButtonHandler}>
-                                <Text style={styles.lightText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
+                                <Text style={[styles.lightText, {color: 'white'}]}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
                                 <MaterialIcons name="help-outline" size={30} color={this.state.theme.textColor}/>
                                 <Text style={[styles.extraLightText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
                             </TouchableOpacity>
-                            <ThemeSwitch theme={this.state.theme} swapThemeHandler={this.swapThemeHandler} language={this.state.language}/>
+                            <ThemeSwitch currentTheme={this.state.theme} swapThemeHandler={this.swapThemeHandler}
+                                         language={this.state.language} allThemes={getAllThemes()}/>
                         </View>
                     </LinearGradient>
                     <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} theme={this.state.theme}/>
@@ -200,13 +199,12 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: 'center',
         alignItems: 'center',
-        position: "absolute"
     },
     buttonContainer: {
         width: "100%",
         alignItems: "center",
         padding: 20,
-        rowGap: 10
+        rowGap: 20
     },
     container: {
         flex: 1,
@@ -223,7 +221,6 @@ const styles = StyleSheet.create({
       height: 80
     },
     language: {
-        backgroundColor: "teal",
         width: "100%"
     },
     logoContainer: {
@@ -234,13 +231,11 @@ const styles = StyleSheet.create({
     },
     lightText: {
         padding: 4,
-        color: colors.White,
         fontSize: 20,
         fontFamily: 'Sono-Light'
     },
     extraLightText: {
         padding: 4,
-        color: colors.White,
         fontSize: 20,
         fontFamily: 'Sono-ExtraLight'
     },
