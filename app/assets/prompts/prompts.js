@@ -2,7 +2,7 @@ export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
     "uk": {
-        // 36
+        // 53
         General: [
             {prompt: "If you have ever been admitted into a hospital"},
             {prompt: "For every letter in your first name"},
@@ -42,8 +42,25 @@ export default {
             {prompt: "If you have ever sent a sensitive or hurtful message to the wrong person"},
             {prompt: "If you have ever done drugs with your family"},
             {prompt: "If you have ever attended a funeral"},
+            {prompt: "If you have ever had a near death experience"},
+            {prompt: "If you have ever gone on a solo trip"},
+            {prompt: "If you have ever gone on a hot air balloon ride"},
+            {prompt: "For every tattoo you have ever gotten"},
+            {prompt: "If you have ever gotten a piercing"},
+            {prompt: "If you have ever went on a safari"},
+            {prompt: "If you ever swam with dolphins"},
+            {prompt: "If you have ever taken a gap year"},
+            {prompt: "If you have ever went to a drag show"},
+            {prompt: "If you have ever went on a whale watching tour"},
+            {prompt: "If you have ever went to a silent disco"},
+            {prompt: "If you have ever went to a wellness spa"},
+            {prompt: "If you have ever been on the same plane as ..."},
+            {prompt: "If you have ever been on a vacation with ..."},
+            {prompt: "For everytime you got so drunk you couldn't stop vomiting for at least another 12 hours after waking up"},
+            {prompt: "If you have ever had a lucid dream"},
+            {prompt: "If you ever tried a psychedelic substance"},
         ],
-        // 25
+        // 33
         Sports: [
             {prompt: "If you have ever played football"},
             {prompt: "If you have ever played tennis"},
@@ -70,8 +87,16 @@ export default {
             {prompt: "If you have ever been drunk while participating in an official sportsmatch"},
             {prompt: "For every sport you've ever officially practiced"},
             {prompt: "If you have ever watched an entire handball match"},
+            {prompt: "If you have ever went on a ziplining adventure"},
+            {prompt: "If you have ever practiced boxing"},
+            {prompt: "If you have ever parkoured"},
+            {prompt: "If you have ever played water polo"},
+            {prompt: "If you have ever gone mountain biking"},
+            {prompt: "If you have ever practiced archery"},
+            {prompt: "If you have ever went rock climbing"},
+            {prompt: "If you have ever practiced bouldering"},
         ],
-        // 41
+        // 58
         Games: [
             {prompt: "If you have ever played League of Legends"},
             {prompt: "If you have ever played Fortnite"},
@@ -113,8 +138,25 @@ export default {
             {prompt: "For every E-girl you've ever simped for"},
             {prompt: "If you've never played Pokémon Red or Blue"},
             {prompt: "If you have ever owned a Petal Patch in Habbo Hotel"},
+            {prompt: "If you have ever owned a gaming PC"},
+            {prompt: "If you have ever owned at least 3 different FIFA games"},
+            {prompt: "If, when you were little, you would get up extra early so you could play videogames without your parents finding out"},
+            {prompt: "If you've ever had a World of Warcraft subscription"},
+            {prompt: "If you've ever had a RuneScape membership"},
+            {prompt: "If you have ever griefed someone's house on a Minecraft server"},
+            {prompt: "If you have ever played Minecraft with ..."},
+            {prompt: "If you have ever gotten a #1 Victory Royale in Fortnite"},
+            {prompt: "If you have ever spent more than 12 hours building a structure in Minecraft"},
+            {prompt: "If you have ever prestiged in Call of Duty: Multiplayer"},
+            {prompt: "If you have ever beaten a Halo campaign on Legendary difficulty"},
+            {prompt: "If you have ever caught all 151 Pokémon in the original game"},
+            {prompt: "If you have ever had a level 60 character in classic World of Warcraft"},
+            {prompt: "If you have ever completed the GTA V storyline"},
+            {prompt: "If you have ever beaten someone at this table in a Super Smash Bro's match"},
+            {prompt: "If you have ever beaten a Dark Souls game"},
+            {prompt: "If you had at least 80% completion on Red Dead Redemption 2"},
         ],
-        // 26
+        // 37
         Work: [
             {prompt: "For every time you've been fired"},
             {prompt: "If you have ever told your superior you didn't like them"},
@@ -142,6 +184,17 @@ export default {
             {prompt: "If you prepare your own lunch before work"},
             {prompt: "If you ever skipped work without letting work know"},
             {prompt: "If you have ever truly hated a coworker"},
+            {prompt: "If you have ever worked an overnight shift"},
+            {prompt: "If you have ever worked a job where you had to give a presentation in front of a large audience"},
+            {prompt: "If you have ever had job where you had to work outside in bad weather conditions"},
+            {prompt: "If you have ever had a job which had a commute of at least an hour"},
+            {prompt: "If you have ever had a job where you had to work unpaid overtime"},
+            {prompt: "If you have ever had a job where you had a difficult or micro-managing boss"},
+            {prompt: "If you have ever had a work-from-home job"},
+            {prompt: "If you have ever seriously injured yourself at work"},
+            {prompt: "If you have ever negotiated a raise"},
+            {prompt: "If you have ever had to manage a team or supervise others at your workplace"},
+            {prompt: "If you have ever had to give a performance review to a colleague"},
         ],
         // 35
         Hobby: [
@@ -216,7 +269,7 @@ export default {
             {prompt: "If you have ever fantasized about getting back together with your ex"},
             {prompt: "If you ever had an STD scare"},
         ],
-        // 20
+        // 38
         School: [
             {prompt: "If you have ever skipped school without letting your parents know"},
             {prompt: "If you have ever been the only one from your class to score full points in a test"},
@@ -239,6 +292,23 @@ export default {
             {prompt: "If you have ever drunk alcohol at your high school"},
             {prompt: "If you have ever played 'Spin the bottle' at school-camp"},
             {prompt: "If you always took pictures with your friends in the school bathroom"},
+            {prompt: "If you ever pulled an all-nighter to study for an exam"},
+            {prompt: "If you ever cheated on a test or assignment"},
+            {prompt: "If you ever had to give a presentation in front of the class"},
+            {prompt: "If you ever participated in an extracurricular activity or club"},
+            {prompt: "If you ever had to change your major or program of study"},
+            {prompt: "If you ever had to write a research paper or thesis"},
+            {prompt: "If you ever had a teacher or professor who made a lasting impact on you"},
+            {prompt: "If you ever studied abroad or participated in an international program"},
+            {prompt: "If you ever experienced bullying or harassment in school"},
+            {prompt: "If you ever struggled with a particular subject or course in school"},
+            {prompt: "If you ever had to apply for financial aid or scholarships"},
+            {prompt: "If you ever had a teacher who inspired you to pursue a certain career or field"},
+            {prompt: "If you ever had a crush on a teacher"},
+            {prompt: "If you ever had to work on a group project with someone you didn't get along with"},
+            {prompt: "If you ever participated in a school play, musical, or performance"},
+            {prompt: "If you ever had to give a presentation or report on a controversial topic"},
+            {prompt: "If you ever had a school project that involved creating a business or startup idea"},
         ],
         Finishers: [
             "Continue playing if you're drunk right now",
@@ -276,7 +346,7 @@ export default {
         ]
     },
     "nl": {
-        // 36
+        // 53
         General: [
             {prompt: "Als je wel eens bent opgenomen in het ziekenhuis"},
             {prompt: "Voor elke letter in je voornaam"},
@@ -316,8 +386,25 @@ export default {
             {prompt: "Als je ooit een gevoelig of pijnlijk bericht hebt gestuurd naar de verkeerde persoon"},
             {prompt: "Als je ooit wel eens drugs hebt gedaan met een familielid"},
             {prompt: "Als je wel eens bij een begrafenis bent geweest"},
+            {prompt: "Als je wel eens een bijna dood ervaring hebt gehad"},
+            {prompt: "Als je wel eens in je eentje op reis bent geweest"},
+            {prompt: "Als je ooit wel eens in een luchtballon hebt gevlogen"},
+            {prompt: "Voor elke tattoo die je ooit hebt laten zetten"},
+            {prompt: "Als je ooit een piercing hebt gehad"},
+            {prompt: "Als je ooit wel eens op safari bent geweest"},
+            {prompt: "Als je ooit met dolfijnen hebt gezwommen"},
+            {prompt: "Als je ooit een tussenjaar hebt gehad"},
+            {prompt: "Als je ooit naar een dragshow bent geweest"},
+            {prompt: "Als je ooit wel eens op walvisexcursie bent gegaan"},
+            {prompt: "Als je ooit eens naar een stille disco bent geweest"},
+            {prompt: "Als je ooit wel eens naar een kuuroord bent geweest"},
+            {prompt: "Als je wel eens in hetzelfde vliegtuig hebt gevlogen als ..."},
+            {prompt: "Als je ooit wel eens op vakantie bent geweest met ..."},
+            {prompt: "Voor elke keer dat je zo dronken was dat je minstens 8 uur na het wakker worden nog steeds aan het kotsen was"},
+            {prompt: "Als je ooit een lucide droom hebt gehad"},
+            {prompt: "Als je ooit psychedelische drugs hebt geprobeerd"},
         ],
-        //25
+        // 33
         Sports: [
             {prompt: "Als je ooit op voetbal hebt gezeten"},
             {prompt: "Als je ooit op tennis hebt gezeten"},
@@ -344,8 +431,16 @@ export default {
             {prompt: "Als je ooit alcohol hebt gedronken tijdens een officiële wedstrijd"},
             {prompt: "Voor elke sport waar je op hebt gezeten"},
             {prompt: "Als je ooit een hele handbalwedstrijd gekeken hebt"},
+            {prompt: "Als je ooit bent wezen tokkelen"},
+            {prompt: "Als je ooit op boxen hebt gezeten"},
+            {prompt: "Als je ooit hebt geparkoured"},
+            {prompt: "Als je ooit hebt waterpolo hebt gespeeld"},
+            {prompt: "Als je ooit bent wezen mountain biken"},
+            {prompt: "Als je ooit aan boogschutten hebt gedaan"},
+            {prompt: "Als je ooit aan rotsklimmen hebt gedaan"},
+            {prompt: "Als je ooit hebt geboulderd"},
         ],
-        // 41
+        // 58
         Games: [
             {prompt: "Als je ooit League of Legends hebt gespeeld"},
             {prompt: "Als je ooit Fortnite hebt gespeeld"},
@@ -387,8 +482,25 @@ export default {
             {prompt: "Voor elke E-girl waar je ooit voor gesimped hebt"},
             {prompt: "Als je nog nooit Pokémon Red of Blue hebt gespeeld"},
             {prompt: "Als je de eigenaar was van een grasperkje in Habbo Hotel"},
+            {prompt: "Als je ooit een gaming pc hebt gehad"},
+            {prompt: "Als je ooit de eigenaar was van 3 verschillende FIFA spellen"},
+            {prompt: "Als je vroeger wel eens extra vroeg wakker werd zodat je kon gamen totdat je ouders wakker werden"},
+            {prompt: "Als je ooit een World of Warcraft abonnement had"},
+            {prompt: "Als je ooit een RuneScape member was"},
+            {prompt: "Als je ooit wel eens iemand zijn huis gegriefed hebt op Minecraft"},
+            {prompt: "Als je wel eens Minecraft hebt gespeeld met ..."},
+            {prompt: "Als je wel eens een #1 Victory Royale hebt behaald in Fortnite"},
+            {prompt: "Als je wel eens 12 uur lang bezig bent geweest met een gebouw maken in Minecraft"},
+            {prompt: "Als je ooit wel eens bent geprestiged in Call of Duty: Multiplayer"},
+            {prompt: "Als je ooit een Halo campaign op Legendary difficulty hebt gehaald"},
+            {prompt: "Als je ooit wel eens alle 151 Pokémon in de originele game hebt gevangen"},
+            {prompt: "Als je ooit een level 60 character hebt gehad in classic World of Warcraft"},
+            {prompt: "Als je ooit de GTA V storyline hebt uitgespeeld"},
+            {prompt: "Als je ooit iemand aan deze tafel hebt verslagen in een Super Smash Bro's match"},
+            {prompt: "Als je ooit een Dark Souls game hebt uitgespeeld"},
+            {prompt: "Als je ooit 80% completion hebt behaald op Red Dead Redemption 2"},
         ],
-        // 26
+        // 37
         Work: [
             {prompt: "Voor elke keer dat je ontslagen bent"},
             {prompt: "Als je ooit tegen een leidinggevende hebt verteld dat je ze niet mocht"},
@@ -416,6 +528,17 @@ export default {
             {prompt: "Als je je eigen lunch klaar maakt voor werk"},
             {prompt: "Als je ooit niet naar werk bent gegaan zonder het je werkgever te laten weten"},
             {prompt: "Als je ooit een collega gehaat hebt"},
+            {prompt: "Als je ooit wel eens een nachtdienst hebt gedraaid"},
+            {prompt: "Als je ooit wel eens voor werk een presentatie moest geven aan een groot publiek"},
+            {prompt: "Als je ooit een baan hebt gehad waar je buiten in slecht weer moest werken"},
+            {prompt: "Als je ooit een baan hebt gehad waar de reistijd minstens een uur was"},
+            {prompt: "Als je ooit een baan hebt gehad waar je onbetaald moest overwerken"},
+            {prompt: "Als je ooit een moeilijke of micro-managende baas hebt gehad"},
+            {prompt: "Als je ooit een baan hebt gehad waar je thuis mocht werken"},
+            {prompt: "Als je ooit een serieuze blessure hebt opgelopen op werk"},
+            {prompt: "Als je ooit in overleg bent geweest over een salarisverhoging"},
+            {prompt: "Als je ooit een team hebt gemanaged op je werkplek"},
+            {prompt: "Als je wel eens een performance review hebt moeten uitvoeren op een collega"},
         ],
         // 35
         Hobby: [
@@ -490,7 +613,7 @@ export default {
             {prompt: "Als je ooit wel eens erover na hebt gedacht om terug te gaan naar je ex"},
             {prompt: "Als je wel eens bang bent geweest dat je een SOA had"},
         ],
-        // 20
+        // 38
         School: [
             {prompt: "Als je ooit hebt gespijbeld zonder dat je ouders het wisten"},
             {prompt: "Als je ooit de enige in je klas bent geweest die een 10 had voor een toets"},
@@ -513,6 +636,23 @@ export default {
             {prompt: "Als je ooit in je middelbare school alcohol hebt gedronken"},
             {prompt: "Als je ooit flesje draaien hebt gespeeld op kamp"},
             {prompt: "Als je altijd foto's nam samen met je vrienden in de schooltoiletten"},
+            {prompt: "Als je ooit de hele nacht wakker bent gebleven om te leren voor een toets of tentamen"},
+            {prompt: "Als je ooit wel een gespiekt hebt tijdens een toets of tentamen"},
+            {prompt: "Als je wel eens een presentatie hebt moeten geven voor de klas"},
+            {prompt: "Als je ooit aan buitenschoolse activiteiten hebt meegedaan"},
+            {prompt: "Als je ooit van studierichting of studie bent veranderd"},
+            {prompt: "Als je ooit een scriptie hebt moeten schrijven"},
+            {prompt: "Als je ooit een docent of professor hebt gehad die een blijvende impact op je heeft achtergelaten"},
+            {prompt: "Als je ooit in het buitenland hebt gestudeerd of aan een internationaal schoolprogramma hebt meegedaan"},
+            {prompt: "Als je ooit bent gepest of gepest hebt op school"},
+            {prompt: "Als je ooit erg moeite had met een bepaald vak"},
+            {prompt: "Als je ooit moest gaan lenen om je studie te kunnen betalen"},
+            {prompt: "Als je ooit een docent hebt gehad die jou inspireerde om een bepaalde studierichting op te gaan"},
+            {prompt: "Als je ooit een crush hebt gehad op een docent"},
+            {prompt: "Als je ooit aan een groepsproject hebt gewerkt samen met iemand waar je niet goed mee overweg kon"},
+            {prompt: "Als je ooit in een toneelstuk of musical van school hebt gezeten vanaf de middelbare school"},
+            {prompt: "Als je ooit een presentatie moest houden of paper moest schrijven over een controversieël onderwerp"},
+            {prompt: "Als je ooit een schoolproject moest doen waar je je eigen bedrijf of startup moest creeëren"},
         ],
         Finishers: [
             "Speel door als je dronken bent",

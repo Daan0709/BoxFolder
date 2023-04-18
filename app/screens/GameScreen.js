@@ -100,8 +100,15 @@ class GameScreen extends Component {
             this.state.prompts.splice(index, 1); // 2nd parameter means remove one item only
         }
 
+        let amountOfSips;
+        // Limits the amount of sips given away or being drunk to just be 1 per thing
+        if (promptClone.prompt.startsWith('For') || promptClone.prompt.startsWith('Voor')){
+            amountOfSips = 1;
+        } else {
         //                                             V The max amount of sips per prompt, minimum of 1
-        let amountOfSips = Math.floor(Math.random()*3)+1;
+            amountOfSips = Math.floor(Math.random()*3)+1;
+        }
+
         this.setState({'currentPrompt': {prompt: promptClone.prompt, amountOfSips: amountOfSips}});
     }
 
