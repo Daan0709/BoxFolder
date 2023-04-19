@@ -2,7 +2,7 @@ export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
     "uk": {
-        // 53
+        // 56
         General: [
             {prompt: "If you have ever been admitted into a hospital"},
             {prompt: "For every letter in your first name"},
@@ -59,6 +59,9 @@ export default {
             {prompt: "For everytime you got so drunk you couldn't stop vomiting for at least another 12 hours after waking up"},
             {prompt: "If you have ever had a lucid dream"},
             {prompt: "If you ever tried a psychedelic substance"},
+            {prompt: "If you have ever been to a country of which you didnt speak the primary language"},
+            {prompt: "If you enjoy eating fast food for breakfast"},
+            {prompt: "If you have ever seen a sex scene with your parents"},
         ],
         // 33
         Sports: [
@@ -234,7 +237,7 @@ export default {
             {prompt: "If you have ever seen the entire 'The Lord of the Rings' trilogy in one sitting"},
             {prompt: "If you enjoy listening to Meghan Trainor"},
         ],
-        // 31
+        // 33
         Love: [
             {prompt: "If you have ever been in a relationship that lasted longer than 2 years"},
             {prompt: "If you have ever been in a relationship that lasted less than a month"},
@@ -268,6 +271,8 @@ export default {
             {prompt: "If you have ever seriously considered getting married"},
             {prompt: "If you have ever fantasized about getting back together with your ex"},
             {prompt: "If you ever had an STD scare"},
+            {prompt: "If you have ever measured your penis"},
+            {prompt: "If you have ever had more than 5 sexual partners"},
         ],
         // 38
         School: [
@@ -346,7 +351,7 @@ export default {
         ]
     },
     "nl": {
-        // 53
+        // 56
         General: [
             {prompt: "Als je wel eens bent opgenomen in het ziekenhuis"},
             {prompt: "Voor elke letter in je voornaam"},
@@ -403,6 +408,9 @@ export default {
             {prompt: "Voor elke keer dat je zo dronken was dat je minstens 8 uur na het wakker worden nog steeds aan het kotsen was"},
             {prompt: "Als je ooit een lucide droom hebt gehad"},
             {prompt: "Als je ooit psychedelische drugs hebt geprobeerd"},
+            {prompt: "Als je ooit naar een land bent geweest waarvan je de taal niet beheerste"},
+            {prompt: "Als je ervan geniet om fastfood als ontbijt te eten"},
+            {prompt: "Als je wel eens een seksscène hebt gezien waar je ouders bij zaten"},
         ],
         // 33
         Sports: [
@@ -578,7 +586,7 @@ export default {
             {prompt: "Als je ooit de hele 'The Lord of the Rings' trilogie in een keer gekeken hebt"},
             {prompt: "Als je Suzan & Freek leuk vindt"},
         ],
-        // 31
+        // 33
         Love: [
             {prompt: "Als je ooit een relatie van langer dan 2 jaar hebt gehad"},
             {prompt: "Als je ooit een relatie hebt gehad die korter duurde dan één maand"},
@@ -612,6 +620,8 @@ export default {
             {prompt: "Als je ooit serieus hebt overwogen om te gaan trouwen"},
             {prompt: "Als je ooit wel eens erover na hebt gedacht om terug te gaan naar je ex"},
             {prompt: "Als je wel eens bang bent geweest dat je een SOA had"},
+            {prompt: "Als je ooit je penis hebt opgemeten"},
+            {prompt: "Als je 5 of meer sekspartners hebt gehad"},
         ],
         // 38
         School: [
