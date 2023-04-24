@@ -39,6 +39,7 @@ export const nl = () => {
             "Hobby": "Hobby",
             "Love": "Liefde",
             "School": "School",
+            "Boomer": "Boomer",
             "Blank1": "",
             "Blank2": "",
             "prompts-per-round": "Aantal vragen per ronde:",
