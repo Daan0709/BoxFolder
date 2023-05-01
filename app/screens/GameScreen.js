@@ -29,6 +29,7 @@ class GameScreen extends Component {
         finalRound: false,
         language: this.props.route.params.language,
         theme: this.props.route.params.theme,
+        maxForSips: 5, // Maximum amount of sips for a 'For every' prompt
     };
 
     componentDidMount() {
@@ -94,6 +95,7 @@ class GameScreen extends Component {
         const randomName = this.state.playerList[Math.floor(Math.random()*this.state.playerList.length)].name
         let promptClone = {...prompt};  // Don't overwrite the existing prompt in prompts.js
         promptClone.prompt = String(promptClone.prompt).replace("...", randomName);
+
         // Remove the random prompt from the prompt pool so it doesn't come up again
         const index = this.state.prompts.indexOf(prompt);
         if (index > -1) { // only splice array when item is found
@@ -102,8 +104,10 @@ class GameScreen extends Component {
 
         let amountOfSips;
         // Limits the amount of sips given away or being drunk to just be 1 per thing
+        // Also append a string to limit the maximum amount of sips, update this if another language is added
         if (promptClone.prompt.startsWith('For') || promptClone.prompt.startsWith('Voor')){
             amountOfSips = 1;
+            promptClone.prompt += this.state.language === 'nl' ? `, tot een maximum van ${this.state.maxForSips}` : `, up to a maximum of ${this.state.maxForSips}`;
         } else {
         //                                             V The max amount of sips per prompt, minimum of 1
             amountOfSips = Math.floor(Math.random()*3)+1;

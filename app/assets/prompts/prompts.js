@@ -2,7 +2,7 @@ export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
     "uk": {
-        // 56
+        // 58
         General: [
             {prompt: "If you have ever been admitted into a hospital"},
             {prompt: "For every letter in your first name"},
@@ -62,6 +62,8 @@ export default {
             {prompt: "If you have ever been to a country of which you didnt speak the primary language"},
             {prompt: "If you enjoy eating fast food for breakfast"},
             {prompt: "If you have ever seen a sex scene with your parents"},
+            {prompt: "If you ever got iced"},
+            {prompt: "If you think you are the smartest person at this table"},
         ],
         // 33
         Sports: [
@@ -159,13 +161,13 @@ export default {
             {prompt: "If you have ever beaten a Dark Souls game"},
             {prompt: "If you had at least 80% completion on Red Dead Redemption 2"},
         ],
-        // 37
+        // 39
         Work: [
             {prompt: "For every time you've been fired"},
             {prompt: "If you have ever told your superior you didn't like them"},
             {prompt: "If you have ever been coworkers with someone at this table"},
             {prompt: "If you have ever been coworkers with ..."},
-            {prompt: "If you have had 4 or more different jobs"},
+            {prompt: "If you have had 6 or more different jobs"},
             {prompt: "If you have ever worked for more than 10 hours in a day"},
             {prompt: "If you have ever had different functions at the same job"},
             {prompt: "If you work in or study IT"},
@@ -198,6 +200,8 @@ export default {
             {prompt: "If you have ever negotiated a raise"},
             {prompt: "If you have ever had to manage a team or supervise others at your workplace"},
             {prompt: "If you have ever had to give a performance review to a colleague"},
+            {prompt: "If you have ever done undeclared or illegal work"},
+            {prompt: "If you make money by doing chores around the house"},
         ],
         // 35
         Hobby: [
@@ -314,8 +318,9 @@ export default {
             {prompt: "If you ever participated in a school play, musical, or performance"},
             {prompt: "If you ever had to give a presentation or report on a controversial topic"},
             {prompt: "If you ever had a school project that involved creating a business or startup idea"},
+            {prompt: "If you have ever used an AI such as chatGPT for schoolwork"},
         ],
-        // 29
+        // 32
         Boomer: [
             {prompt: "If you ever had to manually dial a phone number on a rotary phone"},
             {prompt: "If you ever listened to vinyl records on a turntable"},
@@ -346,7 +351,9 @@ export default {
             {prompt: "If you squint everytime someone tries to show you something on their phone"},
             {prompt: "If you cant hear really high pitches which other people do tend to notice"},
             {prompt: "If you ever owned a pair of roller skates"},
-            {prompt: "For every flip-phone you have ever owned up to a maximum of 5"},
+            {prompt: "For every flip-phone you have ever owned"},
+            {prompt: "If you have ever said to someone: 'You'll understand when you get older'"},
+            {prompt: "If you have ever watched 'Little House on the Prairie'"},
         ],
         Finishers: [
             "Continue playing if you're drunk right now",
@@ -401,7 +408,7 @@ export default {
         ]
     },
     "nl": {
-        // 56
+        // 58
         General: [
             {prompt: "Als je wel eens bent opgenomen in het ziekenhuis"},
             {prompt: "Voor elke letter in je voornaam"},
@@ -461,6 +468,8 @@ export default {
             {prompt: "Als je ooit naar een land bent geweest waarvan je de taal niet beheerste"},
             {prompt: "Als je ervan geniet om fastfood als ontbijt te eten"},
             {prompt: "Als je wel eens een seksscène hebt gezien waar je ouders bij zaten"},
+            {prompt: "Als je ooit geiced bent"},
+            {prompt: "Als je denkt dat je de slimste persoon aan deze tafel bent"},
         ],
         // 33
         Sports: [
@@ -558,13 +567,13 @@ export default {
             {prompt: "Als je ooit een Dark Souls game hebt uitgespeeld"},
             {prompt: "Als je ooit 80% completion hebt behaald op Red Dead Redemption 2"},
         ],
-        // 37
+        // 39
         Work: [
             {prompt: "Voor elke keer dat je ontslagen bent"},
             {prompt: "Als je ooit tegen een leidinggevende hebt verteld dat je ze niet mocht"},
             {prompt: "Als je ooit collega's bent geweest met iemand aan deze tafel"},
             {prompt: "Als je ooit samen hebt gewerkt met ..."},
-            {prompt: "Als je 4 of meer verschillende banen hebt gehad"},
+            {prompt: "Als je 6 of meer verschillende banen hebt gehad"},
             {prompt: "Als je ooit 10 uur of langer op één dag hebt gewerkt"},
             {prompt: "Als je ooit 2 verschillende functies hebt gehad bij dezelfde werkplek"},
             {prompt: "Als je in de IT werkt of het studeert"},
@@ -597,6 +606,8 @@ export default {
             {prompt: "Als je ooit in overleg bent geweest over een salarisverhoging"},
             {prompt: "Als je ooit een team hebt gemanaged op je werkplek"},
             {prompt: "Als je wel eens een performance review hebt moeten uitvoeren op een collega"},
+            {prompt: "Als je wel eens zwart werk hebt gedaan"},
+            {prompt: "Als je geld verdient door klusjes thuis te doen"},
         ],
         // 35
         Hobby: [
@@ -673,7 +684,7 @@ export default {
             {prompt: "Als je ooit je penis hebt opgemeten"},
             {prompt: "Als je 5 of meer sekspartners hebt gehad"},
         ],
-        // 38
+        // 39
         School: [
             {prompt: "Als je ooit hebt gespijbeld zonder dat je ouders het wisten"},
             {prompt: "Als je ooit de enige in je klas bent geweest die een 10 had voor een toets"},
@@ -713,8 +724,9 @@ export default {
             {prompt: "Als je ooit in een toneelstuk of musical van school hebt gezeten vanaf de middelbare school"},
             {prompt: "Als je ooit een presentatie moest houden of paper moest schrijven over een controversieël onderwerp"},
             {prompt: "Als je ooit een schoolproject moest doen waar je je eigen bedrijf of startup moest creeëren"},
+            {prompt: "Als je ooit een AI zoals chatGPT hebt gebruikt voor een schoolopdracht"},
         ],
-        // 30
+        // 32
         Boomer: [
             {prompt: "Als je ooit handmatig op een roterende telefoon een nummer hebt opgebeld"},
             {prompt: "Als je wel eens een vinyl plaat op een platenspeler hebt beluisterd"},
@@ -745,7 +757,9 @@ export default {
             {prompt: "Als je altijd moeilijk kijkt wanneer iemand je iets op zijn telefoon wil laten zien"},
             {prompt: "Als je hele hoge tonen niet meer kan horen die andere mensen nog wel horen"},
             {prompt: "Als je ooit een paar rollerskates hebt gehad"},
-            {prompt: "Voor elke klaptelefoon die je hebt gehad tot een max van 5"},
+            {prompt: "Voor elke klaptelefoon die je hebt gehad"},
+            {prompt: "Als je ooit hebt gezegd: 'dat snap je wel wanneer je ouder bent'"},
+            {prompt: "Als je ooit 'Little House on the Prairie' hebt gekeken"},
         ],
         Finishers: [
             "Speel door als je dronken bent",
