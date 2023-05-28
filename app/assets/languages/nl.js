@@ -14,6 +14,9 @@ export const nl = () => {
             "player-amount-title": "Te Veel Spelers",
             "player-amount-body": "Er kunnen maximaal 10 spelers meedoen!",
             "player-names-body": "Vul de naam van elke speler in voordat je door kan gaan!",
+            "exit-app-title": "Weet je zeker dat je de app af wil sluiten?",
+            "exit-app-cancel": "Nee",
+            "exit-app-continue": "Ja",
         },
         "HelpPage": {
             "back-button": "< Ga Terug",

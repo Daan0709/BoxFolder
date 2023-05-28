@@ -6,7 +6,7 @@ import {
     Image,
     Text,
     TouchableOpacity,
-    Alert, ScrollView,
+    Alert, ScrollView, BackHandler,
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
@@ -34,9 +34,32 @@ class HomeScreen extends Component {
         fontsLoaded: false,
     };
 
+    backAction = () => {
+        Alert.alert(translateText(this.state.language, "Alert", "exit-app-title"), translateText(this.state.language, "Alert", "exit-app-body"), [
+            {
+                text: translateText(this.state.language, "Alert", "exit-app-cancel"),
+                onPress: () => null,
+                style: 'cancel',
+            },
+            {text: translateText(this.state.language, "Alert", "exit-app-continue"),
+                onPress: () => BackHandler.exitApp()},
+        ]);
+        return true;
+    };
+
     componentDidMount() {
         SystemUI.setBackgroundColorAsync(this.state.theme.Secondary); // Stops screen from flickering white when switching screens
         this.loadFonts();
+        this.props.navigation.addListener('blur', () => {this.removeBackAction()})
+        this.props.navigation.addListener('focus', () => {this.addBackAction()})
+    }
+
+    addBackAction = () => {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.backAction);
+    }
+
+    removeBackAction = () => {
+        this.backHandler.remove();
     }
 
     async loadFonts(){

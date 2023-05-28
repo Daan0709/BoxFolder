@@ -48,11 +48,11 @@ class ResponsibilityScreen extends Component {
                         </Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={this.exitHandler} style={styles.backButton}>
+                        <TouchableOpacity onPress={this.exitHandler} style={styleSheet.SecondaryButton}>
                             <Text style={styles.lightText}>Exit</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.continueHandler} style={styleSheet.PrimaryButton}>
-                            <Text>Continue</Text>
+                            <Text style={styles.lightText}>Continue</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -67,7 +67,7 @@ class ResponsibilityScreen extends Component {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "space-evenly",
         alignItems: "center"
     },
     backButton: {
@@ -76,20 +76,18 @@ const styles = StyleSheet.create({
     buttonContainer: {
         width: "100%",
         height: "10%",
-        flex: 1,
         flexDirection: "row",
         alignContent: "center",
         justifyContent: "space-around"
     },
     lightText: {
         padding: 4,
-        fontSize: 20,
-        fontFamily: 'Sono-Light'
+        fontSize: 30,
+        fontFamily: 'Sono-Light',
+        color: "#fff"
     },
     textBox: {
-        flex: 5,
         width: "90%",
-
         borderRadius: 15,
         borderWidth: 4,
         borderColor: "black",

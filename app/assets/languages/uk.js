@@ -14,6 +14,10 @@ export const uk = () => {
             "player-amount-title": "Too Many Players",
             "player-amount-body": "A maximum of 10 players can play!",
             "player-names-body": "Please fill in all of the player's names before continuing!",
+            "exit-app-title": "Hold on!",
+            "exit-app-body": "Are you sure you want to exit the app?",
+            "exit-app-cancel": "No",
+            "exit-app-continue": "Exit",
         },
         "HelpPage": {
             "back-button": "< Go Back",
