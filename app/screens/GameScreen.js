@@ -18,6 +18,7 @@ class GameScreen extends Component {
         currentRound: 0,
         playerList: [],
         prompts: [],
+        finisherPrompts: [],
         promptLoaded: false,
         promptsLoaded: false,
         showNextRoundScreen: true,
@@ -60,6 +61,7 @@ class GameScreen extends Component {
     };
 
     loadPrompts = () => {
+        this.loadFinisherPrompts();
         let promptsToLoad = [];
         this.state.categories.forEach((category) => {
             if (category.checked) {
@@ -68,6 +70,20 @@ class GameScreen extends Component {
         })
         this.setState({'prompts': promptsToLoad});
         this.setState({'promptsLoaded': true});
+    }
+
+    loadFinisherPrompts = () => {
+        let prompts = [...Prompts[this.state.language].Finishers];
+        this.shuffleArray(prompts);
+        this.setState({'finisherPrompts': prompts});
+    }
+
+    // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 
     showCurrentPrompt = () => {
@@ -103,10 +119,10 @@ class GameScreen extends Component {
         }
 
         let amountOfSips;
-        // Limits the amount of sips given away or being drunk to just be 1 per thing
+        // Limits the amount of sips given away or being drunk to just be 2 per thing
         // Also append a string to limit the maximum amount of sips, update this if another language is added
         if (promptClone.prompt.startsWith('For') || promptClone.prompt.startsWith('Voor')){
-            amountOfSips = 1;
+            amountOfSips = 2;
             promptClone.prompt += this.state.language === 'nl' ? `, tot een maximum van ${this.state.maxForSips}` : `, up to a maximum of ${this.state.maxForSips}`;
         } else {
         //                                             V The max amount of sips per prompt, minimum of 1
@@ -133,7 +149,12 @@ class GameScreen extends Component {
     }
 
     loadInRandomFinisherPrompt = () => {
-        let finisherPrompt = Prompts[this.state.language].Finishers[Math.floor(Math.random()*Prompts[this.state.language].Finishers.length)];
+        // Load new finisherprompts if the last one is being used
+        if (this.state.finisherPrompts.length === 1){
+            this.loadFinisherPrompts();
+        }
+        let finisherPrompt = this.state.finisherPrompts.shift();
+        console.log(this.state.finisherPrompts);
         this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
     }
 
