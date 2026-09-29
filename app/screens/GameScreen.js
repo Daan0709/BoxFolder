@@ -154,7 +154,6 @@ class GameScreen extends Component {
             this.loadFinisherPrompts();
         }
         let finisherPrompt = this.state.finisherPrompts.shift();
-        console.log(this.state.finisherPrompts);
         this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
     }
 

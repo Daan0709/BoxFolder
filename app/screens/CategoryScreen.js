@@ -29,7 +29,8 @@ class CategoryScreen extends Component {
         this.setState({'categories': [{title: translateText(this.state.language, "CategoryScreen", "General"), key: "General", checked: true, emoji: "🧠", rank: 0}, {title: translateText(this.state.language, "CategoryScreen", "Sports"), key: "Sports", checked: true, emoji: "⚽️", rank: 1},
                 {title: translateText(this.state.language, "CategoryScreen", "Games"), key: "Games", checked: true, emoji: "🎮", rank: 2}, {title: translateText(this.state.language, "CategoryScreen", "Work"), key: "Work", checked: true, emoji: "🏢 ", rank: 3},
                 {title: translateText(this.state.language, "CategoryScreen", "Hobby"), key: "Hobby", checked: true, emoji: "🎳", rank: 4}, {title: translateText(this.state.language, "CategoryScreen", "Love"), key: "Love", checked: true, emoji: "❤️", rank: 5},
-                {title: translateText(this.state.language, "CategoryScreen", "School"), key: "School", checked: true, emoji: "📚 ", rank: 6}, {title: translateText(this.state.language, "CategoryScreen", "Boomer"), key: "Boomer", checked: true, emoji: "👵", rank: 7}, {title: "", key: "blank2", checked: false, rank: 8},]})
+                {title: translateText(this.state.language, "CategoryScreen", "School"), key: "School", checked: true, emoji: "📚 ", rank: 6}, {title: translateText(this.state.language, "CategoryScreen", "Boomer"), key: "Boomer", checked: true, emoji: "👵", rank: 7}, 
+                {title: translateText(this.state.language, "CategoryScreen", "Alcohol"), key: "Alcohol", checked: true, emoji: "🍺", rank: 8}]})
     }
 
     async loadFonts(){
