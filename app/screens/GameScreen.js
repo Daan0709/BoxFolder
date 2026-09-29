@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
-import {Alert, BackHandler, StyleSheet, TouchableOpacity, View} from "react-native";
+import {Alert, BackHandler, StatusBar, StyleSheet, TouchableOpacity, View} from "react-native";
 import Prompts from "../assets/prompts/prompts"
-
-import colors from "../config/colors";
+;
 import Prompt from "../components/Prompt";
 import NextRound from "../components/NextRound";
 import FinalRound from "../components/FinalRound";
@@ -14,14 +13,15 @@ import {translateText} from "../services/LanguageService";
 class GameScreen extends Component {
     state = {
         categories: this.props.route.params.categories,
-        currentPrompt: {prompt: 'Click to begin!', amountOfSips: 'Round 1'}, // Starts with this so the prompts can load based on selected categories
-        previousPrompt: {prompt: 'Click to begin!', amountOfSips: 'Round 1'}, // Stored so the player can go back to it when they accidentally skip it
-        currentRound: 1,
+        currentPrompt: {},
+        previousPrompt: {}, // Stored so the player can go back to it when they accidentally skip it
+        currentRound: 0,
         playerList: [],
         prompts: [],
+        finisherPrompts: [],
         promptLoaded: false,
         promptsLoaded: false,
-        showNextRoundScreen: false,
+        showNextRoundScreen: true,
         showPreviousPrompt: false,
         turnsUntilNextRound: this.props.route.params.amountOfPrompts,
         amountOfPrompts: this.props.route.params.amountOfPrompts,
@@ -30,12 +30,13 @@ class GameScreen extends Component {
         finalRound: false,
         language: this.props.route.params.language,
         theme: this.props.route.params.theme,
+        maxForSips: 5, // Maximum amount of sips for a 'For every' prompt
     };
 
     componentDidMount() {
         const copy = [...this.props.route.params.playerList];       // Necessary so the playerlist in HomeScreen doesn't get changed
         this.setState({'playerList': copy})
-        this.setState({'currentPrompt': {prompt: translateText(this.state.language, "GameScreen", "start-title"), amountOfSips: translateText(this.state.language, "GameScreen", "start-round")}})
+        this.setState({'previousPrompt': {prompt: translateText(this.state.language, "GameScreen", "start-title"), amountOfSips: translateText(this.state.language, "GameScreen", "start-round")}})
         this.loadPrompts();
         this.backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
@@ -48,18 +49,19 @@ class GameScreen extends Component {
     }
 
     backAction = () => {
-        Alert.alert('Hold on!', 'You will have to start over, are you sure you want to go back?', [
+        Alert.alert(translateText(this.state.language, "GameScreen", "back-alert-title"), translateText(this.state.language, "GameScreen", "back-alert-body"), [
             {
                 text: 'Cancel',
                 onPress: () => null,
                 style: 'cancel',
             },
-            {text: 'YES', onPress: () => this.props.navigation.goBack()},
+            {text: translateText(this.state.language, "GameScreen", "back-alert-button"), onPress: () => this.props.navigation.goBack()},
         ]);
         return true;
     };
 
     loadPrompts = () => {
+        this.loadFinisherPrompts();
         let promptsToLoad = [];
         this.state.categories.forEach((category) => {
             if (category.checked) {
@@ -68,6 +70,20 @@ class GameScreen extends Component {
         })
         this.setState({'prompts': promptsToLoad});
         this.setState({'promptsLoaded': true});
+    }
+
+    loadFinisherPrompts = () => {
+        let prompts = [...Prompts[this.state.language].Finishers];
+        this.shuffleArray(prompts);
+        this.setState({'finisherPrompts': prompts});
+    }
+
+    // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 
     showCurrentPrompt = () => {
@@ -83,23 +99,37 @@ class GameScreen extends Component {
         if (this.state.turnsUntilNextRound === 0){
             this.setState({'showNextRoundScreen': true});
         }
+
+        this.loadInNextPrompt();
+        this.setState({'turnsUntilNextRound': this.state.turnsUntilNextRound-1});
+    }
+
+    loadInNextPrompt = () => {
         let prompt = this.state.prompts[Math.floor(Math.random()*this.state.prompts.length)];
 
         // If a name needs to be chosen, replace the "..." with a random name
         const randomName = this.state.playerList[Math.floor(Math.random()*this.state.playerList.length)].name
         let promptClone = {...prompt};  // Don't overwrite the existing prompt in prompts.js
         promptClone.prompt = String(promptClone.prompt).replace("...", randomName);
+
         // Remove the random prompt from the prompt pool so it doesn't come up again
         const index = this.state.prompts.indexOf(prompt);
         if (index > -1) { // only splice array when item is found
             this.state.prompts.splice(index, 1); // 2nd parameter means remove one item only
         }
 
+        let amountOfSips;
+        // Limits the amount of sips given away or being drunk to just be 2 per thing
+        // Also append a string to limit the maximum amount of sips, update this if another language is added
+        if (promptClone.prompt.startsWith('For') || promptClone.prompt.startsWith('Voor')){
+            amountOfSips = 2;
+            promptClone.prompt += this.state.language === 'nl' ? `, tot een maximum van ${this.state.maxForSips}` : `, up to a maximum of ${this.state.maxForSips}`;
+        } else {
         //                                             V The max amount of sips per prompt, minimum of 1
-        let amountOfSips = Math.floor(Math.random()*3)+1;
-        this.setState({'currentPrompt': {prompt: promptClone.prompt, amountOfSips: amountOfSips}});
+            amountOfSips = Math.floor(Math.random()*3)+1;
+        }
 
-        this.setState({'turnsUntilNextRound': this.state.turnsUntilNextRound-1});
+        this.setState({'currentPrompt': {prompt: promptClone.prompt, amountOfSips: amountOfSips}});
     }
 
     previousPromptHandler = () => {
@@ -107,9 +137,10 @@ class GameScreen extends Component {
     }
 
     nextRoundHandler = () => {
+        this.loadInNextPrompt();
         this.setState({'showNextRoundScreen': false});
         this.setState({'turnsUntilNextRound': this.state.amountOfPrompts - 1});
-        this.setState({'previousPrompt': {prompt: 'No previous prompt!', amountOfSips: ''}})
+        this.setState({'previousPrompt': {prompt: translateText(this.state.language, "GameScreen", "previous-prompt"), amountOfSips: ''}})
         const nextRound = this.state.currentRound + 1;
         if (nextRound === 3){
             this.loadInFirstPlayer();
@@ -118,7 +149,12 @@ class GameScreen extends Component {
     }
 
     loadInRandomFinisherPrompt = () => {
-        let finisherPrompt = Prompts[this.state.language].Finishers[Math.floor(Math.random()*Prompts[this.state.language].Finishers.length)];
+        // Load new finisherprompts if the last one is being used
+        if (this.state.finisherPrompts.length === 1){
+            this.loadFinisherPrompts();
+        }
+        let finisherPrompt = this.state.finisherPrompts.shift();
+        console.log(this.state.finisherPrompts);
         this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
     }
 
@@ -154,8 +190,7 @@ class GameScreen extends Component {
                 return
             }
             this.setState({'currentPlayer': this.state.playerList[this.state.currentPlayerIndex]});
-            let finisherPrompt = Prompts.Finishers[Math.floor(Math.random()*Prompts.Finishers.length)];
-            this.setState({'currentPrompt': {prompt: finisherPrompt, amountOfSips: 0}});
+            this.loadInRandomFinisherPrompt();
             return
         }
 
@@ -207,6 +242,7 @@ class GameScreen extends Component {
     render() {
         return (
             <View style={styles.background}>
+                <StatusBar hidden={true}/>
                 <ForceMode mode={ScreenOrientation.OrientationLock.LANDSCAPE}/>
                 {this.state.showNextRoundScreen ?                                   // If the next round screen should be shown:
                     <NextRound nextRoundHandler={this.nextRoundHandler} roundNumber={this.state.currentRound} language={this.state.language}/>
@@ -218,6 +254,7 @@ class GameScreen extends Component {
                                 nextPromptHandler={this.nextPromptHandler}
                                 previousPromptHandler={this.previousPromptHandler}
                                 color={this.state.theme.Secondary} secondaryColor={this.state.theme.Tertiary}
+                                textColor={this.state.theme.textColor}
                                 language={this.state.language}/>
                         :
                         this.state.showPreviousPrompt && this.state.currentRound === 2 ? // If the player wants to see the previous prompt and its round 2
@@ -227,6 +264,7 @@ class GameScreen extends Component {
                                     nextPromptHandler={this.nextPromptHandler}
                                     previousPromptHandler={this.previousPromptHandler}
                                     color={this.state.theme.SecondaryContrast} secondaryColor={this.state.theme.TertiaryContrast}
+                                    textColor={this.state.theme.textColor}
                                     language={this.state.language}/>
                             :
                             this.state.currentRound === 1 ?                                 // If it is round one, drink, round two: give out
@@ -236,6 +274,7 @@ class GameScreen extends Component {
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
                                         color={this.state.theme.Secondary} secondaryColor={this.state.theme.Primary}
+                                        textColor={this.state.theme.textColor}
                                         language={this.state.language}/>
                                 :
                                 this.state.currentRound === 2 ?                             // Round two, so give out
@@ -245,6 +284,7 @@ class GameScreen extends Component {
                                         nextPromptHandler={this.nextPromptHandler}
                                         previousPromptHandler={this.previousPromptHandler}
                                         color={this.state.theme.SecondaryContrast} secondaryColor={this.state.theme.PrimaryContrast}
+                                        textColor={this.state.theme.textColor}
                                         language={this.state.language}/>
                                     :                                                       // Final round (round three)
                                     <FinalRound prompt={this.state.currentPrompt.prompt}
@@ -257,7 +297,7 @@ class GameScreen extends Component {
                                                 language={this.state.language}/>
                 }
                 <TouchableOpacity onPress={this.helpButtonHandler} style={styles.helpButton}>
-                    <MaterialIcons name="help-outline" size={30} color="white" />
+                    <MaterialIcons name="help-outline" size={30} color={this.state.theme.textColor} />
                 </TouchableOpacity>
             </View>
         )
@@ -272,17 +312,6 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 20,
         left: 20,
-    },
-    nextRoundScreen: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "black"
-    },
-    title: {
-        color: colors.White,
-        fontSize: 40,
-        fontWeight: "bold"
     },
 })
 

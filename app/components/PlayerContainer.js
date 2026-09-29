@@ -1,12 +1,21 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import colors from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {translateText} from "../services/LanguageService";
+import {useFonts} from "expo-font";
 
 function PlayerContainer(props) {
     const [name, setName] = useState(props.name);
     const [rank, setRank] = useState(props.rank);
+    const [loaded] = useFonts({
+        Sono_ExtraLight: require('../assets/fonts/Sono-ExtraLight.ttf'),
+        Sono_Bold: require('../assets/fonts/Sono-Bold.ttf'),
+        Sono_ExtraBold: require('../assets/fonts/Sono-ExtraBold.ttf'),
+        Sono_Light: require('../assets/fonts/Sono-Light.ttf'),
+        Sono_Medium: require('../assets/fonts/Sono-Medium.ttf'),
+        Sono_Regular: require('../assets/fonts/Sono-Regular.ttf'),
+        Sono_SemiBold: require('../assets/fonts/Sono-SemiBold.ttf'),
+    })
 
     function handleChangeText(newName){
         setName(newName);
@@ -17,23 +26,40 @@ function PlayerContainer(props) {
         props.removePlayer(rank);
     }
 
+    if (!loaded){
+        return null;
+    }
+
     return (
         <View style={styles.playerContainer}>
-            <Text style={styles.normalText}>{translateText(props.language, "PlayerContainer", "player-label")} {rank+1}</Text>
-            <View style={styles.horizontalContainer}>
-                <TextInput value={props.name} style={[styles.input, {backgroundColor: props.theme.Secondary,}]}
-                           placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
-                           placeholderTextColor={'#bdbbbb'}
-                           onChangeText={(newName) => handleChangeText(newName)}/>
-                {rank === 0 || rank === 1 ?
-                    <TouchableOpacity style={styles.invisibleButton}>
-                    </TouchableOpacity>
-                    :
+            <Text style={[styles.regularText, {color: props.theme.textColor}]}>{translateText(props.language, "PlayerContainer", "player-label")} {rank+1}</Text>
+            {rank === 0 || rank === 1 ?
+                <View style={styles.horizontalContainer}>
+                    <TextInput value={props.name} style={[styles.input, {
+                        backgroundColor: props.theme.Secondary,
+                        color: props.theme.textColor
+                    }]}
+                               placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
+                               placeholderTextColor={props.theme.Tertiary}
+                               onChangeText={(newName) => handleChangeText(newName)}
+                               autoFocus={false}/>
+                    <TouchableOpacity style={styles.invisibleButton}/>
+                </View>
+                :
+                <View style={styles.horizontalContainer}>
+                    <TextInput value={props.name} style={[styles.input, {
+                        backgroundColor: props.theme.Secondary,
+                        color: props.theme.textColor
+                    }]}
+                               placeholder={translateText(props.language, "PlayerContainer", "input-placeholder")}
+                               placeholderTextColor={props.theme.Tertiary}
+                               onChangeText={(newName) => handleChangeText(newName)}
+                               autoFocus={true}/>
                     <TouchableOpacity onPress={() => removeSelf(rank)}>
-                        <MaterialCommunityIcons name="close-box" size={30} color="black" />
+                        <MaterialCommunityIcons name="close-box" size={30} color={props.theme.textColor}/>
                     </TouchableOpacity>
-                }
-            </View>
+                </View>
+            }
         </View>
     );
 }
@@ -46,21 +72,21 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     input: {
-        color: colors.White,
         borderRadius: 5,
         padding: 2,
         paddingLeft: 10,
         fontSize: 15,
         flex: 1,
+        fontFamily: 'Sono-ExtraBold'
     },
     invisibleButton: {
         width: 30,
         height: 30,
     },
-    normalText: {
-        color: colors.White,
+    regularText: {
         fontSize: 15,
         alignContent: "flex-start",
+        fontFamily: 'Sono-Regular'
     },
     playerContainer: {
         flex: 1,

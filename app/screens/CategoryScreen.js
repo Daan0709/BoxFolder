@@ -9,6 +9,7 @@ import Category from "../components/Category";
 import ForceMode from "../components/ForceMode";
 import {translateText} from "../services/LanguageService";
 import {LinearGradient} from "expo-linear-gradient";
+import * as Font from "expo-font";
 
 class CategoryScreen extends Component {
 
@@ -17,14 +18,31 @@ class CategoryScreen extends Component {
         theme: this.props.route.params.theme,
         categories: [],
         amountOfPrompts: 15,
+        minusColor: this.props.route.params.theme.textColor,
+        plusColor: this.props.route.params.theme.textColor,
+        fontsLoaded: false,
     };
 
     componentDidMount() {
+        this.loadFonts();
         // Sets all the categories. NOTE: Blank cards to fill up space should always have 'checked: false', 'title: ""' and either 'key="blank1"' or 'key="blank2"'
         this.setState({'categories': [{title: translateText(this.state.language, "CategoryScreen", "General"), key: "General", checked: true, emoji: "🧠", rank: 0}, {title: translateText(this.state.language, "CategoryScreen", "Sports"), key: "Sports", checked: true, emoji: "⚽️", rank: 1},
                 {title: translateText(this.state.language, "CategoryScreen", "Games"), key: "Games", checked: true, emoji: "🎮", rank: 2}, {title: translateText(this.state.language, "CategoryScreen", "Work"), key: "Work", checked: true, emoji: "🏢 ", rank: 3},
                 {title: translateText(this.state.language, "CategoryScreen", "Hobby"), key: "Hobby", checked: true, emoji: "🎳", rank: 4}, {title: translateText(this.state.language, "CategoryScreen", "Love"), key: "Love", checked: true, emoji: "❤️", rank: 5},
-                {title: translateText(this.state.language, "CategoryScreen", "School"), key: "School", checked: true, emoji: "📚 ", rank: 6}, {title: "", key: "blank1", checked: false, rank: 7}, {title: "", key: "blank2", checked: false, rank: 8},]})
+                {title: translateText(this.state.language, "CategoryScreen", "School"), key: "School", checked: true, emoji: "📚 ", rank: 6}, {title: translateText(this.state.language, "CategoryScreen", "Boomer"), key: "Boomer", checked: true, emoji: "👵", rank: 7}, {title: "", key: "blank2", checked: false, rank: 8},]})
+    }
+
+    async loadFonts(){
+        await Font.loadAsync({
+            'Sono-ExtraLight': require('../assets/fonts/Sono-ExtraLight.ttf'),
+            'Sono-Bold': require('../assets/fonts/Sono-Bold.ttf'),
+            'Sono-ExtraBold': require('../assets/fonts/Sono-ExtraBold.ttf'),
+            'Sono-Light': require('../assets/fonts/Sono-Light.ttf'),
+            'Sono-Medium': require('../assets/fonts/Sono-Medium.ttf'),
+            'Sono-Regular': require('../assets/fonts/Sono-Regular.ttf'),
+            'Sono-SemiBold': require('../assets/fonts/Sono-SemiBold.ttf'),
+        });
+        this.setState({'fontsLoaded': true});
     }
 
     handleCheck = (checked, title) => {         // Function that keeps the state categories up to date whenever one of the categories is checked or unchecked
@@ -70,6 +88,10 @@ class CategoryScreen extends Component {
         if (this.state.amountOfPrompts === 5){
             return;
         }
+        if (this.state.amountOfPrompts - 5 === 5){
+            this.setState({'minusColor': this.state.theme.Secondary})
+        }
+        this.setState({'plusColor': this.state.theme.textColor})
         this.setState({'amountOfPrompts': this.state.amountOfPrompts - 5})
     }
 
@@ -77,6 +99,10 @@ class CategoryScreen extends Component {
         if (this.state.amountOfPrompts === 30){
             return;
         }
+        if (this.state.amountOfPrompts + 5 === 30){
+            this.setState({'plusColor': this.state.theme.Secondary})
+        }
+        this.setState({'minusColor': this.state.theme.textColor})
         this.setState({'amountOfPrompts': this.state.amountOfPrompts + 5})
     }
 
@@ -88,66 +114,70 @@ class CategoryScreen extends Component {
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar backgroundColor={colors.Secondary}/>
-                <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
-                                start={{x: 1, y: 0}}
-                                end={{x: 0, y: 1}}
-                                style={styles.background}>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{translateText(this.state.language, "CategoryScreen", "title")}</Text>
-                    </View>
+        if (this.state.fontsLoaded){
+            return (
+                <View style={styles.container}>
+                    <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
+                    <StatusBar backgroundColor={colors.Secondary}/>
+                    <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
+                                    start={{x: 1, y: 0}}
+                                    end={{x: 0, y: 1}}
+                                    style={styles.background}>
+                        <View style={styles.titleContainer}>
+                            <Text style={[styles.title, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "title")}</Text>
+                        </View>
 
-                    <View style={styles.categoriesContainer}>
-                        <View style={styles.categoryRowContainer}>
-                            {this.state.categories.filter(category => category.rank < 3).map((category) => {
-                                return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
-                            })}
+                        <View style={styles.categoriesContainer}>
+                            <View style={styles.categoryRowContainer}>
+                                {this.state.categories.filter(category => category.rank < 3).map((category) => {
+                                    return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
+                                })}
+                            </View>
+                            <View style={styles.categoryRowContainer}>
+                                {this.state.categories.filter(category => category.rank >= 3 && category.rank < 6).map((category) => {
+                                    return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
+                                })}
+                            </View>
+                            <View style={styles.categoryRowContainer}>
+                                {this.state.categories.filter(category => category.rank >= 6 && category.rank < 9).map((category) => {
+                                    return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
+                                })}
+                            </View>
                         </View>
-                        <View style={styles.categoryRowContainer}>
-                            {this.state.categories.filter(category => category.rank >= 3 && category.rank < 6).map((category) => {
-                                return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
-                            })}
-                        </View>
-                        <View style={styles.categoryRowContainer}>
-                            {this.state.categories.filter(category => category.rank >= 6 && category.rank < 9).map((category) => {
-                                return (<Category theme={this.state.theme} title={category.title} emoji={category.emoji} initialCheck={category.checked} key={category.key} handleToUpdate={this.handleCheck}/>)
-                            })}
-                        </View>
-                    </View>
 
-                    <View style={styles.buttonContainerColumn}>
-                        <Text style={styles.smallText}>{translateText(this.state.language, "CategoryScreen", "prompts-per-round")}</Text>
-                        <View style={styles.amountOfRoundsContainer}>
-                            <TouchableOpacity onPress={this.reduceAmountOfPrompts}>
-                                <AntDesign name="minuscircle" size={30} color="white" />
+                        <View style={styles.buttonContainerColumn}>
+                            <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "prompts-per-round")}</Text>
+                            <View style={styles.amountOfRoundsContainer}>
+                                <TouchableOpacity onPress={this.reduceAmountOfPrompts}>
+                                    <AntDesign name="minuscircle" size={30} color={this.state.minusColor} />
+                                </TouchableOpacity>
+                                <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>{this.state.amountOfPrompts}</Text>
+                                <TouchableOpacity onPress={this.increaseAmountOfPrompts}>
+                                    <AntDesign name="pluscircle" size={30} color={this.state.plusColor} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={[styleSheet.SecondaryButton, {borderColor: this.state.theme.textColor}]} onPress={this.handleBackButton}>
+                                <Text style={[styles.normalText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "back-button")}</Text>
                             </TouchableOpacity>
-                            <Text style={styles.normalText}>{this.state.amountOfPrompts}</Text>
-                            <TouchableOpacity onPress={this.increaseAmountOfPrompts}>
-                                <AntDesign name="pluscircle" size={30} color="white" />
+                            <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
+                                <MaterialIcons name="help-outline" size={30} color={this.state.theme.textColor} />
+                                <Text style={[styles.smallText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "CategoryScreen", "help-button")}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styleSheet.PrimaryButton} onPress={this.handlePlayButton}>
+                                <Text style={[styles.normalText, {color: 'white'}]}>{translateText(this.state.language, "CategoryScreen", "play-button")}</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </LinearGradient>
+                </View>
 
-
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styleSheet.SecondaryButton} onPress={this.handleBackButton}>
-                            <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "back-button")}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
-                            <MaterialIcons name="help-outline" size={30} color="white" />
-                            <Text style={styles.smallText}>{translateText(this.state.language, "CategoryScreen", "help-button")}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styleSheet.PrimaryButton} onPress={this.handlePlayButton}>
-                            <Text style={styles.normalText}>{translateText(this.state.language, "CategoryScreen", "play-button")}</Text>
-                        </TouchableOpacity>
-                    </View>
-                </LinearGradient>
-            </View>
-
-        );
+            );
+        } else {
+            return null;
+        }
     }
 }
 
@@ -156,8 +186,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "25%",
         justifyContent: "space-evenly",
-        alignItems: "flex-end",
+        alignItems: "center",
         gap: 10,
+        padding: 10,
     },
     background: {
         flex: 1,
@@ -198,18 +229,16 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     normalText: {
-        padding: 4,
-        color: colors.White,
-        fontSize: 20,
+        fontSize: 18,
+        fontFamily: 'Sono-Regular'
     },
     smallText: {
-        color: colors.White,
-        fontSize: 15,
+        fontSize: 12,
+        fontFamily: 'Sono-Light'
     },
     title: {
-        color: colors.White,
         fontSize: 40,
-        fontWeight: "bold"
+        fontFamily: 'Sono-Bold'
     },
     titleContainer: {
         height: "15%",

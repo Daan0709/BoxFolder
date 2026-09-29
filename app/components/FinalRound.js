@@ -5,8 +5,22 @@ import colors from "../config/colors";
 import styleSheet from "../config/StyleSheet";
 import {translateText} from "../services/LanguageService";
 import {LinearGradient} from "expo-linear-gradient";
+import {useFonts} from "expo-font";
 
 function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler, continuePlayingHandler, goBackHandler, language }) {
+    const [loaded] = useFonts({
+        Sono_ExtraLight: require('../assets/fonts/Sono-ExtraLight.ttf'),
+        Sono_Bold: require('../assets/fonts/Sono-Bold.ttf'),
+        Sono_ExtraBold: require('../assets/fonts/Sono-ExtraBold.ttf'),
+        Sono_Light: require('../assets/fonts/Sono-Light.ttf'),
+        Sono_Medium: require('../assets/fonts/Sono-Medium.ttf'),
+        Sono_Regular: require('../assets/fonts/Sono-Regular.ttf'),
+        Sono_SemiBold: require('../assets/fonts/Sono-SemiBold.ttf'),
+    })
+
+    if (!loaded){
+        return null;
+    }
 
     return (
         <LinearGradient
@@ -16,7 +30,6 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
             style={styles.background}>
             {playerListLength > 1 ?   // If there are more than 1 players left
                 <View style={styles.container}>
-                    <StatusBar hidden={true}/>
                     <View style={styles.nameContainer}>
                         <Text style={styles.title}>{playerName}</Text>
                     </View>
@@ -24,11 +37,11 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                         <Text style={styles.normalText}>{prompt}</Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styleSheet.SecondaryButton} onPress={removePlayerHandler}>
-                            <Text style={styles.normalText}>{translateText(language, "GameScreen", "eliminate-button")}</Text>
+                        <TouchableOpacity style={[styleSheet.SecondaryButton, {borderColor: 'white'}]} onPress={removePlayerHandler}>
+                            <Text style={styles.lightText}>{translateText(language, "GameScreen", "eliminate-button")}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styleSheet.PrimaryButton} onPress={continuePlayingHandler}>
-                            <Text style={styles.normalText}>{translateText(language, "GameScreen", "continue-button")}</Text>
+                            <Text style={styles.lightText}>{translateText(language, "GameScreen", "continue-button")}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -40,7 +53,7 @@ function FinalRound({ playerName, prompt, playerListLength, removePlayerHandler,
                         <Image source={require('../assets/images/confetti-box.png')} style={styles.image}/>
                         <Text style={styles.outlinedText}>{playerName}{translateText(language, "GameScreen", "win")}</Text>
                         <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={goBackHandler}>
-                            <Text style={styles.normalText}>{translateText(language, "GameScreen", "menu-button")}</Text>
+                            <Text style={styles.lightText}>{translateText(language, "GameScreen", "menu-button")}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -104,7 +117,15 @@ const styles = StyleSheet.create({
         padding: 4,
         color: colors.White,
         fontSize: 20,
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily: 'Sono-Light'
+    },
+    lightText: {
+        padding: 4,
+        color: colors.White,
+        fontSize: 20,
+        textAlign: "center",
+        fontFamily: 'Sono-Light'
     },
     promptContainer: {
         width: "80%",

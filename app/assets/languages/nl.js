@@ -14,6 +14,9 @@ export const nl = () => {
             "player-amount-title": "Te Veel Spelers",
             "player-amount-body": "Er kunnen maximaal 10 spelers meedoen!",
             "player-names-body": "Vul de naam van elke speler in voordat je door kan gaan!",
+            "exit-app-title": "Weet je zeker dat je de app af wil sluiten?",
+            "exit-app-cancel": "Nee",
+            "exit-app-continue": "Ja",
         },
         "HelpPage": {
             "back-button": "< Ga Terug",
@@ -39,6 +42,7 @@ export const nl = () => {
             "Hobby": "Hobby",
             "Love": "Liefde",
             "School": "School",
+            "Boomer": "Boomer",
             "Blank1": "",
             "Blank2": "",
             "prompts-per-round": "Aantal vragen per ronde:",
@@ -48,8 +52,12 @@ export const nl = () => {
         },
         "GameScreen": {
             "start-title": "Klik om te beginnen!",
+            "previous-prompt": "Geen vorige vraag!",
             "start-round": "Ronde 1",
             "round": "Ronde ",
+            "round-one": "Blijf Gehydrateerd!",
+            "round-two": "Geven aan het goede doel!",
+            "round-three": "De sterkste overleeft!",
             "sip-singular": " slok",
             "sip-plural": " slokken",
             "give-out": "Geef ... weg",
@@ -57,7 +65,10 @@ export const nl = () => {
             "continue-button": "Speel Door",
             "menu-button": "Nieuw Spel",
             "win": " heeft gewonnen!",
-            "no-one": "Niemand"
+            "no-one": "Niemand",
+            "back-alert-title": "Wacht Even!",
+            "back-alert-body": "Als je teruggaat zal je opnieuw moeten beginnen. Weet je het zeker?",
+            "back-alert-button": "JA",
         }
     }
 }

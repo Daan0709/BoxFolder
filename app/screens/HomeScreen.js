@@ -6,19 +6,19 @@ import {
     Image,
     Text,
     TouchableOpacity,
-    Alert, ScrollView
+    Alert, ScrollView, BackHandler,
 } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
+import * as Font from 'expo-font';
 import {LinearGradient} from "expo-linear-gradient";
 
-import colors from "../config/colors";
 import styleSheet from "../config/StyleSheet";
 import PlayerContainer from "../components/PlayerContainer";
 import ForceMode from "../components/ForceMode";
 import LanguageSwitch from "../components/LanguageSwitch";
 import {translateText} from "../services/LanguageService";
-import {getColorTheme} from "../services/ThemeService";
+import {getAllThemes, getColorTheme} from "../services/ThemeService";
 import ThemeSwitch from "../components/ThemeSwitch";
 import * as SystemUI from "expo-system-ui";
 
@@ -30,11 +30,49 @@ class HomeScreen extends Component {
         amountOfPlayers: 1,
         language: 'uk',
         languageOpacity: 1,
-        theme: getColorTheme('green')
+        theme: getColorTheme('green'),
+        fontsLoaded: false,
+    };
+
+    backAction = () => {
+        Alert.alert(translateText(this.state.language, "Alert", "exit-app-title"), translateText(this.state.language, "Alert", "exit-app-body"), [
+            {
+                text: translateText(this.state.language, "Alert", "exit-app-cancel"),
+                onPress: () => null,
+                style: 'cancel',
+            },
+            {text: translateText(this.state.language, "Alert", "exit-app-continue"),
+                onPress: () => BackHandler.exitApp()},
+        ]);
+        return true;
     };
 
     componentDidMount() {
         SystemUI.setBackgroundColorAsync(this.state.theme.Secondary); // Stops screen from flickering white when switching screens
+        this.loadFonts();
+        this.props.navigation.addListener('blur', () => {this.removeBackAction()})
+        this.props.navigation.addListener('focus', () => {this.addBackAction()})
+    }
+
+    addBackAction = () => {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.backAction);
+    }
+
+    removeBackAction = () => {
+        this.backHandler.remove();
+    }
+
+    async loadFonts(){
+        await Font.loadAsync({
+            'Sono-ExtraLight': require('../assets/fonts/Sono-ExtraLight.ttf'),
+            'Sono-Bold': require('../assets/fonts/Sono-Bold.ttf'),
+            'Sono-ExtraBold': require('../assets/fonts/Sono-ExtraBold.ttf'),
+            'Sono-Light': require('../assets/fonts/Sono-Light.ttf'),
+            'Sono-Medium': require('../assets/fonts/Sono-Medium.ttf'),
+            'Sono-Regular': require('../assets/fonts/Sono-Regular.ttf'),
+            'Sono-SemiBold': require('../assets/fonts/Sono-SemiBold.ttf'),
+        });
+        this.setState({'fontsLoaded': true});
     }
 
     updatePlayerName = (name, rank) => {
@@ -115,57 +153,61 @@ class HomeScreen extends Component {
     }
 
     swapThemeHandler = (theme) => {
-        theme = getColorTheme(theme)
         SystemUI.setBackgroundColorAsync(theme.Secondary);   // Prevents the screen flashing white when switching screens (Android only)
         this.setState({'theme': theme});
     }
 
     render(){
-        return (
-            <View style={styles.container}>
-                <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
-                <StatusBar backgroundColor={this.state.theme.Secondary}/>
-                <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
-                                start={{x: 1, y: 0}}
-                                end={{x: 0, y: 1}}
-                                style={styles.background}>
-                    <View style={styles.logoContainer}>
-                        <Text style={styles.title}>Box Folder!</Text>
-                        <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
-                    </View>
-                    <TouchableOpacity style={styles.addPlayerContainer} onPress={this.addPlayerHandler}>
-                        <Entypo name="add-user" size={30} color="white" />
-                    </TouchableOpacity>
-                    <ScrollView contentContainerStyle={styles.fixedHeightContainer}>
-                        <View style={[styles.playersContainer, {height: this.state.playerList.length * 80}]}>
-                            {this.state.playerList.map((pair) => {
-                                return (
-                                    <PlayerContainer
-                                        language={this.state.language}
-                                        theme={this.state.theme}
-                                        handleToUpdate={this.updatePlayerName}
-                                        removePlayer={this.removePlayerHandler}
-                                        name={pair.name}
-                                        rank={pair.rank}
-                                        key={pair.rank}/>
-                                )
-                            })}
+        if (this.state.fontsLoaded){
+            return (
+                <View style={styles.container}>
+                    <ForceMode mode={ScreenOrientation.OrientationLock.PORTRAIT}/>
+                    <StatusBar backgroundColor={this.state.theme.Secondary}/>
+                    <LinearGradient colors={[this.state.theme.Secondary, this.state.theme.Primary, this.state.theme.Secondary]}
+                                    start={{x: 1, y: 0}}
+                                    end={{x: 0, y: 1}}
+                                    style={styles.background}>
+                        <View style={styles.logoContainer}>
+                            <Text style={[styles.title, {color: this.state.theme.textColor}]}>Box Folder!</Text>
+                            <Image source={require('../assets/images/BoxFolderLogo.png')} style={styles.image}/>
                         </View>
-                    </ScrollView>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={this.playButtonHandler}>
-                            <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
+                        <TouchableOpacity style={styles.addPlayerContainer} onPress={this.addPlayerHandler}>
+                            <Entypo name="add-user" size={30} color={this.state.theme.textColor} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
-                            <MaterialIcons name="help-outline" size={30} color="white"/>
-                            <Text style={styles.normalText}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
-                        </TouchableOpacity>
-                        <ThemeSwitch theme={this.state.theme} swapThemeHandler={this.swapThemeHandler} language={this.state.language}/>
-                    </View>
-                </LinearGradient>
-                <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} theme={this.state.theme}/>
-            </View>
-        );
+                        <ScrollView contentContainerStyle={styles.fixedHeightContainer}>
+                            <View style={[styles.playersContainer, {height: this.state.playerList.length * 80}]}>
+                                {this.state.playerList.map((pair) => {
+                                    return (
+                                        <PlayerContainer
+                                            language={this.state.language}
+                                            theme={this.state.theme}
+                                            handleToUpdate={this.updatePlayerName}
+                                            removePlayer={this.removePlayerHandler}
+                                            name={pair.name}
+                                            rank={pair.rank}
+                                            key={pair.rank}/>
+                                    )
+                                })}
+                            </View>
+                        </ScrollView>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={styleSheet.PrimaryButtonLarge} onPress={this.playButtonHandler}>
+                                <Text style={[styles.lightText, {color: 'white'}]}>{translateText(this.state.language, "HomeScreen", "play-button")}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.helpButton} onPress={this.helpButtonHandler}>
+                                <MaterialIcons name="help-outline" size={30} color={this.state.theme.textColor}/>
+                                <Text style={[styles.extraLightText, {color: this.state.theme.textColor}]}>{translateText(this.state.language, "HomeScreen", "help-button")}</Text>
+                            </TouchableOpacity>
+                            <ThemeSwitch currentTheme={this.state.theme} swapThemeHandler={this.swapThemeHandler}
+                                         language={this.state.language} allThemes={getAllThemes()}/>
+                        </View>
+                    </LinearGradient>
+                    <LanguageSwitch language={'🇬🇧 '} setLanguageHandler={this.setLanguageHandler} theme={this.state.theme}/>
+                </View>
+            );
+        } else {
+            return null;
+        }
     }
 
 }
@@ -180,13 +222,12 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: 'center',
         alignItems: 'center',
-        position: "absolute"
     },
     buttonContainer: {
         width: "100%",
         alignItems: "center",
         padding: 20,
-        rowGap: 10
+        rowGap: 20
     },
     container: {
         flex: 1,
@@ -203,7 +244,6 @@ const styles = StyleSheet.create({
       height: 80
     },
     language: {
-        backgroundColor: "teal",
         width: "100%"
     },
     logoContainer: {
@@ -212,10 +252,15 @@ const styles = StyleSheet.create({
         width: "100%",
         top: StatusBar.currentHeight
     },
-    normalText: {
+    lightText: {
         padding: 4,
-        color: colors.White,
         fontSize: 20,
+        fontFamily: 'Sono-Light'
+    },
+    extraLightText: {
+        padding: 4,
+        fontSize: 20,
+        fontFamily: 'Sono-ExtraLight'
     },
     playersContainer: {
         width: '100%',
@@ -229,8 +274,8 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
     },
     title: {
-        color: colors.White,
         fontSize: 40,
+        fontFamily: 'Sono-Regular'
     }
 })
 
