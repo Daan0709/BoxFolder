@@ -2,7 +2,7 @@ export default {
     // If you want to insert a random playername into of the prompts: use "..." as the player's name
     // TODO: Need at least 30 prompts per category (finishers excluded), because rounds last for 15 prompts and there are 2 rounds
     "uk": {
-        // 63
+        // 69
         General: [
             {prompt: "If you have ever been admitted into a hospital"},
             {prompt: "For every letter in your first name"},
@@ -67,6 +67,12 @@ export default {
             {prompt: "If you have ever gone bald"},
             {prompt: "If you ever forgot about your clothes in the washing machine, causing them to smell again"},
             {prompt: "If you have ever been severely sunburned because you were too stubborn to apply sunscreen"},
+            {prompt: "If Christmas is your favorite holiday"},
+            {prompt: "If you have ever attended a halloween party"},
+            {prompt: "If you have ever bought a house"},
+            {prompt: "If you no longer live with your parents"},
+            {prompt: "For every cozy blanket you own"},
+            {prompt: "If you ever had to install someones floor"},
         ],
         // 32
         Sports: [
@@ -209,7 +215,7 @@ export default {
             {prompt: "If you make money by doing chores around the house"},
             {prompt: "If you ever (intentional or not) took something home from work you were not supposed to"},
         ],
-        // 34
+        // 35
         Hobby: [
             {prompt: "If you have ever played a table top rpg"},
             {prompt: "If you are a collector of a specific object"},
@@ -245,8 +251,9 @@ export default {
             {prompt: "If you enjoy listening to Meghan Trainor"},
             {prompt: "If you have ever left your home continent"},
             {prompt: "If you have ever had a royal flush in a game of poker"},
+            {prompt: "If you have visited all continents (not counting Antarctica)"},
         ],
-        // 34
+        // 36
         Love: [
             {prompt: "If you have ever been in a relationship that lasted longer than 2 years"},
             {prompt: "If you have ever been in a relationship that lasted less than a month"},
@@ -282,6 +289,8 @@ export default {
             {prompt: "If you ever had an STD scare"},
             {prompt: "If you have ever measured your penis"},
             {prompt: "If you have ever had more than 5 sexual partners"},
+            {prompt: "If you have ever been married"},
+            {prompt: "For every child you have"},
         ],
         // 40
         School: [
@@ -440,7 +449,7 @@ export default {
         ]
     },
     "nl": {
-        // 63
+        // 70
         General: [
             {prompt: "Als je wel eens bent opgenomen in het ziekenhuis"},
             {prompt: "Voor elke letter in je voornaam"},
@@ -505,6 +514,13 @@ export default {
             {prompt: "Als je ooit kaal bent gegaan"},
             {prompt: "Als je ooit je kleding in de wasmachine bent vergeten, waardoor ze weer gingen stinken"},
             {prompt: "Als je ooit ernstig verbrand bent door de zon omdat je te eigenwijs was om zonnebrand te smeren"},
+            {prompt: "Als kerst je favoriete feestdag is"},
+            {prompt: "Als je wel eens een halloween feestje hebt gehad"},
+            {prompt: "Als je een huis hebt gekocht"},
+            {prompt: "Als je niet meer bij je ouders woont"},
+            {prompt: "Voor elk dekentje die je bezit"},
+            {prompt: "Als je een 'On That Ass' abonnement hebt (gehad)"},
+            {prompt: "Als je wel eens laminaat hebt moeten leggen"},
         ],
         // 32
         Sports: [
@@ -647,7 +663,7 @@ export default {
             {prompt: "Als je geld verdient door klusjes thuis te doen"},
             {prompt: "Als je ooit (opzettelijk of niet) iets mee naar huis hebt genomen van werk wat je niet had mogen meenemen"},
         ],
-        // 34
+        // 35
         Hobby: [
             {prompt: "Als je ooit een table top rpg hebt gespeeld"},
             {prompt: "Als je een verzamelaar bent van een bepaald voorwerp"},
@@ -683,8 +699,9 @@ export default {
             {prompt: "Als je Suzan & Freek leuk vindt"},
             {prompt: "Als je ooit je thuiscontinent hebt verlaten"},
             {prompt: "Als je ooit een royal flush hebt gehad in een potje poker"},
+            {prompt: "Als je ooit alle continenten hebt bezocht (Antarctica niet meegerekend)"}
         ],
-        // 34
+        // 36
         Love: [
             {prompt: "Als je ooit een relatie van langer dan 2 jaar hebt gehad"},
             {prompt: "Als je ooit een relatie hebt gehad die korter duurde dan één maand"},
@@ -720,6 +737,8 @@ export default {
             {prompt: "Als je wel eens bang bent geweest dat je een SOA had"},
             {prompt: "Als je ooit je penis hebt opgemeten"},
             {prompt: "Als je 5 of meer sekspartners hebt gehad"},
+            {prompt: "Als je ooit getrouwd bent geweest"},
+            {prompt: "Voor elk kind dat je hebt"},
         ],
         // 40
         School: [
