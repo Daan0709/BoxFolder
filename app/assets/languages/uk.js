@@ -44,6 +44,7 @@ export const uk = () => {
             "Love": "Love",
             "School": "School",
             "Boomer": "Boomer",
+            "Alcohol": "Alcohol",
             "Blank1": "",
             "Blank2": "",
             "prompts-per-round": "Number of prompts per round:",

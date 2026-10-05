@@ -122,7 +122,7 @@ class HomeScreen extends Component {
     }
 
     playButtonHandler = () => {
-        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ-— 0-9()]+$/;
+        const regex = /^(?=.*\S).+$/;
         let cleared = true;
         this.state.playerList.forEach((player) => {
             if (!regex.test(player.name)){

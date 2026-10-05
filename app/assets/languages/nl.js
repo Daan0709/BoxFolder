@@ -43,6 +43,7 @@ export const nl = () => {
             "Love": "Liefde",
             "School": "School",
             "Boomer": "Boomer",
+            "Alcohol": "Alcohol",
             "Blank1": "",
             "Blank2": "",
             "prompts-per-round": "Aantal vragen per ronde:",
